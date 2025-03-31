@@ -1,9 +1,9 @@
 public abstract class Pokemon {
 
-    private String nombre;
-    private int nivel;
-    private String vida;
-    private int vidaMaxima;
+    public String nombre;
+    public int nivel;
+    public String vida;
+    public int vidaMaxima;
 
 
 
@@ -14,7 +14,50 @@ public abstract class Pokemon {
         this.vidaMaxima = vidaMaxima;
     }
 
- public abstract String toString();
+    
+
+    public  String toString(){
+        return "Nombre: " + this.nombre + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: " + this.vidaMaxima + "\n"+getClass().getName();
+    };
 
     public abstract void Sonido();
+
+    public String getNombre() {
+        return nombre;
+    }
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+    public int getNivel() {
+        return nivel;
+    }
+
+ 
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+
+    public String getVida() {
+        return vida;
+    }
+
+
+    public void setVida(String vida) {
+        this.vida = vida;
+    }
+
+
+    public int getVidaMaxima() {
+        return vidaMaxima;
+    }
+
+    public void setVidaMaxima(int vidaMaxima) {
+        this.vidaMaxima = vidaMaxima;
+    }
+
 }
