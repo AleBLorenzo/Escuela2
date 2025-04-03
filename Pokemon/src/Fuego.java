@@ -26,10 +26,9 @@ public class Fuego extends Pokemon implements Ataque {
 
     @Override
     public String toString() {
-        return "Nombre: " + getClass() + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
+        return "Nombre: " + this.nombre + "\nDaño: " + this.dano + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
                 + this.vidaMaxima;
     }
-
     @Override
     public void Sonido() {
         System.out.println("Fwooooshhh-kaaaak");

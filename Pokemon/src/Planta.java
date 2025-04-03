@@ -10,9 +10,9 @@ public class Planta extends Pokemon implements Ataque {
         double danioFinal = dano;
 
         if (enemigo instanceof Agua) {
-            danioFinal *= 1.2; // +20% contra Planta
+            danioFinal *= 1.2; 
         } else if (enemigo instanceof Fuego) {
-            danioFinal *= 0.8; // -20% contra Agua
+            danioFinal *= 0.8; 
         }
 
         enemigo.vida -= danioFinal;
@@ -24,7 +24,7 @@ public class Planta extends Pokemon implements Ataque {
 
     @Override
     public String toString() {
-        return "Nombre: " + getClass() + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
+        return "Nombre: " + this.nombre + "\nDaño: " + this.dano + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
                 + this.vidaMaxima;
     }
 

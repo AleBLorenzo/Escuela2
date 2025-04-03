@@ -4,6 +4,8 @@ public class Agua extends Pokemon implements Ataque{
     public Agua(String name,int dano,int vida, int nivel, int vidaMaxima) {
         super(name, dano ,nivel, vida, vidaMaxima);
     }
+
+
     
     @Override
     public void atacar(Pokemon enemigo) {
@@ -24,7 +26,8 @@ public class Agua extends Pokemon implements Ataque{
 
     @Override
     public String toString() {
-        return "Nombre: " + getClass() + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: " + this.vidaMaxima ;
+        return "Nombre: " + this.nombre + "\nDaño: " + this.dano + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
+                + this.vidaMaxima;
     }
 
     @Override

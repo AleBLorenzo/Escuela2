@@ -1,4 +1,4 @@
 public interface Ataque {
 
-    public void atacar(Pokemon objetivo);
+    public void atacar(Pokemon enemigo); 
 }

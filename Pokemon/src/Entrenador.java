@@ -6,14 +6,14 @@ public class Entrenador  {
 
     public String nombre;
     public int pokeballs;
-    public ArrayList<Pokemon> equipo;
-
-    public Entrenador(String nombre, int pokeballs) {
+    public ArrayList<Pokemon> equipo = new ArrayList<>();
+    
+  
+    public Entrenador(String nombre, int pokeballs, ArrayList<Pokemon> equipo) {
         this.nombre = nombre;
         this.pokeballs = pokeballs;
-        this.equipo = new ArrayList<>();
+        this.equipo = equipo;
     }
-
     public void capturar(Pokemon listaPokemon) {
 
         double probabilidad = 0.5 * (listaPokemon.vida / listaPokemon.vidaMaxima);
@@ -35,8 +35,27 @@ public class Entrenador  {
         }
 
     }
+    
+    public String toString() {
+        return "\nNombre: " + this.nombre + "\nPokeballs: " + this.pokeballs + "\nEquipo: " + this.equipo;
+    }
 
     public ArrayList<Pokemon> getEquipo() {
         return equipo;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public int getPokeballs() {
+        return pokeballs;
+    }
+    public void setPokeballs(int pokeballs) {
+        this.pokeballs = pokeballs;
+    }
+    public void setEquipo(ArrayList<Pokemon> equipo) {
+        this.equipo = equipo;
     }
 }
