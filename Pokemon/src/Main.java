@@ -51,7 +51,7 @@ public class Main {
                     System.out.println("Inventario: " + entrenador);
                     break;
                 case 2:
-                    System.out.println("Elige un Pokémon para atacar:");
+                    System.out.println("Elige un Pokemon para atacar:");
 
                     for (int i = 0; i < entrenador.equipo.size(); i++) {
                         System.out.println((i) + ". " + entrenador.equipo.get(i).nombre);
@@ -66,7 +66,7 @@ public class Main {
                     int eleccionEnemigo = random.nextInt(listaPokemon.size());
                     enemigo = listaPokemon.get(eleccionEnemigo);
 
-                    System.out.println("Has elegido a " + enemigo.nombre);
+                    System.out.println("Te encontraste a " + enemigo.nombre);
                     pokemonAtaca.atacar(enemigo);
 
                     if (enemigo.vida <= 0) {
@@ -75,7 +75,7 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println("Elige un Pokémon para capturar:");
+                    System.out.println("Elige un Pokemon para capturar:");
                     for (int i = 0; i < listaPokemon.size(); i++) {
                         System.out.println((i) + ". " + listaPokemon.get(i).nombre);
                     }
