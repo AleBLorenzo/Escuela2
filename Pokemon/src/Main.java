@@ -14,6 +14,8 @@ public class Main {
         Pokemon Chikorita = new Planta("Chikorita", 15, 48, 16, 52);
         Pokemon Treecko = new Planta("Treecko", 20, 58, 19, 62);
 
+
+        
         ArrayList<Pokemon> equipo1 = new ArrayList<>();
         equipo1.add(Squirtle);
         equipo1.add(Psyduck);
@@ -21,7 +23,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Entrenador entrenador = new Entrenador("Alejandro", 5, equipo1);
-        
 
         ArrayList<Pokemon> listaPokemon = new ArrayList<>();
         listaPokemon.add(Squirtle);
@@ -34,10 +35,12 @@ public class Main {
         listaPokemon.add(Chikorita);
         listaPokemon.add(Treecko);
 
+    
+
         while (true) {
             System.out.println("\n--- Menú ---");
             System.out.println("1. Inventario");
-           
+
             System.out.println("2. Atacar");
             System.out.println("3. Capturar");
             System.out.println("4. Escapar");
@@ -49,24 +52,35 @@ public class Main {
                     System.out.println("Inventario: " + entrenador);
                     break;
                 case 2:
-                     System.out.println("Elige un Pokémon para atacar:");
-                    for (int i = 0; i < entrenador.getEquipo().size(); i++) {
-                        System.out.println((i + 1) + ". " + entrenador.getEquipo().get(i).getNombre());
+                    System.out.println("Elige un Pokémon para atacar:");
+
+                    for (int i = 0; i < entrenador.equipo.size(); i++) {
+                        System.out.println((i) + ". " + entrenador.equipo.get(i).nombre);
                     }
-                    int eleccionAtacar = scanner.nextInt() - 1;
-                    Pokemon pokemonAtacar = entrenador.getEquipo().get(eleccionAtacar);
-                    System.out.println("Has elegido a " + pokemonAtacar.getNombre());
+
+                    int eleccionAtacar = scanner.nextInt();
+                    Pokemon pokemonAtaca = entrenador.equipo.get(eleccionAtacar);
+
+                    System.out.println("Has elegido a " + pokemonAtaca.nombre);
                     System.out.println("Elige un Pokémon a atacar:");
+
                     for (int i = 0; i < listaPokemon.size(); i++) {
-                        System.out.println((i + 1) + ". " + listaPokemon.get(i).getNombre());
+                        System.out.println((i) + ". " + listaPokemon.get(i).nombre);
                     }
-                    int eleccionEnemigo = scanner.nextInt() - 1;
-                    Pokemon pokemonEnemigo = listaPokemon.get(eleccionEnemigo);
-                    System.out.println("Has elegido a " + pokemonEnemigo.getNombre());
-                    pokemonAtacar.atacar(pokemonEnemigo);
+
+                    int eleccionEnemigo = scanner.nextInt();
+                    Pokemon enemigo = listaPokemon.get(eleccionEnemigo);
+
+                    System.out.println("Has elegido a " + enemigo.nombre);
+                    pokemonAtaca.atacar(enemigo);
+
+                    if (enemigo.vida <= 0) {
+                        System.out.println("Has derrotado a " + enemigo.nombre);
+                        listaPokemon.remove(eleccionEnemigo);
+                    }
                     break;
                 case 3:
-                    entrenador.capturar(listaPokemon.get((int) Math.random() * listaPokemon.size()));
+                    entrenador.capturar();
                     break;
                 case 4:
                     System.out.println("Has escapado");

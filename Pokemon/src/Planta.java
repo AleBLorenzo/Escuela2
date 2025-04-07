@@ -13,13 +13,15 @@ public class Planta extends Pokemon implements Ataque {
             danioFinal *= 1.2; 
         } else if (enemigo instanceof Fuego) {
             danioFinal *= 0.8; 
+        } else if (enemigo instanceof Planta) {
+            danioFinal *= 1; 
         }
 
         enemigo.vida -= danioFinal;
         if (enemigo.vida < 0)
             enemigo.vida = 0;
 
-        System.out.println(this.nombre + " atacó a " + enemigo.nombre + " causando " + danioFinal + " de daño.");
+        System.out.println(this.nombre + " atacó a " + enemigo.nombre + " causando " + danioFinal + " de daño con" + enemigo.vida + " de vida restante.");
     }
 
     @Override
