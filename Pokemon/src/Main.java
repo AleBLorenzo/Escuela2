@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -60,13 +61,9 @@ public class Main {
                     Pokemon pokemonAtaca = entrenador.equipo.get(eleccionAtacar);
 
                     System.out.println("Has elegido a " + pokemonAtaca.nombre);
-                    System.out.println("Elige un Pokémon a atacar:");
 
-                    for (int i = 0; i < listaPokemon.size(); i++) {
-                        System.out.println((i) + ". " + listaPokemon.get(i).nombre);
-                    }
-
-                    int eleccionEnemigo = scanner.nextInt();
+                    Random random = new Random();
+                    int eleccionEnemigo = random.nextInt(listaPokemon.size());
                     enemigo = listaPokemon.get(eleccionEnemigo);
 
                     System.out.println("Has elegido a " + enemigo.nombre);
