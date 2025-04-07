@@ -20,7 +20,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Entrenador entrenador = new Entrenador("Alejandro", 5, equipo1);
+        Entrenador entrenador = new Entrenador("Alejandro", 10, equipo1);
 
         Pokemon enemigo;
 

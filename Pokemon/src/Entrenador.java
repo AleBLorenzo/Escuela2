@@ -22,7 +22,7 @@ public class Entrenador  {
         if (numeroAleatorio < probabilidad) {
             if (equipo.size() <= 6) {
                 equipo.add(captura);
-                System.out.println("Has capturado a " + captura.nombre );
+                System.out.println("Has capturado a " + captura.toString() );
             } else {
                 System.out.println("Estas lleno no puedes capturar más Pokemon");
             }
