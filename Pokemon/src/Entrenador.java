@@ -14,15 +14,15 @@ public class Entrenador  {
         this.pokeballs = pokeballs;
         this.equipo = equipo;
     }
-    public void capturar( Pokemon enemigo ) {
+    public void capturar( Pokemon captura) {
 
-        double probabilidad = 0.5 * (enemigo.vida / enemigo.vidaMaxima);
+        double probabilidad = 0.5 * ((double)  captura.vida / captura.vidaMaxima);
         double numeroAleatorio = Math.random();
 
         if (numeroAleatorio < probabilidad) {
             if (equipo.size() <= 6) {
-                equipo.add(enemigo);
-                System.out.println("Has capturado a " + enemigo.nombre );
+                equipo.add(captura);
+                System.out.println("Has capturado a " + captura.nombre );
             } else {
                 System.out.println("Estas lleno no puedes capturar más Pokemon");
             }

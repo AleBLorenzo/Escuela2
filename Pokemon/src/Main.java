@@ -14,8 +14,6 @@ public class Main {
         Pokemon Chikorita = new Planta("Chikorita", 15, 48, 16, 52);
         Pokemon Treecko = new Planta("Treecko", 20, 58, 19, 62);
 
-
-        
         ArrayList<Pokemon> equipo1 = new ArrayList<>();
         equipo1.add(Squirtle);
         equipo1.add(Psyduck);
@@ -23,6 +21,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Entrenador entrenador = new Entrenador("Alejandro", 5, equipo1);
+
+        Pokemon enemigo;
 
         ArrayList<Pokemon> listaPokemon = new ArrayList<>();
         listaPokemon.add(Squirtle);
@@ -34,8 +34,6 @@ public class Main {
         listaPokemon.add(Bulbasaur);
         listaPokemon.add(Chikorita);
         listaPokemon.add(Treecko);
-
-    
 
         while (true) {
             System.out.println("\n--- Menú ---");
@@ -69,18 +67,25 @@ public class Main {
                     }
 
                     int eleccionEnemigo = scanner.nextInt();
-                    Pokemon enemigo = listaPokemon.get(eleccionEnemigo);
+                    enemigo = listaPokemon.get(eleccionEnemigo);
 
                     System.out.println("Has elegido a " + enemigo.nombre);
                     pokemonAtaca.atacar(enemigo);
 
                     if (enemigo.vida <= 0) {
                         System.out.println("Has derrotado a " + enemigo.nombre);
-                        listaPokemon.remove(eleccionEnemigo);
+                        listaPokemon.remove(enemigo);
                     }
                     break;
                 case 3:
-                    entrenador.capturar();
+                    System.out.println("Elige un Pokémon para capturar:");
+                    for (int i = 0; i < listaPokemon.size(); i++) {
+                        System.out.println((i) + ". " + listaPokemon.get(i).nombre);
+                    }
+
+                    int eleccionCaptura = scanner.nextInt();
+                    Pokemon captura = listaPokemon.get(eleccionCaptura);
+                    entrenador.capturar(captura);
                     break;
                 case 4:
                     System.out.println("Has escapado");
