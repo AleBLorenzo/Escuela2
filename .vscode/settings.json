@@ -2,6 +2,7 @@
     "java.project.sourcePaths": [
         "VPProjects",
         "Pokemon/src",
-        "Copiar/src"
+        "Copiar/src",
+        "Lector/src"
     ]
 }
