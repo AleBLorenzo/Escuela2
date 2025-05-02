@@ -1,4 +1,6 @@
-public class Planta extends Pokemon implements Ataque {
+import java.io.Serializable;
+
+public class Planta extends Pokemon implements Ataque ,Serializable {
 
     public Planta(String name, int dano, int vida, int nivel, int vidaMaxima) {
         super(name, dano, nivel, vida, vidaMaxima);

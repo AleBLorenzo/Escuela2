@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Fuego extends Pokemon implements Ataque {
+public class Fuego extends Pokemon implements Ataque ,Serializable {
 
     // en las 3 utilizar en to string el getclss
 

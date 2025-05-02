@@ -1,8 +1,8 @@
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Entrenador  {
+public class Entrenador  implements Serializable {
 
     public String nombre;
     public int pokeballs;

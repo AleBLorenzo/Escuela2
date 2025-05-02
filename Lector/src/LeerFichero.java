@@ -51,13 +51,14 @@ public class LeerFichero {
                         totalCaracteres++;
                     }
 
-                    System.out.println("Total de caracteres: " + totalCaracteres);
+
+                    System.out.println("Total de caracteres " + totalCaracteres);
                     break;
 
                 case "3":
                     String contenido = Files.readString(fichero.toPath());
                     String[] palabras = contenido.split(" ");
-                    System.out.println("Total de palabras: " + palabras.length);
+                    System.out.println("Total de palabras " + palabras.length);
                     break;
             }
 

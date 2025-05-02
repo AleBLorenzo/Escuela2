@@ -1,4 +1,5 @@
-public abstract class Pokemon {
+import java.io.Serializable;
+public abstract class Pokemon  implements Serializable{
 
     public String nombre;
     public int nivel;

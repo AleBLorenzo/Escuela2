@@ -1,4 +1,6 @@
-public class Agua extends Pokemon implements Ataque{
+import java.io.Serializable;
+
+public class Agua extends Pokemon implements Ataque ,Serializable{
 
 
     public Agua(String name,int dano,int vida, int nivel, int vidaMaxima) {

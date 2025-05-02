@@ -1,8 +1,18 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.Serializable;
+import java.util.StringTokenizer;
 
-public class Main {
+public class Main implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     public static void main(String[] args) {
 
         Pokemon Squirtle = new Agua("Squirtle", 15, 45, 15, 50);
@@ -36,13 +46,17 @@ public class Main {
         listaPokemon.add(Chikorita);
         listaPokemon.add(Treecko);
 
+        LocalDateTime TiempoI = LocalDateTime.now();
+        int vecesjugadas = 0;
+
         while (true) {
             System.out.println("\n--- Menú ---");
             System.out.println("1. Inventario");
-
             System.out.println("2. Atacar");
             System.out.println("3. Capturar");
             System.out.println("4. Escapar");
+            System.out.println("5. Guardar Partida");
+            System.out.println("6. Cargar Partida");
             System.out.print("Elige una opción: ");
             int opcion = scanner.nextInt();
 
@@ -73,6 +87,7 @@ public class Main {
                         System.out.println("Has derrotado a " + enemigo.nombre);
                         listaPokemon.remove(enemigo);
                     }
+                    vecesjugadas++;
                     break;
                 case 3:
                     System.out.println("Elige un Pokemon para capturar:");
@@ -83,10 +98,58 @@ public class Main {
                     int eleccionCaptura = scanner.nextInt();
                     Pokemon captura = listaPokemon.get(eleccionCaptura);
                     entrenador.capturar(captura);
+                    vecesjugadas++;
                     break;
                 case 4:
                     System.out.println("Has escapado");
+
                     return;
+                case 5:
+                    try {
+                        LocalDateTime TiempoF = LocalDateTime.now();
+                        int tiempoTranscurrido = TiempoF.getMinute() - TiempoI.getMinute();
+                        System.out.println("Guardando partida");
+                        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("datos.dat"));
+
+                        oos.writeObject(equipo1);
+                        oos.writeInt(tiempoTranscurrido);
+                        oos.writeObject(TiempoI);
+                        oos.write(vecesjugadas);
+                        oos.close();
+
+                        System.out.println("Partida guardada con exito");
+                        System.out.println("Tiempo de juego: " + tiempoTranscurrido + " minutos");
+                        System.out.println("Partida guardada el " + TiempoI);
+                        System.out.println("Partida guardada con " + equipo1);
+                        System.out.println("Partida guardada con " + vecesjugadas + " veces jugadas");
+
+                    } catch (Exception e) {
+                        System.err.println("Error al escribir: " + e.getMessage());
+                    }
+
+                    break;
+                case 6:
+                    try {
+                        System.out.println("Cargando partida");
+                        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("datos.dat"));
+                        ArrayList<Pokemon> equipoCargado = (ArrayList<Pokemon>) ois.readObject();
+                        int tiempoTranscurridoCargado = ois.readInt();
+                        LocalDateTime TiempoICargado = (LocalDateTime) ois.readObject();
+                        int vecesjugadasCargadas = ois.read();
+
+                        System.out.println("Tiempo de juego " + tiempoTranscurridoCargado + " minutos");
+                        System.out.println("Partida guardada el " + TiempoICargado);
+                        System.out.println("Partida guardada con " + equipoCargado);
+                        System.out.println("Partida guardada con " + vecesjugadasCargadas + " veces jugadas");
+
+                        ois.close();
+                        System.out.println("Partida cargada con exito");
+
+                    } catch (Exception e) {
+                        System.err.println("Error al leer: " + e.getMessage());
+                    }
+
+                    break;
                 default:
                     System.out.println("Selecione un numero correcto");
             }
