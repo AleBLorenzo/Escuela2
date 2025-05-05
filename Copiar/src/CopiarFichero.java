@@ -11,6 +11,7 @@ public class CopiarFichero {
         try {
 
             if (args.length < 2) {
+                System.out.println("Fichero copiado correctamente");
                 return;
             }
 
@@ -38,8 +39,6 @@ public class CopiarFichero {
             }
 
             Files.copy(fichero.toPath(), new File(ficheroDestino + "//fichero.txt").toPath());
-
-            System.out.println("Fichero copiado correctamente");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

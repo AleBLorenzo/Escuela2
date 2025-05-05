@@ -11,17 +11,33 @@ import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+
 public class LeerFichero {
     public static void main(String[] args) throws IOException {
 
         try {
 
-            File fichero = new File("fichero.txt");
+            if (args.length < 1) {
+                System.out.println("Lectura Correcta");
+             return;
+            }
+            String  nombreFichero = args[0];
+
+            File fichero = new File(nombreFichero);
+
+            if (fichero.exists()) {
+                System.out.println("El fichero ya existe");
+            } else {
+                System.out.println("El fichero no existe se va a crear uno nuevo");
+                fichero.mkdirs();
+            }
 
             FileWriter fw = new FileWriter(fichero);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("Esto es un fichero de texto fg4");
             bw.close();
+
+            
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Sleecione q quiere ver del archivo: ");
@@ -62,6 +78,7 @@ public class LeerFichero {
                     break;
             }
 
+            scanner.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
