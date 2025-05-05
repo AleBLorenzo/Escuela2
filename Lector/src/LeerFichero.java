@@ -11,7 +11,6 @@ import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-
 public class LeerFichero {
     public static void main(String[] args) throws IOException {
 
@@ -19,66 +18,55 @@ public class LeerFichero {
 
             if (args.length < 1) {
                 System.out.println("Lectura Correcta");
-             return;
+                return;
             }
-            String  nombreFichero = args[0];
+            boolean v = false;
+            String nombreFichero;
+
+            if (args.length == 2 && args[0].equals("-v")) {
+                v = true;
+                nombreFichero = args[1];
+            } else {
+                nombreFichero = args[0];
+            }
 
             File fichero = new File(nombreFichero);
 
             if (fichero.exists()) {
                 System.out.println("El fichero ya existe");
             } else {
-                System.out.println("El fichero no existe se va a crear uno nuevo");
-                fichero.mkdirs();
+                System.out.println("El fichero no existe  " + nombreFichero);
+
             }
 
-            FileWriter fw = new FileWriter(fichero);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("Esto es un fichero de texto fg4");
-            bw.close();
+            BufferedReader br = new BufferedReader(new FileReader(fichero));
 
-            
+            String linea;
+            int totalCaracteres = 0;
+            int totalPalabras = 0;
+            int totalLineas = 0;
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Sleecione q quiere ver del archivo: ");
-            System.out.println("1. Leer el fichero completo");
-            System.out.println("2. Cantidad total de caracteres");
-            System.out.println("3. Cantiadd total de palabras");
-            String seleccion = scanner.nextLine();
+            if ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+                totalLineas++;
 
-            switch (seleccion) {
-                case "1":
-                    FileReader fr = new FileReader(fichero);
-                    BufferedReader br = new BufferedReader(fr);
+                if (linea.length() > 0) {
+                    totalCaracteres += linea.length();
+                }
 
-                    int c;
-                    while ((c = br.read()) != -1) {
-                        System.out.print((char) c);
-                    }
-                    fr.close();
-                    break;
+                if (!linea.isEmpty()) {
+                    totalPalabras += linea.split("\\s+").length;
+                }
 
-                case "2":
-                    FileInputStream fis = new FileInputStream(fichero);
-                    InputStreamReader dis = new InputStreamReader(fis);
+                if (v == false) {
+                    System.out.println("\n--- Estadísticas ---");
+                    System.out.println("Total de caracteres: " + totalCaracteres);
+                    System.out.println("Total de palabras: " + totalPalabras);
+                    System.out.println("Total de líneas: " + totalLineas);
+                }
 
-                    int totalCaracteres = 0;
-                    while ((c = dis.read()) != -1) {
-                        totalCaracteres++;
-                    }
-
-
-                    System.out.println("Total de caracteres " + totalCaracteres);
-                    break;
-
-                case "3":
-                    String contenido = Files.readString(fichero.toPath());
-                    String[] palabras = contenido.split(" ");
-                    System.out.println("Total de palabras " + palabras.length);
-                    break;
             }
 
-            scanner.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
