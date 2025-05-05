@@ -2,7 +2,8 @@
     "java.project.sourcePaths": [
         "VPProjects",
         "Pokemon/src",
+        "Lector/src",
         "Copiar/src",
-        "Lector/src"
+        "Ejemplos codigo Interfaz grafica"
     ]
 }
