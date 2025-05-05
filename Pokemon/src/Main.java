@@ -49,6 +49,8 @@ public class Main implements Serializable {
         LocalDateTime TiempoI = LocalDateTime.now();
         int vecesjugadas = 0;
 
+        
+
         while (true) {
             System.out.println("\n--- Menú ---");
             System.out.println("1. Inventario");

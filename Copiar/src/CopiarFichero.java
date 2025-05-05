@@ -9,7 +9,15 @@ public class CopiarFichero {
     public static void main(String[] args) throws IOException {
 
         try {
-            File ficheroOrigen = new File("origen");
+
+            if (args.length < 2) {
+                return;
+            }
+
+            String nombreOrigen = args[0];
+            String nombreDestino = args[1];
+
+            File ficheroOrigen = new File(nombreOrigen);
             ficheroOrigen.mkdirs();
 
             File fichero = new File(ficheroOrigen + "//fichero.txt");
@@ -19,11 +27,7 @@ public class CopiarFichero {
             bw.write("Esto es un fichero de texto");
             bw.close();
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Introduce el nombre de la Carpeta destino: ");
-            String nombreFichero = scanner.nextLine();
-
-            File ficheroDestino = new File(nombreFichero);
+            File ficheroDestino = new File(nombreDestino);
 
             if (ficheroDestino.exists()) {
                 System.out.println("La carpeta ya existe");
@@ -35,7 +39,6 @@ public class CopiarFichero {
 
             Files.copy(fichero.toPath(), new File(ficheroDestino + "//fichero.txt").toPath());
 
-            scanner.close();
             System.out.println("Fichero copiado correctamente");
 
         } catch (Exception e) {
