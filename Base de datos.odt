@@ -1,0 +1,130 @@
+
+
+
+
+
+Enunciados de las consultas
+    1. Seleccionar todas las columnas de la tabla marcas.
+
+       select * from marcas;
+
+    2. Seleccionar solo el nombre y el precio de todos los productos.
+
+       select nombre ,precio from productos;
+
+    3. Seleccionar el nombre y email de todos los clientes activos.
+
+       select nombre , email from clientes where activo != 0;
+
+    4. Seleccionar los nombres de las categorías ordenados alfabéticamente.
+
+       select nombre from categorias order by nombre  asc;
+
+    5. Seleccionar los productos ordenados por precio, del más caro al más barato.
+
+       select nombre , precio from productos order by precio desc;
+
+    6. Seleccionar los 5 productos más caros.
+
+        select nombre , precio from productos order by precio desc limit 5;
+
+    7. Seleccionar los clientes registrados más recientemente (los 10 últimos).
+
+       select nombre , fecha_registro from clientes order by  fecha_registro desc limit 10;
+
+    8. Seleccionar los productos que cuestan exactamente 499.00.
+
+       select nombre , precio from productos where precio = 499.00;
+
+    9. Seleccionar los pedidos con estado 'Entregado'.
+
+       select id_pedido , estado from pedidos where estado = "Entregado";
+       
+    10. Seleccionar los productos cuyo stock sea menor a 20 unidades.
+
+       select nombre , stock  from productos where stock <= 20;
+
+    11. Seleccionar los clientes cuyo nombre empiece por 'A'.
+
+       select nombre from clientes Where nombre like 'A%';
+
+    12. Seleccionar los productos cuyo nombre contenga la palabra 'Laptop'.
+
+       select nombre from productos where nombre like '%Laptop%';
+
+    13. Seleccionar las marcas de 'Estados Unidos' o 'Japón'.
+
+       select nombre , pais_origen from marcas where pais_origen in ('Estados Unidos', 'Japón');
+
+    14. Seleccionar los productos con precio entre 100 y 500 (inclusive).
+
+       select nombre , precio from productos where precio >= 100.00 and precio <= 500.00;
+
+    15. Seleccionar los clientes que NO tienen teléfono registrado.
+
+       select nombre , telefono from clientes Where telefono is NULL;
+
+    16. Seleccionar los productos que NO pertenecen a la categoría 1 (Smartphones) ni a la 2 (Laptops).
+
+       select p.nombre ,c.id_categoria from productos as p inner join categorias as c  using(id_categoria) where id_categoria <>1 and id_categoria <>2  ;
+
+    17. Seleccionar el nombre del producto y su precio con IVA (precio * 1.21), usando un alias.
+
+       select nombre , precio*1.21 as precio_iva from productos;
+
+    18. Concatenar el nombre y apellidos de los clientes en una sola columna llamada 'nombre_completo'.
+
+       select nombre , apellidos ,concat(nombre,' ', apellidos)as Nombre_completo from clientes;
+
+    19. Mostrar los nombres de las categorías en mayúsculas.
+
+       select  upper(nombre) from categorias ;
+
+    20. Mostrar el año de lanzamiento de los productos que tengan fecha de lanzamiento.
+
+       select nombre _fecha_lanzamiento from productos where fecha_lanzamiento is not null ;
+
+    21. Seleccionar los diferentes estados de pedido que existen.
+
+        select  distinct estado from pedidos;
+
+    22. Seleccionar los distintos países de origen de las marcas (sin nulos).
+
+         select  distinct pais_origen , nombre from marcas where pais_origen is not null;
+
+    23. Contar cuántos productos hay en total.
+
+        select count(id_producto) From productos;
+
+    24. Calcular el precio medio de todos los productos activos.
+    25. Obtener la suma total de todos los pedidos 'Entregado'.
+    26. Encontrar el precio del producto más caro.
+    27. Encontrar la fecha del pedido más antiguo.
+    28. Contar cuántos productos hay por cada categoría (mostrar id_categoria y el conteo).
+    29. Contar cuántos pedidos ha realizado cada cliente (mostrar id_cliente y el conteo).
+    30. Calcular el total gastado por cada cliente en pedidos 'Entregado'.
+    31. Mostrar el precio medio de los productos por cada marca (mostrar id_marca y precio medio).
+    32. Encontrar la cantidad total de productos (stock) por categoría.
+    33. Mostrar las categorías que tienen más de 10 productos.
+    34. Mostrar los clientes que han realizado más de 5 pedidos.
+    35. Mostrar las marcas cuyo precio medio de producto sea superior a 500.
+    36. Mostrar el nombre de cada producto junto con el nombre de su categoría.
+    37. Mostrar el nombre de cada producto junto con el nombre de su marca.
+    38. Mostrar el ID del pedido, la fecha del pedido y el nombre completo del cliente que lo realizó.
+    39. Mostrar los detalles de cada pedido: ID de detalle, ID de pedido, nombre del producto, cantidad y subtotal.
+    40. Mostrar el nombre del producto, el nombre de la categoría y el nombre de la marca para todos los productos.
+    41. Listar todos los productos de la categoría 'Laptops' mostrando su nombre, precio y el nombre de la marca.
+    42. Mostrar los pedidos (ID y fecha) realizados por el cliente con email 'juan.perez@email.com'.
+    43. Listar el nombre de los productos incluidos en el pedido con ID 10, junto con la cantidad pedida.
+    44. Mostrar el nombre de cada categoría y cuántos productos tiene asociados, ordenado por el número de productos descendentemente.
+    45. Mostrar el nombre de cada marca y el precio medio de sus productos, solo para marcas con precio medio superior a 300.
+    46. Mostrar el nombre del cliente, email, ID del pedido y total del pedido para todos los pedidos 'Pendiente'.
+    47. Listar los 10 productos más vendidos (mayor cantidad total en detalles_pedido), mostrando nombre del producto y cantidad total vendida.
+    48. Mostrar el ID del pedido, nombre del cliente y nombre del producto para todos los detalles de pedido donde el precio unitario fue superior a 1000.
+    49. Calcular el total facturado por cada método de pago en los pedidos 'Entregado'.
+    50. Mostrar el nombre del producto, marca, categoría y stock para productos de marcas de 'Corea del Sur' con stock menor a 50.
+    51. Listar el nombre y email de los clientes que han comprado algún producto de la marca 'Samsung'.
+    52. Listar el nombre y precio de los productos que nunca han sido vendidos (no aparecen en detalles_pedido).
+    53. Mostrar el ID y la fecha de los pedidos que contienen al menos un producto de la categoría 'Auriculares'.
+    54. Mostrar el nombre completo de cada cliente y la fecha de su último pedido.
+    55. Listar las marcas que no tienen ningún producto asociado en la tabla productos.
