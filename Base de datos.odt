@@ -97,22 +97,73 @@ Enunciados de las consultas
         select count(id_producto) From productos;
 
     24. Calcular el precio medio de todos los productos activos.
+
+        select AVG(precio), activo from productos where activo = 1;
+
     25. Obtener la suma total de todos los pedidos 'Entregado'.
+
+    select count(id_pedido) , estado from pedidos Where estado = 'Entregado';
+
     26. Encontrar el precio del producto más caro.
+
+      select nombre ,precio  from productos order by precio desc limit 1;
+
     27. Encontrar la fecha del pedido más antiguo.
+
+    select id_pedido , fecha_pedido from pedidos order by fecha_pedido asc limit 1 ;
+
     28. Contar cuántos productos hay por cada categoría (mostrar id_categoria y el conteo).
+ 
+       select id_categoria, count(*) as total_productos from productos group by id_categoria;
+
     29. Contar cuántos pedidos ha realizado cada cliente (mostrar id_cliente y el conteo).
+
+    select id_cliente , count(*) from pedidos  group by id_cliente;
+
     30. Calcular el total gastado por cada cliente en pedidos 'Entregado'.
+
+    select id_cliente ,sum(total) , estado from pedidos  where estado = 'Entregado' group by id_cliente;
+
     31. Mostrar el precio medio de los productos por cada marca (mostrar id_marca y precio medio).
+   
+   select id_marca ,avg(precio) from productos group by id_marca;
+
     32. Encontrar la cantidad total de productos (stock) por categoría.
+
+    select id_categoria , count(stock) from productos group by id_categoria;
+
     33. Mostrar las categorías que tienen más de 10 productos.
+
+    select id_categoria , count(stock) from productos group by id_categoria having count(stock) > 10;
+
     34. Mostrar los clientes que han realizado más de 5 pedidos.
+
+    select id_cliente , count(*) from pedidos group by id_cliente having count(*) > 10;
+
     35. Mostrar las marcas cuyo precio medio de producto sea superior a 500.
+   
+     select id_marca , avg(precio) from productos group by id_marca having avg(precio) > 500 ;
+
     36. Mostrar el nombre de cada producto junto con el nombre de su categoría.
+    
+    select p.nombre , c.nombre from productos as p inner join categorias as c using(id_categoria);
+
     37. Mostrar el nombre de cada producto junto con el nombre de su marca.
+    
+    select p.nombre , m.nombre from productos as p inner join marcas as m using(id_marca);
+
     38. Mostrar el ID del pedido, la fecha del pedido y el nombre completo del cliente que lo realizó.
+    
+    select p.id_pedido ,p.fecha_pedido , c.nombre , c.apellidos from pedidos as p inner join clientes as c using(id
+_cliente);
+
     39. Mostrar los detalles de cada pedido: ID de detalle, ID de pedido, nombre del producto, cantidad y subtotal.
+   
+   select d.id_pedido ,d.id_detalle , d.cantidad , d.subtotal , pr.nombre from detalles_pedido as d inner join productos as pr on pr.id_producto = d.id_producto
+   
     40. Mostrar el nombre del producto, el nombre de la categoría y el nombre de la marca para todos los productos.
+    
+    
     41. Listar todos los productos de la categoría 'Laptops' mostrando su nombre, precio y el nombre de la marca.
     42. Mostrar los pedidos (ID y fecha) realizados por el cliente con email 'juan.perez@email.com'.
     43. Listar el nombre de los productos incluidos en el pedido con ID 10, junto con la cantidad pedida.
