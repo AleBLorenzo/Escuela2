@@ -163,16 +163,47 @@ _cliente);
    
     40. Mostrar el nombre del producto, el nombre de la categoría y el nombre de la marca para todos los productos.
     
-    
+    select p.nombre ,c.nombre , m.nombre from productos as p inner join categorias as c using(id_categoria) inner join marcas as m using(id_marca);
+
     41. Listar todos los productos de la categoría 'Laptops' mostrando su nombre, precio y el nombre de la marca.
+    
+    select p.nombre ,p.precio ,c.nombre , m.nombre from productos as p inner join categorias as c using(id_categori
+a) inner join marcas as m using(id_marca) where c.nombre = 'Laptops';
+
     42. Mostrar los pedidos (ID y fecha) realizados por el cliente con email 'juan.perez@email.com'.
+    
+    select p.id_pedido , p.fecha_pedido , c.email from pedidos as p inner join clientes as c using(id_cliente) where c.email = 'juan.perez@email.com';
+
     43. Listar el nombre de los productos incluidos en el pedido con ID 10, junto con la cantidad pedida.
+   
+   select p.nombre ,d.id_pedido , d.cantidad from detalles_pedido as d inner join productos as p using(id_producto) where id_pedido = 10;
+
     44. Mostrar el nombre de cada categoría y cuántos productos tiene asociados, ordenado por el número de productos descendentemente.
+   
+     select c.nombre, count(p.id_producto) as total from categorias as c inner join productos as p on c.id_categoria=p.id_categoria group by c.id_categoria  order by total desc;
+
     45. Mostrar el nombre de cada marca y el precio medio de sus productos, solo para marcas con precio medio superior a 300.
+ 
+     select m.nombre , avg(p.precio) as media from productos as p inner join marcas as m using(id_marca) group by m.id_marca having media > 300.00;
+
     46. Mostrar el nombre del cliente, email, ID del pedido y total del pedido para todos los pedidos 'Pendiente'.
+   
+     select c.nombre , c.email , p.id_pedido , p.total from pedidos as p inner join clientes as c using(id_cliente)
+where estado = 'Pendiente';
+
     47. Listar los 10 productos más vendidos (mayor cantidad total en detalles_pedido), mostrando nombre del producto y cantidad total vendida.
+   
+    select p.nombre ,sum(d.cantidad) from detalles_pedido as d inner join productos as p using(id_producto) group by p.id_producto order by sum(d.cantidad) desc limit 10;
+
     48. Mostrar el ID del pedido, nombre del cliente y nombre del producto para todos los detalles de pedido donde el precio unitario fue superior a 1000.
+   
+      select c.nombre ,p.id_pedido , pr.nombre from clientes as c inner join pedidos as p on c.id_cliente=p.id_cliente inner join detalles_pedido as d  on p.id_pedido=d.id_pedido inner join productos as pr on d.id_producto=pr.id_produc
+to where precio_unitario >1000;
+
     49. Calcular el total facturado por cada método de pago en los pedidos 'Entregado'.
+   
+     select sum(total) ,  metodo_pago , estado from pedidos where estado = 'Entregado' group by metodo_pago;
+
     50. Mostrar el nombre del producto, marca, categoría y stock para productos de marcas de 'Corea del Sur' con stock menor a 50.
     51. Listar el nombre y email de los clientes que han comprado algún producto de la marca 'Samsung'.
     52. Listar el nombre y precio de los productos que nunca han sido vendidos (no aparecen en detalles_pedido).
