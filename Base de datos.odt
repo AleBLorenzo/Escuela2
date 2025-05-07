@@ -205,8 +205,27 @@ to where precio_unitario >1000;
      select sum(total) ,  metodo_pago , estado from pedidos where estado = 'Entregado' group by metodo_pago;
 
     50. Mostrar el nombre del producto, marca, categoría y stock para productos de marcas de 'Corea del Sur' con stock menor a 50.
+   
+     select p.nombre , m.nombre , c.nombre , p.stock from productos as p inner join marcas as m using(id_marca) inner join categorias as c using(id_categoria) where m.pais_origen = 'Corea del Sur' and stock < 50;
+
     51. Listar el nombre y email de los clientes que han comprado algún producto de la marca 'Samsung'.
+   
+     select c.nombre , c.email ,pr.nombre as producto from clientes as c inner join pedidos as p on p.id_cliente=c.id_cliente inner join detalles_pedido as dl on dl.id_pedido=p.id_pedido inner join productos as pr on pr.id_producto=dl.id_producto where pr.id_producto in (select p.id_producto  from productos as p inner join marcas as m on m.id_marca=p.id_marca where m.nombre = 'Samsung');
+
     52. Listar el nombre y precio de los productos que nunca han sido vendidos (no aparecen en detalles_pedido).
+   
+       select nombre , precio from productos where id_producto  in(select  p.id_producto  from detalles_pedido as d right join productos as p on d.id_producto=p.id_producto where d.id_producto is NULL );
+
     53. Mostrar el ID y la fecha de los pedidos que contienen al menos un producto de la categoría 'Auriculares'.
+   
+      select p.id_pedido , p.fecha_pedido from pedidos as p inner join detalles_pedido using(id_pedido) inner join productos using(id_producto) where id_producto  in(select  p.id_producto  from productos as p right join categorias as c on c.id_categoria=p.id_categoria where c.nombre = 'Auriculares');
+
     54. Mostrar el nombre completo de cada cliente y la fecha de su último pedido.
+   
+     select concat(c.nombre ,' ',c.apellidos), max(p.fecha_pedido)  from clientes as c inner join pedidos as p on c.id_cliente=p.id_cliente group by c.id_cliente;
+
     55. Listar las marcas que no tienen ningún producto asociado en la tabla productos.
+    
+    select  p.id_producto ,p.nombre , m.nombre from marcas as m left join productos as p on p.id_marca=m.id_marca where p.id_marca is NULL;
+
+
