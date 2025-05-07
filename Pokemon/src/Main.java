@@ -140,9 +140,9 @@ public class Main implements Serializable {
                         int vecesjugadasCargadas = ois.read();
 
                         System.out.println("Tiempo de juego " + tiempoTranscurridoCargado + " minutos");
-                        System.out.println("Partida guardada el " + TiempoICargado);
-                        System.out.println("Partida guardada con " + equipoCargado);
-                        System.out.println("Partida guardada con " + vecesjugadasCargadas + " veces jugadas");
+                        System.out.println("Partida cargada el " + TiempoICargado);
+                        System.out.println("Partida cargada con " + equipoCargado);
+                        System.out.println("Partida cargada con " + vecesjugadasCargadas + " veces jugadas");
 
                         ois.close();
                         System.out.println("Partida cargada con exito");
