@@ -1,3 +1,4 @@
+import java.util.Collection;
 public class array {
 
     public static void main(String[] args) {
