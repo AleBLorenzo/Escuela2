@@ -25,6 +25,10 @@ public abstract class Pokemon  implements Serializable{
         System.out.println("Atacando a " + enemigo.getNombre());
     }
 
+    public void curar (Pokemon atacante){
+        System.out.println("Atacando con " + atacante.getNombre());
+    }
+
     public abstract void Sonido();
 
     public String getNombre() {

@@ -6,5 +6,6 @@
         "Ejemplos codigo Interfaz grafica",
         "Copiar/src",
         ""
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

@@ -2,13 +2,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.io.Serializable;
-import java.util.StringTokenizer;
 
 public class Main implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -24,16 +22,19 @@ public class Main implements Serializable {
         Pokemon Bulbasaur = new Planta("Bulbasaur", 18, 65, 20, 70);
         Pokemon Chikorita = new Planta("Chikorita", 15, 48, 16, 52);
         Pokemon Treecko = new Planta("Treecko", 20, 58, 19, 62);
+        Pokemon Hadino = new Hada("Hadino", 20, 50, 19, 62);
 
         ArrayList<Pokemon> equipo1 = new ArrayList<>();
         equipo1.add(Squirtle);
         equipo1.add(Psyduck);
+        equipo1.add(Hadino);
 
         Scanner scanner = new Scanner(System.in);
 
-        Entrenador entrenador = new Entrenador("Alejandro", 10, equipo1);
+        Entrenador entrenador = new Entrenador("Alejandro", 10, equipo1, 5);
 
         Pokemon enemigo;
+        Pokemon atacante;
 
         ArrayList<Pokemon> listaPokemon = new ArrayList<>();
         listaPokemon.add(Squirtle);
@@ -45,11 +46,10 @@ public class Main implements Serializable {
         listaPokemon.add(Bulbasaur);
         listaPokemon.add(Chikorita);
         listaPokemon.add(Treecko);
+        listaPokemon.add(Hadino);
 
         LocalDateTime TiempoI = LocalDateTime.now();
         int vecesjugadas = 0;
-
-        
 
         while (true) {
             System.out.println("\n--- Menú ---");
@@ -74,22 +74,56 @@ public class Main implements Serializable {
                     }
 
                     int eleccionAtacar = scanner.nextInt();
-                    Pokemon pokemonAtaca = entrenador.equipo.get(eleccionAtacar);
+                    atacante = entrenador.equipo.get(eleccionAtacar);
 
-                    System.out.println("Has elegido a " + pokemonAtaca.nombre);
+                    System.out.println("Has elegido a " + atacante.nombre);
 
-                    Random random = new Random();
-                    int eleccionEnemigo = random.nextInt(listaPokemon.size());
-                    enemigo = listaPokemon.get(eleccionEnemigo);
+                    if (atacante != Hadino) {
 
-                    System.out.println("Te encontraste a " + enemigo.nombre);
-                    pokemonAtaca.atacar(enemigo);
+                        Random random = new Random();
+                        int eleccionEnemigo = random.nextInt(listaPokemon.size());
+                        enemigo = listaPokemon.get(eleccionEnemigo);
 
-                    if (enemigo.vida <= 0) {
-                        System.out.println("Has derrotado a " + enemigo.nombre);
-                        listaPokemon.remove(enemigo);
+                        System.out.println("Te encontraste a " + enemigo.nombre);
+                        atacante.atacar(enemigo);
+
+                        if (enemigo.vida <= 0) {
+                            System.out.println("Has derrotado a " + enemigo.nombre);
+                            listaPokemon.remove(enemigo);
+                        }
+                        vecesjugadas++;
+
+                    } else {
+                        System.out.println("Selecione si quiere [1]atacar o [2]curar");
+                        int opcion2 = scanner.nextInt();
+
+                        switch (opcion2) {
+
+                            case 1:
+
+                                Random random = new Random();
+                                int eleccionEnemigo = random.nextInt(listaPokemon.size());
+                                enemigo = listaPokemon.get(eleccionEnemigo);
+
+                                System.out.println("Te encontraste a " + enemigo.nombre);
+                                atacante.atacar(enemigo);
+
+                                if (enemigo.vida <= 0) {
+                                    System.out.println("Has derrotado a " + enemigo.nombre);
+                                    listaPokemon.remove(enemigo);
+                                }
+                                vecesjugadas++;
+                                break;
+                            case 2:
+
+                                atacante.curar(atacante);
+                                System.out.println("Curado");
+                                vecesjugadas++;
+                                break;
+                        }
+
                     }
-                    vecesjugadas++;
+
                     break;
                 case 3:
                     System.out.println("Elige un Pokemon para capturar:");
@@ -150,6 +184,15 @@ public class Main implements Serializable {
                     } catch (Exception e) {
                         System.err.println("Error al leer: " + e.getMessage());
                     }
+
+                    break;
+                case 7:
+                    for (int i = 0; i < entrenador.equipo.size(); i++) {
+                        System.out.println((i) + ". " + entrenador.equipo.get(i).nombre);
+                    }
+
+                    int eleccionCuracion = scanner.nextInt();
+                    atacante = entrenador.equipo.get(eleccionCuracion);
 
                     break;
                 default:

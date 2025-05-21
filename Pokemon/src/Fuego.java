@@ -27,6 +27,8 @@ public class Fuego extends Pokemon implements Ataque ,Serializable {
         System.out.println(this.nombre + " atacó a " + enemigo.nombre + " causando " + danioFinal + " de daño con" +enemigo.vida + " de vida restante.");
     }
 
+    
+
     @Override
     public String toString() {
         return "Nombre: " + this.nombre + "\nDaño: " + this.dano + "\nNivel: " + this.nivel + "\nVida: " + this.vida + "\nVidaMaxima: "
