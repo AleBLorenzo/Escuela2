@@ -7,5 +7,6 @@
         "Copiar/src",
         ""
     ],
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "docwriter.style": "Javadoc"
 }

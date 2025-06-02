@@ -13,10 +13,7 @@ public class Pila<T> {
     }
 
     public T pop() {
-        if (!elementos.isEmpty()) {
-            return elementos.remove(elementos.size() - 1);
-        }
-        return null;
+         return elementos.remove(elementos.size() - 1);
     }
 
     public static void main(String[] args) {
