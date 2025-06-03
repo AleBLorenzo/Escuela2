@@ -24,7 +24,7 @@ public class Pila<T> {
 
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Selecciona una opción:");
+            System.out.println("Selecciona una opcion");
             System.out.println("1. Añadir texto");
             System.out.println("2. Deshacer");
             System.out.println("3. Mostrar todo");
