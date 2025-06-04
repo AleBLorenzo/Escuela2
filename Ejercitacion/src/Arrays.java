@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Arrays {
 
@@ -195,31 +196,44 @@ public class Arrays {
             nome.add(8);
             nome.add(55);
             nome.add(6);
-          
-           int  palabra= 9;
 
-           for(Integer nu : nome){
-            System.out.println(nu);
-           }
-            
-                if (nome.contains(palabra)) {
-                    System.out.println(palabra);
-                } else{
-                    System.out.println("no contiene la palabra");
-                }
-               
-                System.out.println("introduce una frase");
+            int palabra = 9;
 
-                 String frace =sc.nextLine();
-            
+            for (Integer nu : nome) {
+                System.out.println(nu);
+            }
 
-                
-                String [] palabre = frace.split(" ");
-HashSet <String> pala = new HashSet<>(palabre);
-                for(String pa : palabre){
-                    System.out.println(pa);
-                }
-            
+            if (nome.contains(palabra)) {
+                System.out.println(palabra);
+            } else {
+                System.out.println("no contiene la palabra");
+            }
+
+            System.out.println("introduce una frase");
+
+            String frace = sc.nextLine();
+
+            String[] palabre = frace.split(" ");
+            for (String pa : palabre) {
+                System.out.println(pa);
+            }
+
+            TreeMap<String, Integer> diccionario = new TreeMap<>();
+
+            diccionario.put("rolex", 150);
+            diccionario.put("cacio", 100);
+            diccionario.put("invictus", 250);
+            diccionario.put("lotus", 180);
+            diccionario.put("ssd", 1550);
+            diccionario.put("roldx", 170);
+            diccionario.put("rolexs", 1990);
+            diccionario.put("rolexed", 160);
+
+
+            for(String si : diccionario.keySet()){
+                System.out.println(diccionario.get(si));
+            }
+
         }
 
     }
