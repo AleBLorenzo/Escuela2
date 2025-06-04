@@ -1,15 +1,16 @@
 package Ejercitacion.src;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Arrays {
-    
+
     public static void main(String[] args) {
 
-        
         int suma = 0;
 
         int[] array = new int[10];
@@ -99,7 +100,6 @@ public class Arrays {
 
     }
 
-
     public static class Caja<T> {
 
         private T contenido;
@@ -166,36 +166,60 @@ public class Arrays {
 
             System.out.println(primero);
             System.out.println(ultimo);
-             
+
             System.out.println(suma);
             System.out.println(media);
 
-
-
-            ArrayList <String> users = new ArrayList<>();
+            ArrayList<String> users = new ArrayList<>();
 
             Scanner sc = new Scanner(System.in);
 
-           
-              
-          
-            for (int i = 0 ; i< 11;i++){
-                  users.add(sc.nextLine());
+            for (int i = 0; i < 11; i++) {
+                users.add(sc.nextLine());
             }
 
-            for ( String nombre : users){
-                if (nombre.length()> 5 ){
+            for (String nombre : users) {
+                if (nombre.length() > 5) {
                     System.out.println(nombre);
                 }
             }
 
             Collections.reverse(users);
 
+            HashSet<Integer> nome = new HashSet<>();
 
+            nome.add(5);
+            nome.add(4);
+            nome.add(3);
+            nome.add(5);
+            nome.add(8);
+            nome.add(55);
+            nome.add(6);
+          
+           int  palabra= 9;
 
+           for(Integer nu : nome){
+            System.out.println(nu);
+           }
+            
+                if (nome.contains(palabra)) {
+                    System.out.println(palabra);
+                } else{
+                    System.out.println("no contiene la palabra");
+                }
+               
+                System.out.println("introduce una frase");
+
+                 String frace =sc.nextLine();
             
 
-
+                
+                String [] palabre = frace.split(" ");
+HashSet <String> pala = new HashSet<>(palabre);
+                for(String pa : palabre){
+                    System.out.println(pa);
+                }
+            
         }
 
     }
