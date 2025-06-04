@@ -1,9 +1,11 @@
 package Ejercitacion.src;
 
 import java.lang.reflect.Array;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -175,16 +177,6 @@ public class Arrays {
 
             Scanner sc = new Scanner(System.in);
 
-            for (int i = 0; i < 11; i++) {
-                users.add(sc.nextLine());
-            }
-
-            for (String nombre : users) {
-                if (nombre.length() > 5) {
-                    System.out.println(nombre);
-                }
-            }
-
             Collections.reverse(users);
 
             HashSet<Integer> nome = new HashSet<>();
@@ -211,29 +203,41 @@ public class Arrays {
 
             System.out.println("introduce una frase");
 
-            String frace = sc.nextLine();
+            ArrayDeque<String> cola = new ArrayDeque<>();
 
-            String[] palabre = frace.split(" ");
-            for (String pa : palabre) {
-                System.out.println(pa);
+            for (int i = 0; i < 7; i++) {
+                String nombre = sc.nextLine();
+                cola.add(nombre);
+
+            }
+            System.out.println();
+            if (cola.size() == 7) {
+                System.out.println(cola.poll());
             }
 
-            TreeMap<String, Integer> diccionario = new TreeMap<>();
+            ArrayDeque<String> pila = new ArrayDeque<>();
 
-            diccionario.put("rolex", 150);
-            diccionario.put("cacio", 100);
-            diccionario.put("invictus", 250);
-            diccionario.put("lotus", 180);
-            diccionario.put("ssd", 1550);
-            diccionario.put("roldx", 170);
-            diccionario.put("rolexs", 1990);
-            diccionario.put("rolexed", 160);
+            pila.push("1");
+            pila.push("s");
+            pila.push("d");
+            pila.push("f");
+            pila.push("g");
+            pila.push("c");
+            pila.push("b");
+            pila.push("g");
+            pila.push("h");
+            pila.push("y");
 
 
-            for(String si : diccionario.keySet()){
-                System.out.println(diccionario.get(si));
+            for(String s :pila){
+                System.out.println(s);
             }
 
+            pila.pop();
+
+            for(String a :pila){
+                System.out.println(a);
+            }
         }
 
     }
