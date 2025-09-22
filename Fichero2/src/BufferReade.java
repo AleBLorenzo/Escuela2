@@ -9,17 +9,19 @@ public class BufferReade {
         FileReader fr = null;
         int contador = 0;
 
+
         try {
 
             fr = new java.io.FileReader("Fichero2/src/frases.txt");
             br = new java.io.BufferedReader(fr);
+            
 
             String s;
-
-            while ((s = br.readLine()) != null) {
+ while ((s = br.readLine()) != null) {
                 contador++;
                 System.out.println(s);
             }
+           
 
             System.out.println("El fichero tiene " + contador + " lineas");
 

@@ -15,6 +15,7 @@ public class BufferWhrit {
 
             fw = new FileWriter("Fichero2/src/frases_usuario.txt", true);
             bw = new BufferedWriter(fw);
+            
 
             System.out.println("Escribe una frase: ");
 
