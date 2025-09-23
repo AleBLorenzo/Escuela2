@@ -4,15 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.lang.StringBuffer;
 import java.lang.Comparable;
-import java.io.buffered;
 
 // Falta lo de la inversa
 public class creainversa {
-
-    public int compareTo(BufferedReader listo, BufferedWriter escrito) {
-
-        return;
-    }
 
     public static void main(String[] args) {
 
@@ -34,10 +28,15 @@ public class creainversa {
 
                 System.out.println(a);
 
-                escrito.write(a);
+            }
+
+            for (int i = 0; i < listo.read(); i++) {
+
+                String res = String.valueOf(i);
+                
+                escrito.write(res);
                 escrito.newLine();
                 escrito.flush();
-
             }
 
         } catch (Exception e) {
