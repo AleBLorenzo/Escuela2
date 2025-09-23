@@ -22,9 +22,9 @@ public class FileReade {
 
             System.out.println("Error al abrir el fichero");
         } finally {
-            if (fr != null)
                 try {
                     fr.close();
+                    
                 } catch (Exception e) {
                     System.out.println("Error al cerrar el fichero");
                 }

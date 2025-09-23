@@ -17,7 +17,8 @@ public class BufferReade {
             
 
             String s;
- while ((s = br.readLine()) != null) {
+            
+            while ((s = br.readLine()) != null) {
                 contador++;
                 System.out.println(s);
             }
