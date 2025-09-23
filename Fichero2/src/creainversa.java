@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.lang.StringBuffer;
+import java.util.ArrayList;
 import java.lang.Comparable;
 
 // Falta lo de la inversa
@@ -14,6 +15,8 @@ public class creainversa {
         BufferedReader listo = null;
         FileWriter doc = null;
         BufferedWriter escrito = null;
+
+        ArrayList<String> lineas = new ArrayList<>();
 
         try {
 
@@ -27,16 +30,16 @@ public class creainversa {
             while ((a = listo.readLine()) != null) {
 
                 System.out.println(a);
+                lineas.add(a);
 
             }
 
-            for (int i = 0; i < listo.read(); i++) {
+            for (int i = lineas.size() - 1; i >= 0; i--) {
 
-                String res = String.valueOf(i);
-                
-                escrito.write(res);
+                escrito.write(lineas.get(i));
                 escrito.newLine();
                 escrito.flush();
+
             }
 
         } catch (Exception e) {

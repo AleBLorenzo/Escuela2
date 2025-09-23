@@ -15,7 +15,7 @@ public class addCont {
             System.out.println("Ingresa una frase: ");
             String frace = sc.nextLine();
 
-            histo = new FileWriter("/workspaces/Escuela2/Fichero2/src/historial.txt", true);
+            histo = new FileWriter("Fichero2/src/historial.txt", true);
             Escrito = new BufferedWriter(histo);
 
             Escrito.write(frace);

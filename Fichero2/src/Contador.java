@@ -11,7 +11,7 @@ public class Contador {
 
         try {
 
-            si = new FileReader("/workspaces/Escuela2/fichero.txt");
+            si = new FileReader("Fichero2/src/fichero.txt");
             lee = new BufferedReader(si);
 
             int contador = 0;

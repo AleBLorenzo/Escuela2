@@ -10,7 +10,7 @@ public class FileReade {
         FileReader fr = null;
         try {
 
-            fr = new FileReader("/workspaces/Escuela2/Fichero2/src/frases.txt");
+            fr = new FileReader("Fichero2/src/frases.txt");
 
             int s;
 

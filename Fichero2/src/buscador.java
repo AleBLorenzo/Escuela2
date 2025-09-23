@@ -19,7 +19,7 @@ public class buscador {
 
         try {
 
-            s = new FileReader("/workspaces/Escuela2/Fichero2/src/libro.txt");
+            s = new FileReader("Fichero2/src/libro.txt");
             leer = new BufferedReader(s);
 
             String a;
@@ -35,6 +35,7 @@ public class buscador {
                 }
             }
 
+            sc.close();
         } catch (Exception e) {
 
             System.out.println(e);

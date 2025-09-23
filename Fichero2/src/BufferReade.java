@@ -12,8 +12,8 @@ public class BufferReade {
 
         try {
 
-            fr = new java.io.FileReader("Fichero2/src/frases.txt");
-            br = new java.io.BufferedReader(fr);
+            fr = new FileReader("Fichero2/src/frases.txt");
+            br = new BufferedReader(fr);
             
 
             String s;
@@ -30,8 +30,8 @@ public class BufferReade {
 
             System.out.println("Error al abrir el fichero");
         } finally {
-            if (br != null)
                 try {
+                    fr.close();
                     br.close();
                 } catch (Exception e) {
                     System.out.println("Error al cerrar el fichero");
