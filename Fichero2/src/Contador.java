@@ -19,14 +19,9 @@ public class Contador {
 
             while ((linea = lee.readLine()) != null) {
 
-                linea = linea.trim();
-
-                if (!linea.isEmpty()) {
-
-                    String[] palabras = linea.split("\\s+");
+                    String[] palabras = linea.split(" ");
                     contador += palabras.length;
 
-                }
             }
 
             System.out.print("El Total de Palabras es " + contador);

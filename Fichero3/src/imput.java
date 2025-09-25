@@ -1,0 +1,31 @@
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class imput {
+    public static void main(String[] args) throws Exception {
+
+        try (InputStream input = new FileInputStream("Fichero3/src/archivo.txt");
+                OutputStream salid = new FileOutputStream("Fichero3/src/Salida.txt")) {
+
+            int dato = 0;
+            int contador = 0;
+
+            while ((dato = input.read()) != -1) {
+                contador++;
+
+                salid.write((char) dato);
+
+            }
+            
+
+            System.out.println("Numero de Bytes copiados " + contador + " byte");
+        }
+
+        catch (Exception e) {
+            System.out.print(e);
+        }
+
+    }
+}

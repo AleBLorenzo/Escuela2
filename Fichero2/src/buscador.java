@@ -14,6 +14,7 @@ public class buscador {
         String palabra = sc.nextLine();
 
         System.out.println("\nTexto: \n");
+        
         FileReader s = null;
         BufferedReader leer = null;
 

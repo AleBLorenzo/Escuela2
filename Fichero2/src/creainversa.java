@@ -16,8 +16,6 @@ public class creainversa {
         FileWriter doc = null;
         BufferedWriter escrito = null;
 
-        ArrayList<String> lineas = new ArrayList<>();
-
         try {
 
             lee = new FileReader("Fichero2/src/entrada.txt");
@@ -30,16 +28,12 @@ public class creainversa {
             while ((a = listo.readLine()) != null) {
 
                 System.out.println(a);
-                lineas.add(a);
 
-            }
+                StringBuilder lineainv = new StringBuilder(a).reverse();
 
-            for (int i = lineas.size() - 1; i >= 0; i--) {
-
-                escrito.write(lineas.get(i));
+                escrito.write(lineainv.toString());
                 escrito.newLine();
                 escrito.flush();
-
             }
 
         } catch (Exception e) {
