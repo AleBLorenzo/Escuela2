@@ -23,7 +23,10 @@ public class Propiedades {
 
             for (int i = 0; i < si.read(); i++) {
          
+               if (si.toString().contains(null)){
+                valornull++;
 
+               }
           }
             nulo++;
 
@@ -32,7 +35,7 @@ public class Propiedades {
 
             System.out.println("\nArchivo: " + si.toString());
             System.out.println("Tamaño: " + contador + " Bytes" + " (" + kb + " KB,  " + mb + " MB)");
-            System.out.println("Bytes nulos: " + nulo);
+            System.out.println("Bytes nulos: " + valornull);
             System.out.println("Cabecera (hex): ");
             System.out.println("¿Esta vacio?: " + si.toString().isEmpty());
 
