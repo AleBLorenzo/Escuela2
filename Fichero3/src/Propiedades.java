@@ -1,5 +1,6 @@
 package Fichero3.src;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -15,29 +16,47 @@ public class Propiedades {
             double contador = 0;
             int nulo = 0;
             int valornull = 0;
+            byte[] bist = new byte[1024];
+            int contadors = 0;
+            StringBuffer ya = new StringBuffer();
+            File ruta = new File("Fichero3/src/imagen.jpg");
+            String nombre = ruta.getName();
 
-            while ((dato = si.read()) != -1) {
+            while ((dato = si.read(bist)) != -1) {
                 contador++;
+
+                for (int i = 0; i < bist.length; i++) {
+
+                    if (bist[i] == 0) {
+                        valornull++;
+
+                    }
+                    if (contadors < 10) {
+
+                        ya.append(String.format("%02X ", bist[i]));
+                        contadors++;
+                    }
+
+                }
 
             }
 
-            for (int i = 0; i < si.read(); i++) {
-         
-               if (si.toString().contains(null)){
-                valornull++;
-
-               }
-          }
+            String q;
+            if (si.toString().isEmpty()) {
+                q = "Si";
+            } else {
+                q = "No";
+            }
             nulo++;
 
             double kb = contador / 1000;
-            double mb = kb / 1000;
+            double mb = kb / 100;
 
-            System.out.println("\nArchivo: " + si.toString());
+            System.out.println("\nArchivo: " + nombre);
             System.out.println("Tamaño: " + contador + " Bytes" + " (" + kb + " KB,  " + mb + " MB)");
             System.out.println("Bytes nulos: " + valornull);
-            System.out.println("Cabecera (hex): ");
-            System.out.println("¿Esta vacio?: " + si.toString().isEmpty());
+            System.out.println("Cabecera (hex): " + ya);
+            System.out.println("¿Esta vacio?: " + q);
 
         } catch (FileNotFoundException e) {
             System.out.println(e);

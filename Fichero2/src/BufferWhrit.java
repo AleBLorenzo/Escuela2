@@ -17,7 +17,7 @@ public class BufferWhrit {
             bw = new BufferedWriter(fw);
             
 
-            System.out.println("Escribe una frase: ");
+            System.out.println("Escribe una frase: "+"\n Para salir escriba exit");
 
             String user = null;
             while (user != "exit") {
