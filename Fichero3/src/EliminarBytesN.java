@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class EliminarBytesN {
 
+
   public static void main(String[] args) {
 
     File nombre = new File("Fichero3/src/imagen_sin_nulos.jpg");
@@ -52,4 +53,5 @@ contador+= numeros;
       System.out.println(e);
     }
   }
+  
 }
