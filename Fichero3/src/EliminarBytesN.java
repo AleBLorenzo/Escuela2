@@ -1,11 +1,11 @@
+package Fichero3.src;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.Byte;
-import java.util.ArrayList;
 
 public class EliminarBytesN {
 

@@ -1,9 +1,11 @@
+package Fichero3.src;
 
 
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class imput {
     public static void main(String[] args) throws Exception {
