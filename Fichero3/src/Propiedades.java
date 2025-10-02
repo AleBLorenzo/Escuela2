@@ -14,16 +14,20 @@ public class Propiedades {
 
             int dato = 0;
             double contador = 0;
-            int nulo = 0;
             int valornull = 0;
+
             byte[] bist = new byte[1024];
+
             int contadors = 0;
+
             StringBuffer ya = new StringBuffer();
+
             File ruta = new File("Fichero3/src/imagen.jpg");
+
             String nombre = ruta.getName();
 
             while ((dato = si.read(bist)) != -1) {
-                contador++;
+                contador += dato;
 
                 for (int i = 0; i < bist.length; i++) {
 
@@ -47,9 +51,8 @@ public class Propiedades {
             } else {
                 q = "No";
             }
-            nulo++;
 
-            double kb = contador / 1000;
+            double kb = contador / 10000;
             double mb = kb / 100;
 
             System.out.println("\nArchivo: " + nombre);
