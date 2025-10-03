@@ -1,7 +1,6 @@
 package Fichero3.src;
 
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -10,8 +9,8 @@ import java.io.OutputStream;
 public class imput {
     public static void main(String[] args) throws Exception {
 
-        try (InputStream input = new FileInputStream("Fichero3/src/archivo.txt");
-                OutputStream salid = new FileOutputStream("Fichero3/src/Salida.txt")) {
+        try (InputStream input = new FileInputStream("src/archivo.txt");
+                OutputStream salid = new FileOutputStream("src/Salida.txt")) {
 
             int dato = 0;
             int contador = 0;

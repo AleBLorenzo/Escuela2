@@ -6,34 +6,37 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
 
-public class Ejercicio6 {
+public class Escuela {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+
         int opcion;
         String NIE = null;
         String nombre = null;
         float notaP = 0;
         float notaB = 0;
         float notaS = 0;
+        float media = 0;
         String[] s;
 
-        try (DataInputStream in = new DataInputStream(new FileInputStream("datos.txt"));
-                DataOutputStream out = new DataOutputStream(new FileOutputStream("datos.txt", true))) {
+        while (true) {
 
-            while (true) {
-                System.out.println("1- Introducir calificaciones de nuevos estudiantes");
-                System.out.println("2- Mostrar listado completo con medias individuales");
-                System.out.println("3- Calcular estadísticas del grupo ");
-                System.out.println("4- Buscar estudiante por NIE");
-                System.out.println("5- Contar aprobados y suspensos por asignatura");
-                System.out.println("6- Salir");
-                opcion = sc.nextInt();
-                sc.nextLine();
+            System.out.println("----MENU----");
+            System.out.println("1- Introducir calificaciones de nuevos estudiantes");
+            System.out.println("2- Mostrar listado completo con medias individuales");
+            System.out.println("3- Calcular estadísticas del grupo ");
+            System.out.println("4- Buscar estudiante por NIE");
+            System.out.println("5- Contar aprobados y suspensos por asignatura");
+            System.out.println("6- Salir");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
-                switch (opcion) {
-                    case 1:
+            switch (opcion) {
+                case 1:
+
+                    try (DataOutputStream out = new DataOutputStream(new FileOutputStream("datos.txt", true))) {
                         System.out.println("NIE: ");
                         NIE = sc.nextLine();
 
@@ -54,6 +57,7 @@ public class Ejercicio6 {
 
                         if (notaP < 0 || notaP > 10 && notaB < 0 || notaB > 10 && notaS < 0
                                 || notaS > 10 && NIE.matches("\\d{8}[A-Z]")) {
+
                             out.writeUTF(NIE);
                             out.writeUTF(nombre);
                             out.writeFloat(notaP);
@@ -66,10 +70,15 @@ public class Ejercicio6 {
                             System.out.println("Nota o NIE introducidos mal");
                         }
 
-                        break;
+                    } catch (Exception e) {
+                    }
 
-                    case 2:
-                        float media;
+                    break;
+
+                case 2:
+
+                    try (DataInputStream in = new DataInputStream(new FileInputStream("datos.txt"))) {
+
                         while (in.available() > 0) {
 
                             NIE = in.readUTF();
@@ -89,10 +98,13 @@ public class Ejercicio6 {
                             System.out.println("Nota media: " + media);
                         }
 
-                        break;
+                    } catch (Exception e) {
+                    }
 
-                    case 3:
+                    break;
 
+                case 3:
+                    try (DataInputStream in = new DataInputStream(new FileInputStream("datos.txt"))) {
                         float mediageneral = 0;
                         float notaMax = -1;
                         float notaMin = 11;
@@ -127,9 +139,14 @@ public class Ejercicio6 {
                             }
                         }
 
-                        break;
+                    } catch (Exception e) {
+                    }
 
-                    case 4:
+                    break;
+
+                case 4:
+
+                    try (DataInputStream in = new DataInputStream(new FileInputStream("datos.txt"))) {
                         System.out.print("Introduce NIE a buscar: ");
                         String buscar = sc.nextLine();
 
@@ -153,9 +170,16 @@ public class Ejercicio6 {
 
                             }
                         }
-                        break;
 
-                    case 5:
+                    } catch (Exception e) {
+                    }
+
+                    break;
+
+                case 5:
+
+                    try (DataInputStream in = new DataInputStream(new FileInputStream("datos.txt"))) {
+
                         int aprobP = 0;
                         int suspP = 0;
                         int aprobB = 0;
@@ -163,7 +187,7 @@ public class Ejercicio6 {
                         int aprobS = 0;
                         int suspS = 0;
                         while (in.available() > 0) {
-                            
+
                             in.readUTF();
                             in.readUTF();
                             notaP = in.readFloat();
@@ -187,20 +211,20 @@ public class Ejercicio6 {
                         System.out.println(" Bases de Datos: Aprobados = " + aprobB + " Suspensos = " + suspB);
                         System.out.println(" Sistemas: Aprobados = " + aprobS + " Suspensos = " + suspS);
 
-                        break;
+                    } catch (Exception e) {
+                    }
 
-                    case 6:
-                        System.out.println("Adios");
-                        sc.close();
-                        return;
+                    break;
 
-                    default:
-                        throw new AssertionError();
-                }
+                case 6:
+                    System.out.println("Adios");
+                    sc.close();
+                    return;
+
+                default:
+                    throw new AssertionError();
             }
-
-        } catch (Exception e) {
-        } finally {
         }
+
     }
 }

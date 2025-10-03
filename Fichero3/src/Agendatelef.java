@@ -71,15 +71,14 @@ public class Agendatelef {
             return;
         }
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile("src/Datos.txt", "rw")) {
 
             rs.seek(rs.length());
 
-            rs.writeUTF(String.format("%-30s", nombre));
-
-            rs.writeUTF(String.format("%-15s", numero));
-
-            rs.writeUTF(String.format("%-35s", email));
+            rs.writeUTF(String.format("%-30.30s", nombre));
+            rs.writeUTF(String.format("%-15.15s", numero));
+            rs.writeUTF(String.format("%-35.35s", email));
+        
 
         } catch (Exception e) {
             System.out.println(e);
@@ -89,24 +88,33 @@ public class Agendatelef {
 
     public static void Lista() {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "r")) {
+        try (RandomAccessFile rs = new RandomAccessFile("src/Datos.txt", "r")) {
+
             int contador = 0;
+
             rs.seek(0);
+            System.out.println("----Agenda----");
             while (rs.getFilePointer() < rs.length()) {
+
                 contador++;
-                System.out.println(contador + " - " + rs.readUTF() + rs.readUTF() + rs.readUTF());
+                String dato1 = rs.readUTF();
+                String dato2 = rs.readUTF();
+                String dato3 = rs.readUTF();
+
+                System.out.println(contador + " - " + dato1 + dato2 + dato3);
 
             }
 
         } catch (Exception e) {
+
         }
     }
 
     public static void Buscar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile("src/Datos.txt", "r")) {
 
-            long salto = (2 + 30) + (2 + 15) + (2 + 35);
+            long salto = (2+30) + (15) + (35);
 
             System.out.println("Escriba la posicion numerica numero del contacto q quiere encontrar");
 
@@ -115,7 +123,11 @@ public class Agendatelef {
 
             rs.seek(salto * (registro - 1));
 
-            System.out.println(rs.readUTF() + rs.readUTF() + rs.readUTF());
+            String dato1 = rs.readUTF();
+            String dato2 = rs.readUTF();
+            String dato3 = rs.readUTF();
+
+            System.out.println(registro + " - " + dato1 + dato2 + dato3);
 
         } catch (Exception e) {
         }
@@ -124,9 +136,9 @@ public class Agendatelef {
 
     public static void Borrar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile("src/Datos.txt", "rw")) {
 
-            long salto = (2 + 30) + (2 + 15) + (2 + 30);
+            long salto = (30) + (15) + (30);
 
             System.out.println("Escriba la posicion numerica numero del contacto q quiere borrar");
 
@@ -149,13 +161,13 @@ public class Agendatelef {
 
     public static void Modificar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile("src/Datos.txt", "rw")) {
 
             System.out.print("Posición a modificar: ");
             int registro = sc.nextInt();
             sc.nextLine();
 
-            long salto = (2 + 30) + (2 + 15) + (2 + 30);
+            long salto = (30) + (15) + (30);
 
             rs.seek(salto * (registro - 1));
 
@@ -167,7 +179,7 @@ public class Agendatelef {
                 System.out.println("Solo números.");
                 return;
             }
-            rs.seek( 30);
+            rs.seek(30);
             rs.writeUTF(String.format("%-15s", nuevo));
 
         } catch (Exception e) {

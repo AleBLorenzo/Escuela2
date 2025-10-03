@@ -12,10 +12,10 @@ public class EliminarBytesN {
 
   public static void main(String[] args) {
 
-    File nombre = new File("Fichero3/src/imagen_sin_nulos.jpg");
+    File nombre = new File("src/imagen_sin_nulos.jpg");
 
     try (
-        InputStream si = new FileInputStream("Fichero3/src/imagen.jpg");
+        InputStream si = new FileInputStream("src/imagen.jpg");
         OutputStream salida = new FileOutputStream(nombre)) {
 
       byte[] numeroByts = new byte[1024];
@@ -26,7 +26,9 @@ public class EliminarBytesN {
       int escritos = 0;
 
       while ((numeros = si.read(numeroByts)) != -1) {
+
 contador+= numeros;
+
         for (int i = 0; i < numeros; i++) {
           
           if (numeroByts[i] == 0) {

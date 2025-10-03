@@ -10,7 +10,7 @@ public class Propiedades {
 
     public static void main(String[] args) {
 
-        try (InputStream si = new FileInputStream("Fichero3/src/imagen.jpg")) {
+        try (InputStream si = new FileInputStream("src/imagen.jpg")) {
 
             int dato = 0;
             double contador = 0;
