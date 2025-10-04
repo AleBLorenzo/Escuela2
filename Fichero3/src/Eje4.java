@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
 
-public class temperaturasdiarias {
+public class Eje4 {
 
     public static void main(String[] args) {
 
