@@ -97,6 +97,8 @@ public class Eje10 {
 
             lista.add(nuevo);
 
+            System.out.println("Coche Añadido");
+
               try (ObjectOutputStream ob = new ObjectOutputStream( new FileOutputStream("Fichero3/src/confecionario.dat"))) {
             ob.writeObject(lista);
 
