@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <libro id="1">
+        <titulo>Don Quijote</titulo>
+        <autor>Miguel de Cervantes</autor>
+        <precio>25.50</precio>
+    </libro>
+    <libro id="2">
+        <titulo>Cien años de soledad</titulo>
+        <autor>Gabriel García Márquez</autor>
+        <precio>20.00</precio>
+    </libro>
+</biblioteca>
