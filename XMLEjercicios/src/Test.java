@@ -20,8 +20,8 @@ public class Test {
 
     try {
 
-      // Lo clasico siempre hayq poner esto para escribir un XML.
-      // Enm este caso esto seria al principio.
+      // Lo clasico siempre hayq poner esto para escribir un XML
+      // En este caso esto seria al principio.
 
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder build = factory.newDocumentBuilder();

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><universidad>
+    <estudiante id="001">
+        <nombre>María Rodríguez</nombre>
+        <edad>20</edad>
+        <carrera>Informática</carrera>
+        <nota>8.5</nota>
+    </estudiante>
+    <estudiante id="002">
+        <nombre>Pedro Martín</nombre>
+        <edad>22</edad>
+        <carrera>Matemáticas</carrera>
+        <nota>7.2</nota>
+    </estudiante>
+</universidad>
