@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<empleados>
+    <empleados>
+        <empleado id="001">
+            <nombre>Ana</nombre>
+            <departamento>Recursos Humanos</departamento>
+            <salario>45000</salario>
+        </empleado>
+        <empleado id="002">
+            <nombre>Rosa</nombre>
+            <departamento>Obrero</departamento>
+            <salario>35000</salario>
+        </empleado>
+        <empleado id="003">
+            <nombre>Juan</nombre>
+            <departamento>Administracion</departamento>
+            <salario>55000</salario>
+        </empleado>
+    </empleados>
+</empleados>
