@@ -1,0 +1,3 @@
+[2025-10-28 10:02:45] ERROR: Database connection failed. Timeout expired.
+[2025-10-28 10:05:30] ERROR: NullPointerException at com.example.MyService:42.
+[2025-10-28 10:07:00] ERROR: Payment failed for transaction #987.

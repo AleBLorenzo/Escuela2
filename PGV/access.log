@@ -1,0 +1,8 @@
+[2025-10-28 10:00:01] INFO: User 'admin' logged in successfully.
+[2025-10-28 10:01:23] INFO: Data processed for request #123.
+[2025-10-28 10:02:45] ERROR: Database connection failed. Timeout expired.
+[2025-10-28 10:03:10] WARN: Disk space is running low.
+[2025-10-28 10:04:55] INFO: Request #124 completed.
+[2025-10-28 10:05:30] ERROR: NullPointerException at com.example.MyService:42.
+[2025-10-28 10:06:15] INFO: Server health check OK.
+[2025-10-28 10:07:00] ERROR: Payment failed for transaction #987.
