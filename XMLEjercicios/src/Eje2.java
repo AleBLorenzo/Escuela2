@@ -1,4 +1,4 @@
-
+package  XMLEjercicios.src;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -22,33 +22,45 @@ public class Eje2 {
     
         try {
 
+           //  Crear una instancia de DocumentBuilderFactory , un DocumentBuilder y  DOMImplementation
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder build = factory.newDocumentBuilder();
             DOMImplementation implement = build.getDOMImplementation();
 
+          //Crea un documento XML con elemento raíz <empleados>
+
             Document documento = implement.createDocument(null,"empleados", null);
             documento.setXmlVersion("1.0");
 
-            Element empleados = documento.createElement("empleados");
-
+               //Obtenemos el elemento raíz
+            Element empleados = documento.getDocumentElement();
+          // // añadimos el primer empleado
             Element empleado = documento.createElement("empleado");
             empleado.setAttribute("id", "001");
         
-
+           // Nombre
             Element nombre = documento.createElement("nombre");
             Text txNombre = documento.createTextNode("Ana");
             nombre.appendChild(txNombre);
             empleado.appendChild(nombre);
+
+          // Departamento
 
             Element  departamento = documento.createElement("departamento");
              Text txdep = documento.createTextNode("Recursos Humanos");
             departamento.appendChild(txdep);
             empleado.appendChild(departamento);
 
+             // Salario
+
             Element salario = documento.createElement("salario");
              Text txsal = documento.createTextNode("45000");
            salario.appendChild(txsal);
             empleado.appendChild(salario);
+
+            // Agregamos el empleado al elemento raíz
+            //Todo esto con lo siguiente
 
             empleados.appendChild(empleado);
 
@@ -94,18 +106,22 @@ public class Eje2 {
 
             empleados.appendChild(empleado2);
 
-
-            documento.getDocumentElement().appendChild(empleados);
+             //Guardamos el XML en un archivo
 
             Source sou = new DOMSource(documento);
-            Result resul = new StreamResult(new File ("empleados.xml"));
+            Result resul = new StreamResult(new File ("XMLEjercicios/src/empleados.xml"));
+
+           // Transforma el DOM en archivo XML
 
             Transformer transf = TransformerFactory.newInstance().newTransformer();
             transf.transform(sou, resul);
             
+            System.out.println("Archivo 'empleados.xml' creado correctamente");
             
             
         } catch (Exception e) {
+           System.out.println("Error al crear el archivo XML: " + e.getMessage());
+    e.printStackTrace();
         }
     }
 
