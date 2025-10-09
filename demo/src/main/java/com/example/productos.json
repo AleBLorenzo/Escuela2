@@ -1,0 +1,29 @@
+{
+    "tienda": "TechStore",
+    "productos": [
+        {
+            "id": 1,
+            "nombre": "Laptop HP",
+            "categoria": "Informática",
+            "precio": 899.99,
+            "disponible": true,
+            "especificaciones": {
+                "ram": "8GB",
+                "almacenamiento": "256GB SSD",
+                "procesador": "Intel i5"
+            }
+        },
+        {
+            "id": 2,
+            "nombre": "Mouse Inalámbrico",
+            "categoria": "Accesorios",
+            "precio": 25.50,
+            "disponible": false,
+            "especificaciones": {
+                "tipo": "Óptico",
+                "conectividad": "Bluetooth",
+                "bateria": "AAA"
+            }
+        }
+    ]
+}
