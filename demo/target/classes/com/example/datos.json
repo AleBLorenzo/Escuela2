@@ -1,0 +1,53 @@
+{
+    "fecha_creacion": "2025-10-10",
+    "peliculas": [
+        {
+            "ano_lanzamiento": "1965",
+            "director": "Sancho",
+            "genero": [
+                "Drama",
+                "Terror",
+                "Romance"
+            ],
+            "premios": {
+                "oscar": true,
+                "glovo:oro": false,
+                "otros": 2
+            },
+            "titulo": "quijote",
+            "id": 1,
+            "clasificacion": 8.2
+        },
+        {
+            "ano_lanzamiento": "1ee965",
+            "director": "Sanwwwcho",
+            "genero": [
+                "Drama",
+                "Romance"
+            ],
+            "premios": {
+                "oscar": true,
+                "glovo:oro": false,
+                "otros": 2
+            },
+            "titulo": "sssss",
+            "id": 2,
+            "clasificacion": 7.5
+        },
+        {
+            "ano_lanzamiento": "1ee965",
+            "director": "Sanwwwcho",
+            "genero": ["Romance"],
+            "premios": {
+                "oscar": true,
+                "glovo:oro": false,
+                "otros": 2
+            },
+            "titulo": "sssss",
+            "id": 2,
+            "clasificacion": 7.5
+        }
+    ],
+    "coleccion": "Mis Peliculas Favoritas",
+    "total_peliculas": 3
+}
