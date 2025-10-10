@@ -1,15 +1,15 @@
-package  XMLEjercicios.src;
-
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,112 +17,112 @@ import org.w3c.dom.Text;
 
 public class Eje2 {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-    
-        try {
+    File ruta = new File("src/empleados.xml");
+    try {
 
-           //  Crear una instancia de DocumentBuilderFactory , un DocumentBuilder y  DOMImplementation
+      // Crear una instancia de DocumentBuilderFactory , un DocumentBuilder y
+      // DOMImplementation
 
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder build = factory.newDocumentBuilder();
-            DOMImplementation implement = build.getDOMImplementation();
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder build = factory.newDocumentBuilder();
 
-          //Crea un documento XML con elemento raíz <empleados>
+      // recomendable cuando se trate de crear un XML desde cero.
+      DOMImplementation implement = build.getDOMImplementation();
 
-            Document documento = implement.createDocument(null,"empleados", null);
-            documento.setXmlVersion("1.0");
+      // Crea un documento XML con elemento raíz <empleados>
 
-               //Obtenemos el elemento raíz
-            Element empleados = documento.getDocumentElement();
-          // // añadimos el primer empleado
-            Element empleado = documento.createElement("empleado");
-            empleado.setAttribute("id", "001");
-        
-           // Nombre
-            Element nombre = documento.createElement("nombre");
-            Text txNombre = documento.createTextNode("Ana");
-            nombre.appendChild(txNombre);
-            empleado.appendChild(nombre);
+      Document documento = implement.createDocument(null, "empleados", null);
+      documento.setXmlVersion("1.0");
 
-          // Departamento
+      // Obtenemos el elemento raíz
+      Element empleados = documento.getDocumentElement();
+      // // añadimos el primer empleado
+      Element empleado = documento.createElement("empleado");
+      empleado.setAttribute("id", "001");
 
-            Element  departamento = documento.createElement("departamento");
-             Text txdep = documento.createTextNode("Recursos Humanos");
-            departamento.appendChild(txdep);
-            empleado.appendChild(departamento);
+      // Nombre
+      Element nombre = documento.createElement("nombre");
+      Text txNombre = documento.createTextNode("Ana");
+      nombre.appendChild(txNombre);
+      empleado.appendChild(nombre);
 
-             // Salario
+      // Departamento
 
-            Element salario = documento.createElement("salario");
-             Text txsal = documento.createTextNode("45000");
-           salario.appendChild(txsal);
-            empleado.appendChild(salario);
+      Element departamento = documento.createElement("departamento");
+      Text txdep = documento.createTextNode("Recursos Humanos");
+      departamento.appendChild(txdep);
+      empleado.appendChild(departamento);
 
-            // Agregamos el empleado al elemento raíz
-            //Todo esto con lo siguiente
+      // Salario
 
-            empleados.appendChild(empleado);
+      Element salario = documento.createElement("salario");
+      Text txsal = documento.createTextNode("45000");
+      salario.appendChild(txsal);
+      empleado.appendChild(salario);
 
-              Element empleado1 = documento.createElement("empleado");
-            empleado1.setAttribute("id", "002");
-        
+      // Agregamos el empleado al elemento raíz
+      // Todo esto con lo siguiente
 
-            Element nombre1 = documento.createElement("nombre");
-           Text txNombre1 = documento.createTextNode("Rosa");
-           nombre1.appendChild(txNombre1);
-            empleado1.appendChild(nombre1);
+      empleados.appendChild(empleado);
 
-           Element  departamento1 = documento.createElement("departamento");
-             Text txdep1 = documento.createTextNode("Obrero");
-            departamento1.appendChild(txdep1);
-            empleado1.appendChild(departamento1);
-            
-            Element salario1 = documento.createElement("salario");
-             Text txsal1 = documento.createTextNode("35000");
-           salario1.appendChild(txsal1);
-            empleado1.appendChild(salario1);
+      Element empleado1 = documento.createElement("empleado");
+      empleado1.setAttribute("id", "002");
 
-            empleados.appendChild(empleado1);
+      Element nombre1 = documento.createElement("nombre");
+      Text txNombre1 = documento.createTextNode("Rosa");
+      nombre1.appendChild(txNombre1);
+      empleado1.appendChild(nombre1);
 
-            Element empleado2 = documento.createElement("empleado");
-            empleado2.setAttribute("id", "003");
-        
+      Element departamento1 = documento.createElement("departamento");
+      Text txdep1 = documento.createTextNode("Obrero");
+      departamento1.appendChild(txdep1);
+      empleado1.appendChild(departamento1);
 
-            Element nombre2 = documento.createElement("nombre");
-           Text txNombre2 = documento.createTextNode("Juan");
-           nombre2.appendChild(txNombre2);
-            empleado2.appendChild(nombre2);
+      Element salario1 = documento.createElement("salario");
+      Text txsal1 = documento.createTextNode("35000");
+      salario1.appendChild(txsal1);
+      empleado1.appendChild(salario1);
 
-           Element  departamento2 = documento.createElement("departamento");
-             Text txdep2 = documento.createTextNode("Administracion");
-            departamento2.appendChild(txdep2);
-            empleado2.appendChild(departamento2);
-            
-            Element salario2 = documento.createElement("salario");
-             Text txsal2 = documento.createTextNode("55000");
-           salario2.appendChild(txsal2);
-            empleado2.appendChild(salario2);
+      empleados.appendChild(empleado1);
 
-            empleados.appendChild(empleado2);
+      Element empleado2 = documento.createElement("empleado");
+      empleado2.setAttribute("id", "003");
 
-             //Guardamos el XML en un archivo
+      Element nombre2 = documento.createElement("nombre");
+      Text txNombre2 = documento.createTextNode("Juan");
+      nombre2.appendChild(txNombre2);
+      empleado2.appendChild(nombre2);
 
-            Source sou = new DOMSource(documento);
-            Result resul = new StreamResult(new File ("XMLEjercicios/src/empleados.xml"));
+      Element departamento2 = documento.createElement("departamento");
+      Text txdep2 = documento.createTextNode("Administracion");
+      departamento2.appendChild(txdep2);
+      empleado2.appendChild(departamento2);
 
-           // Transforma el DOM en archivo XML
+      Element salario2 = documento.createElement("salario");
+      Text txsal2 = documento.createTextNode("55000");
+      salario2.appendChild(txsal2);
+      empleado2.appendChild(salario2);
 
-            Transformer transf = TransformerFactory.newInstance().newTransformer();
-            transf.transform(sou, resul);
-            
-            System.out.println("Archivo 'empleados.xml' creado correctamente");
-            
-            
-        } catch (Exception e) {
-           System.out.println("Error al crear el archivo XML: " + e.getMessage());
-    e.printStackTrace();
-        }
+      empleados.appendChild(empleado2);
+
+      // Guardamos el XML en un archivo
+
+      Source sou = new DOMSource(documento);
+      Result resul = new StreamResult(ruta);
+
+      // Transforma el DOM en archivo XML
+
+      Transformer transf = TransformerFactory.newInstance().newTransformer();
+      transf.transform(sou, resul);
+
+      System.out.println("Archivo 'empleados.xml' creado correctamente");
+
+    } catch (ParserConfigurationException | TransformerException | DOMException e) {
+      System.out.println("Error al crear el archivo XML: " + e.getMessage());
+      e.printStackTrace();
     }
+  }
 
 }

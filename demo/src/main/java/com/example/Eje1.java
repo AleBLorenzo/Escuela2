@@ -9,7 +9,7 @@ import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Main {
+public class Eje1 {
     public static void main(String[] args) throws IOException {
 
         String ruta = "src/main/java/com/example/productos.json";
