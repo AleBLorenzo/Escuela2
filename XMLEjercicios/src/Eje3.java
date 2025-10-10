@@ -48,18 +48,18 @@ public class Eje3 {
                 // Lo convierte a Element para acceder
                 Element e = (Element) nodo;
 
-                // Extrae el nombre del estudiante
-                String nombre = e.getElementsByTagName("nombre").item(0).getTextContent();
+                // Extrae el id del estudiante
+                String id = e.getAttribute("id");
 
-                // Si el nombre es Maria Rodriguez se actualiza su nota
-                if (nombre.equals("María Rodríguez")) {
+                // Si el id es 001 se actualiza su nota
+                if (id.equals("001")) {
                     e.getElementsByTagName("nota").item(0).setTextContent("9");
                     System.out.println("Nota actualizada a 9");
 
                 }
 
-                // Si el nombre es Pedro Martin se modifica su atributo id
-                if (nombre.equals("Pedro Martín")) {
+                // Si el id es 002 se modifica su atributo id
+                if (id.equals("002")) {
                     e.setAttribute("id", "002-modificado");
                     System.out.println("id actualizada a 002-modificado");
                 }
