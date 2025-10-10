@@ -1,4 +1,3 @@
-package Fichero3.src;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,8 +12,8 @@ public class Eje4 {
         Scanner sc = new Scanner(System.in);
 
         int opcion;
-        double tempM;
-        double tempN;
+        float tempM;
+        float tempN;
         int humedad;
         String dia;
 
@@ -30,38 +29,40 @@ public class Eje4 {
                 case 1:
                     try (DataOutputStream dis = new DataOutputStream(new FileOutputStream("src/temp.txt", true))) {
 
-                        System.out.println("Escriba el dia: ");
+                        System.out.println("Escriba la fecha (DD/MM/AAAA): ");
                         dia = sc.nextLine();
-                        dis.writeUTF(dia);
 
-                        System.out.println("Escriba la temperatura Maxima: ");
-                        tempM = sc.nextDouble();
+                        System.out.println("Escriba la temperatura Maxima (ejemplo: 22,4): ");
+                        tempM = sc.nextFloat();
                         sc.nextLine();
-                        System.out.println("Escriba la temperatura Minima: ");
-                        tempN = sc.nextDouble();
+                        System.out.println("Escriba la temperatura Minima(ejemplo: 20,5): ");
+                        tempN = sc.nextFloat();
                         sc.nextLine();
 
                         if (tempM > tempN) {
-                            dis.writeDouble(tempM);
-                            dis.writeDouble(tempN);
-
                         } else {
                             System.out.println("La temperatura maxima tiene q ser mayor q la minima");
+                            break;
 
                         }
 
-                        System.out.println("Escriba la humedad: ");
+                        System.out.println("Escriba la humedad (0 <= humedad <= 100): ");
                         humedad = sc.nextInt();
                         sc.nextLine();
                         if (humedad >= 0 && humedad <= 100) {
-                            dis.writeInt(humedad);
                         } else {
                             System.out.println("la humedad tiene q estar entre 0 y 100");
+                            break;
                         }
+                        dis.writeUTF(dia);
+                        dis.writeFloat(tempM);
+                        dis.writeFloat(tempN);
+                        dis.writeInt(humedad);
 
                         dis.flush();
 
                     } catch (Exception e) {
+                         System.out.println(e);
                     }
 
                     break;
@@ -72,13 +73,14 @@ public class Eje4 {
 
                             System.out.println("=== REGISTRO TEMPERATURAS ===");
                             System.out.println("Fecha: " + dic.readUTF());
-                            System.out.println("Temp. Máx: " + dic.readDouble() + "°C | " + "Temp. Mín: "
-                                    + dic.readDouble() + "°C");
+                            System.out.println("Temp. Máx: " + dic.readFloat() + "°C | " + "Temp. Mín: "
+                                    + dic.readFloat() + "°C");
                             System.out.println("Humedad: " + dic.readInt() + "%");
                             System.out.println("------------------------");
                         }
 
                     } catch (Exception e) {
+                        System.out.println(e);
                     }
 
                     break;
