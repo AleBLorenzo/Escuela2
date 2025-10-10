@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.json.JSONArray;
@@ -21,7 +22,7 @@ public class Eje2 {
 
         File ruta = new File("src/main/java/com/example/datos.json");
 
-            JSONObject objetos = new JSONObject(new LinkedHashMap<>());
+            JSONObject objetos = new JSONObject(new HashMap<>());
 
             objetos.put("coleccion", "Mis Peliculas Favoritas");
             objetos.put("fecha_creacion", LocalDate.now());
@@ -29,7 +30,7 @@ public class Eje2 {
 
             JSONArray lista = new JSONArray();
 
-            JSONObject objetosl = new JSONObject(new LinkedHashMap<>());
+            JSONObject objetosl = new JSONObject(new HashMap<>());
 
             objetosl.put("id", 1);
             objetosl.put("titulo", "quijote");
@@ -38,7 +39,7 @@ public class Eje2 {
             objetosl.put("genero", generos);
             objetosl.put("clasificacion", 8.2);
 
-            JSONObject premios = new JSONObject(new LinkedHashMap<>());
+            JSONObject premios = new JSONObject(new HashMap<>());
 
             premios.put("oscar", true);
             premios.put("glovo:oro", false);
@@ -48,7 +49,7 @@ public class Eje2 {
 
             lista.put(objetosl);
 
-            JSONObject objetos2 = new JSONObject(new LinkedHashMap<>());
+            JSONObject objetos2 = new JSONObject(new HashMap<>());
 
             objetos2.put("id", 2);
             objetos2.put("titulo", "sssss");
@@ -57,7 +58,7 @@ public class Eje2 {
             objetos2.put("genero", generos2);
             objetos2.put("clasificacion", 7.5);
 
-            JSONObject premios1 = new JSONObject(new LinkedHashMap<>());
+            JSONObject premios1 = new JSONObject(new HashMap<>());
 
             premios1.put("oscar", true);
             premios1.put("glovo:oro", false);
@@ -67,7 +68,7 @@ public class Eje2 {
 
             lista.put(objetos2);
 
-            JSONObject objetos3 = new JSONObject(new LinkedHashMap<>());
+            JSONObject objetos3 = new JSONObject(new HashMap<>());
 
             objetos3.put("id", 2);
             objetos3.put("titulo", "sssss");
@@ -76,7 +77,7 @@ public class Eje2 {
             objetos3.put("genero", generos3);
             objetos3.put("clasificacion", 7.5);
 
-            JSONObject premios2 = new JSONObject(new LinkedHashMap<>());
+            JSONObject premios2 = new JSONObject(new HashMap<>());
 
             premios2.put("oscar", true);
             premios2.put("glovo:oro", false);
