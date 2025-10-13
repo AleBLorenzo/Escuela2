@@ -1,0 +1,60 @@
+{
+    "libros": [
+        {
+            "año_publicacion": 1967,
+            "prestado": true,
+            "reseñas": [
+                {
+                    "puntuacion": 5,
+                    "usuario": "Ana123",
+                    "comentario": "Obra maestra de la literatura"
+                }
+            ],
+            "isbn": "978-84-376-0494-7",
+            "genero": "Realismo mágico",
+            "titulo": "Cien años de soledad",
+            "valoracion": 4.5,
+            "autor": "Gabriel García Márquez"
+        },
+        {
+            "año_publicacion": 1949,
+            "prestado": true,
+            "reseñas": [],
+            "isbn": "978-84-206-7316-5",
+            "genero": "Distopía",
+            "titulo": "1984",
+            "valoracion": 4.3,
+            "rese�as": [
+                {
+                    "puntuacion": 4.4,
+                    "usuario": "Jose344",
+                    "comentario": "Excelente"
+                }
+            ],
+            "autor": "George Orwell"
+        },
+        {
+            "a�o_publicacion": 1968,
+            "prestado": true,
+            "isbn": "859-85-745-6325-4",
+            "genero": "Fantasia",
+            "titulo": "cencienta",
+            "valoracion": 3.9,
+            "rese�as": [
+                {
+                    "puntuacion": 4.4,
+                    "usuario": "Jose344",
+                    "comentario": "Excelente"
+                }
+            ],
+            "autor": "alguien"
+        }
+    ],
+    "estadisticas": {
+        "total_libros": 3,
+        "valoracion_promedio": 4.23,
+        "libros_prestados": 3
+    },
+    "ubicacion": "barcelona",
+    "nombre_biblioteca": "Biblioteca Central"
+}

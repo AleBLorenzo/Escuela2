@@ -1,0 +1,32 @@
+{
+    "nombre_biblioteca": "Biblioteca Central",
+    "ubicacion": "Madrid",
+    "libros": [
+        {
+            "isbn": "978-84-376-0494-7",
+            "titulo": "Cien años de soledad",
+            "autor": "Gabriel García Márquez",
+            "año_publicacion": 1967,
+            "genero": "Realismo mágico",
+            "prestado": false,
+            "valoracion": 4.5,
+            "reseñas": [
+                {
+                    "usuario": "Ana123",
+                    "comentario": "Obra maestra de la literatura",
+                    "puntuacion": 5
+                }
+            ]
+        },
+        {
+            "isbn": "978-84-206-7316-5",
+            "titulo": "1984",
+            "autor": "George Orwell",
+            "año_publicacion": 1949,
+            "genero": "Distopía",
+            "prestado": true,
+            "valoracion": 4.3,
+            "reseñas": []
+        }
+    ]
+}
