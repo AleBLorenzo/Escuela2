@@ -21,6 +21,7 @@ public class Eje11 {
                lista = (List<Libro>) ois.readObject();
         
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
            
         }
         int opcion = 0;
@@ -124,6 +125,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -139,7 +141,9 @@ public class Eje11 {
             System.out.println("Libros del autor");
             System.out.println(V);
               
-        } 
+        } else{
+            System.out.println("libro no encotrado");
+        }
            
        }
 
@@ -147,6 +151,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
       
     }
@@ -175,6 +180,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -204,6 +210,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -228,6 +235,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
       
     }
@@ -261,6 +269,7 @@ public class Eje11 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
     }
 }

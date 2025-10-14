@@ -9,18 +9,23 @@ import java.util.Scanner;
 
 public class Eje8 {
 
+     public static final String ruta = "Fichero3/src/butacas.dat";
+
     public static void main(String[] args) {
+
+       
 
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
             if (rs.length() == 0) {
 
                 char[] filas = { 'A', 'B', 'C', 'D', 'E' };
-                double precio = 10.0;
+                double precioBase = 10.0;
 
                 for (char f : filas) {
+                     double precio = precioBase;
                     for (int i = 1; i <= 10; i++) {
                         rs.writeInt(i);
                         rs.writeChar(f);
@@ -32,6 +37,7 @@ public class Eje8 {
 
             }
         } catch (Exception e) {
+             System.out.println("Error al inicializar butacas: " + e.getMessage());
         }
 
         while (true) {
@@ -72,9 +78,8 @@ public class Eje8 {
 
     public static void Mapa(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "r")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
 
-            rs.seek(0);
             System.out.println("  1 2 3 4 5 6 7 8 9 10");
             for (char fila = 'A'; fila <= 'E'; fila++) {
 
@@ -93,53 +98,58 @@ public class Eje8 {
             }
 
         } catch (Exception e) {
+             System.out.println("Error al inicializar butacas: " + e.getMessage());
         }
 
     }
 
     public static void Reserva(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.print("Fila (A-E): ");
-            char fila = sc.next().charAt(0);
+            char fila = sc.next().toUpperCase().charAt(0);
             System.out.print("Numero (1-10): ");
             int numero = sc.nextInt();
 
             int index = (fila - 'A') * 10 + (numero - 1);
-            long pos = index * 15 + 6;
+            long pos = index * 15 ;
             rs.seek(pos);
+              rs.readInt(); 
+            rs.readChar(); 
             boolean ocupada = rs.readBoolean();
 
             if (ocupada) {
                 System.out.println("La butaca ya esta ocupada");
             } else {
-                rs.seek(pos);
+                rs.seek(pos+6);
                 rs.writeBoolean(true);
                 System.out.println("Butaca reservada correctamente");
             }
 
         } catch (Exception e) {
+             System.out.println("Error al reservar butaca: " + e.getMessage());
         }
 
     }
 
     public static void Cancelar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
             System.out.print("Fila (A-E): ");
 
-            char fila = sc.next().charAt(0);
+             char fila = sc.next().toUpperCase().charAt(0);
+
             System.out.print("Numero (1-10): ");
             int numero = sc.nextInt();
 
             int index = (fila - 'A') * 10 + (numero - 1);
-            long pos = index * 15 + 6;
+            long pos = index * 15;
             rs.seek(pos);
             boolean ocupada = rs.readBoolean();
 
             if (ocupada) {
-                rs.seek(pos);
+                rs.seek(pos + 6);
                 rs.writeBoolean(false);
                 System.out.println("Reserva cancelada");
 
@@ -149,13 +159,14 @@ public class Eje8 {
             }
 
         } catch (Exception e) {
+            System.out.println("Error al cancelar reserva: " + e.getMessage());
         }
 
     }
 
     public static void Precio(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.print("Fila (A-E): ");
             char fila = sc.next().charAt(0);
@@ -163,22 +174,28 @@ public class Eje8 {
             int numero = sc.nextInt();
 
             int index = (fila - 'A') * 10 + (numero - 1);
-            long pos = index * 15 + 7;
+            long pos = index * 15 ;
             rs.seek(pos);
+            rs.readInt();
+            rs.readChar();
+            rs.readBoolean();
             double precio = rs.readDouble();
+
             System.out.println("Precio de la butaca: " + precio + " euros");
 
         } catch (Exception e) {
+            System.out.println("Error al consultar precio: " + e.getMessage());
         }
 
     }
 
     public static void Estadistica(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/butacas.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             rs.seek(0);
-            int libres = 0, ocupadas = 0;
+            int libres = 0;
+            int ocupadas = 0;
             double recaudacion = 0;
 
             for (int i = 0; i < 50; i++) {
@@ -200,6 +217,7 @@ public class Eje8 {
             System.out.println("Recaudacion total: " + recaudacion + " euros");
             
         } catch (Exception e) {
+             System.out.println("Error al calcular estadísticas: " + e.getMessage());
         }
     }
 }

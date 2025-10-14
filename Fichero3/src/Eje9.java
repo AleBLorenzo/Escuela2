@@ -3,7 +3,12 @@ package Fichero3.src;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 
+import javax.swing.text.Position;
+
 public class Eje9 {
+
+     private static final String ruta = "Fichero3/src/empleados.dat";
+    private static final int tam = 82;
 
     public static void main(String[] args) {
 
@@ -52,11 +57,7 @@ public class Eje9 {
 
     public static void añadir(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "rw")) {
-
-
-          String[] departamentosValidos = {"Informatica", "Administracion", "Ventas", "Produccion"};
-
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.println("Introduzca los datos: ");
 
@@ -71,25 +72,15 @@ public class Eje9 {
             String departamento = sc.nextLine();
             String departamentoV = null ;
 
-            for (String dep : departamentosValidos) {
-                if (dep.equalsIgnoreCase(departamento)) {
-                      departamentoV  = dep;
-                       
-                } else if(departamentoV != null){
-                    System.out.println("Departamento guardado");
-                   
-                } else {
-                    System.out.println("No valido");
-                    break;
-                }
+            if (!validarDepartamento(departamento)) {
+                System.out.println("Departamento no válido.");
+                return;
             }
-
-
 
             System.out.println("Escriba el salario: ");
             Double salario = sc.nextDouble();
 
-            int ID = (int) (rs.length() / 82) + 1;
+            int ID = obtenerSiguienteId(rs);
 
             rs.seek(rs.length());
 
@@ -99,43 +90,32 @@ public class Eje9 {
             rs.writeBytes(String.format("%-20.20s", departamentoV));
             rs.writeDouble(salario);
 
+              System.out.println("Empleado añadido correctamente con ID: " + ID);
+
         } catch (Exception e) {
+             System.out.println("Error al añadir empleado: " + e.getMessage());
         }
 
     }
 
     public static void Buscar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "r")) {
-
+   
             System.out.println("Introduce el id a Buscar : ");
             int idN = sc.nextInt();
 
-            long salto = 82 * (idN - 1);
+                 try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
 
-            rs.seek(salto);
+            rs.seek(0);
 
-            int id = rs.readInt();
+            while (rs.getFilePointer() < rs.length()) {
+                int id = rs.readInt();
+                String nom = leerCadena(rs, 25);
+                String ape = leerCadena(rs, 25);
+                String dep = leerCadena(rs, 20);
+                double sal = rs.readDouble();
 
-            String nom = "";
-            for (int i = 0; i < 25; i++) {
-                nom += (char) rs.readByte();
-                nom = nom.trim();
-            }
-
-            String ape = "";
-            for (int i = 0; i < 25; i++) {
-                ape += (char) rs.readByte();
-                ape = ape.trim();
-            }
-
-            String dep = "";
-            for (int i = 0; i < 20; i++) {
-                dep += (char) rs.readByte();
-                dep = dep.trim();
-            }
-
-            double sal = rs.readDouble();
+                if (id == idN) {
 
             System.out.println("Empleado encontrado:");
             System.out.println("ID: " + id);
@@ -143,107 +123,64 @@ public class Eje9 {
             System.out.println("Apellido: " + ape);
             System.out.println("Departamento: " + dep);
             System.out.println("Salario actual: " + sal);
-
+                    break;    
+        } else{
+            System.out.println("Empleado no encontrado");
+        }
+    }
         } catch (Exception e) {
+             System.err.println("Error al buscar: " + e.getMessage());
         }
 
     }
 
     public static void ModificarS(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.print("ID a modificar: ");
             int registro = sc.nextInt();
             sc.nextLine();
 
-            int contador = 1;
-            long posInicio = 0;
+          
+            long posInicio = buscarEmpleadoPorId(rs, registro);
 
-            while (rs.getFilePointer() < rs.length()) {
-                posInicio = rs.getFilePointer();
-
-                int id = rs.readInt();
-
-                String nom = "";
-                for (int i = 0; i < 25; i++) {
-                    nom += (char) rs.readByte();
-                    nom = nom.trim();
-                }
-
-                String ape = "";
-                for (int i = 0; i < 25; i++) {
-                    ape += (char) rs.readByte();
-                    ape = ape.trim();
-                }
-
-                String dep = "";
-                for (int i = 0; i < 20; i++) {
-                    dep += (char) rs.readByte();
-                    dep = dep.trim();
-                }
-
-                double sal = rs.readDouble();
-
-                if (contador == registro) {
-
-                    System.out.println("Empleado encontrado:");
-                    System.out.println("ID: " + id);
-                    System.out.println("Nombre: " + nom);
-                    System.out.println("Apellido: " + ape);
-                    System.out.println("Departamento: " + dep);
-                    System.out.println("Salario actual: " + sal);
-
-                    System.out.print("Nuevo Salario: ");
-                    Double nuevo = sc.nextDouble();
-
-                    rs.seek(posInicio + 4 + 25 + 25 + 20);
-                    rs.writeDouble(nuevo);
-
-                    System.out.println("Salario modificado correctamente");
-                    return;
-                }
-                contador++;
+            if (posInicio == -1) {
+                System.out.println("❌ Empleado no encontrado.");
+                return;
             }
 
+            rs.seek(posInicio + 4 + 25 + 25 + 20);
+            double salarioActual = rs.readDouble();
+
+            System.out.println("Salario actual: " + salarioActual);
+            System.out.print("Nuevo salario: ");
+            double nuevo = sc.nextDouble();
+
+            rs.seek(posInicio + 4 + 25 + 25 + 20);
+            rs.writeDouble(nuevo);
+            System.out.println("Salario modificado correctamente.");
+
         } catch (Exception e) {
+               System.err.println("Error al modificar: " + e.getMessage());
         }
 
     }
 
     public static void ListaD(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "rw")) {
-      
-
-            
-        System.out.print("Introduce el departamento a listar: ");
+           System.out.print("Introduce el departamento: ");
         String deptoB = sc.nextLine().trim();
 
-        rs.seek(0);
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
+         
 
-        while (rs.getFilePointer() < rs.length()) { 
+            while (rs.getFilePointer() < rs.length()) {
 
-              int id = rs.readInt();
-
-                String nom = "";
-                for (int i = 0; i < 25; i++) {
-                    nom += (char) rs.readByte();
-                    nom = nom.trim();
-                }
-
-                String ape = "";
-                for (int i = 0; i < 25; i++) {
-                    ape += (char) rs.readByte();
-                    ape = ape.trim();
-                }
-
-                String dep = "";
-                for (int i = 0; i < 20; i++) {
-                    dep += (char) rs.readByte();
-                    dep = dep.trim();
-                }
-
+                int id = rs.readInt();
+                String nom = leerCadena(rs, 25);
+                String ape = leerCadena(rs, 25);
+                String dep = leerCadena(rs, 20);
                 double sal = rs.readDouble();
 
                 if (dep.equalsIgnoreCase(deptoB)) {
@@ -254,7 +191,7 @@ public class Eje9 {
                     System.out.println("Apellido: " + ape);
                     System.out.println("Departamento: " + dep);
                     System.out.println("Salario actual: " + sal);
-                    
+                       
                 } else {
                     System.out.println("Empleado no encotrado en ese departamento ");
                 }
@@ -263,114 +200,56 @@ public class Eje9 {
            
 
         } catch (Exception e) {
+
+            System.err.println("Error al listar: " + e.getMessage());
         }
 
     }
 
     public static void CalcularSalarioT(Scanner sc) {
+ try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
+            double total = 0;
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "rw")) {
-
-            rs.seek(0);
-          
-            double total = 0 ;
-
-            while (rs.getFilePointer() < rs.length()) { 
-                 
-                 int id = rs.readInt();
-
-                String nom = "";
-                for (int i = 0; i < 25; i++) {
-                    nom += (char) rs.readByte();
-                    nom = nom.trim();
-                }
-
-                String ape = "";
-                for (int i = 0; i < 25; i++) {
-                    ape += (char) rs.readByte();
-                    ape = ape.trim();
-                }
-
-                String dep = "";
-                for (int i = 0; i < 20; i++) {
-                    dep += (char) rs.readByte();
-                    dep = dep.trim();
-                }
-
-                double sal = rs.readDouble();
-
-
-                total += sal;
-                
+            while (rs.getFilePointer() < rs.length()) {
+                rs.readInt();
+                rs.skipBytes(25 + 25 + 20);
+                total += rs.readDouble();
             }
 
-             System.out.println("La masa salarial total es: " + total + " euros");
+            System.out.println("Masa salarial total: " + total + " euros");
 
         } catch (Exception e) {
+            System.err.println("Error al calcular masa salarial: " + e.getMessage());
         }
     }
 
     public static void SalarioMN(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/empleados.dat", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
+            double salMax = Double.MIN_VALUE;
+            double salMin = Double.MAX_VALUE;
 
-             rs.seek(0);
+            String nomMax = "", apeMax = "", depMax = "";
+            String nomMin = "", apeMin = "", depMin = "";
+            int idMax = 0, idMin = 0;
 
-            double salMax = Double.MAX_VALUE;
-            double salMin = Double.MIN_VALUE;
-
-            int idMax = 0;
-            int idMin = 0;
-            String nomMax = "";
-            String nomMin = "";
-            String apeMax = "";
-            String apeMin = "";
-            String depMax = "";
-            String depMin = "";
-
-
-
-            while (rs.getFilePointer() < rs.length()) { 
-                 
-                 int id = rs.readInt();
-
-                String nom = "";
-                for (int i = 0; i < 25; i++) {
-                    nom += (char) rs.readByte();
-                    nom = nom.trim();
-                }
-
-                String ape = "";
-                for (int i = 0; i < 25; i++) {
-                    ape += (char) rs.readByte();
-                    ape = ape.trim();
-                }
-
-                String dep = "";
-                for (int i = 0; i < 20; i++) {
-                    dep += (char) rs.readByte();
-                    dep = dep.trim();
-                }
-
+            while (rs.getFilePointer() < rs.length()) {
+                int id = rs.readInt();
+                String nom = leerCadena(rs, 25);
+                String ape = leerCadena(rs, 25);
+                String dep = leerCadena(rs, 20);
                 double sal = rs.readDouble();
 
-
-                if(sal < salMax){
-                       salMax = sal;
-                       idMax = id;
-                       nomMax = nom;
-                       apeMax = ape;
-                       depMax = dep;
+                if (sal > salMax) {
+                    salMax = sal; idMax = id;
+                    nomMax = nom; apeMax = ape; depMax = dep;
                 }
-                
-                 if(sal > salMax){
-                       salMin = sal;
-                       idMin = id;
-                       nomMin = nom;
-                       apeMin = ape;
-                       depMin = dep;
+                if (sal < salMin) {
+                    salMin = sal; idMin = id;
+                    nomMin = nom; apeMin = ape; depMin = dep;
                 }
             }
+
  
         System.out.println("\nEmpleado con Menor salario:");
         System.out.println("ID: " + idMax);
@@ -387,6 +266,38 @@ public class Eje9 {
         System.out.println("Salario: " + salMin + " euros");
             
         } catch (Exception e) {
+              System.err.println("Error al calcular salarios extremos: " + e.getMessage());
         }
     }
+
+      private static boolean validarDepartamento(String dept) {
+        String[] validos = { "Informatica", "Administracion", "Ventas", "Produccion" };
+        for (String d : validos) {
+            if (d.equalsIgnoreCase(dept.trim())) return true;
+        }
+        return false;
+    }
+
+       private static int obtenerSiguienteId(RandomAccessFile rs) throws Exception {
+        long tam1 = rs.length();
+        return (int) (tam1 / tam) + 1;
+    }
+
+     private static long buscarEmpleadoPorId(RandomAccessFile rs, int idBuscado) throws Exception {
+        rs.seek(0);
+        while (rs.getFilePointer() < rs.length()) {
+            long pos = rs.getFilePointer();
+            int id = rs.readInt();
+            rs.skipBytes(25 + 25 + 20 + 8);
+            if (id == idBuscado) return pos;
+        }
+        return -1;
+    }
+
+    public static String leerCadena(RandomAccessFile rs, int longitud) throws Exception {
+        byte[] buffer = new byte[longitud];
+        rs.readFully(buffer);
+        return new String(buffer).trim();
+    }
+
 }

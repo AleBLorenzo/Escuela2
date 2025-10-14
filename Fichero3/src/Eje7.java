@@ -3,14 +3,13 @@ package Fichero3.src;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 
-
 public class Eje7 {
+
+    public static final String ruta = "Fichero3/src/Datos.txt";
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
-     
 
         while (true) {
             System.out.println("----MENU----");
@@ -41,7 +40,7 @@ public class Eje7 {
                     Borrar(sc);
                     break;
                 case 6:
-                        
+
                     sc.close();
                     return;
                 default:
@@ -49,7 +48,7 @@ public class Eje7 {
             }
 
         }
-       
+
     }
 
     public static void anadir(Scanner sc) {
@@ -75,38 +74,35 @@ public class Eje7 {
             return;
         }
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
-             long posInicio = rs.length();
-            
+            long posAgregar = rs.length(); 
             rs.seek(0);
 
             while (rs.getFilePointer() < rs.length()) {
-
-                 long actual = rs.getFilePointer();
-                String dato1 = rs.readUTF();
-                String dato2 =rs.readUTF();
-                String dato3 = rs.readUTF();
-
-                if (dato1.trim().isEmpty()) {
-                   posInicio = actual;
+                long actual = rs.getFilePointer();
+                String nombre1 = rs.readUTF();
+                String numero1 = rs.readUTF();
+                String email1 = rs.readUTF();
+                if (nombre.trim().isEmpty()) {
+                    posAgregar = actual;
+                    break; 
                 }
             }
 
-            rs.seek(posInicio);
-            rs.writeUTF(String.format("%-30s", nombre));
-            rs.writeUTF(String.format("%-15s", numero));
-            rs.writeUTF(String.format("%-35s", email));
-
+            rs.seek(posAgregar);
+            rs.writeUTF(nombre);
+            rs.writeUTF(numero);
+            rs.writeUTF(email);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error: " + e);
         }
 
     }
 
     public static void Lista() {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "r")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
 
             int contador = 0;
 
@@ -118,18 +114,19 @@ public class Eje7 {
                 String dato2 = rs.readUTF();
                 String dato3 = rs.readUTF();
 
-                System.out.println(contador + " - " + dato1 + dato2 + dato3);
+               System.out.printf("%-3s %-30s %-15s %-35s%n", contador, dato1, dato2, dato3);
                 contador++;
             }
 
         } catch (Exception e) {
+            System.out.println("Error: " + e);
 
         }
     }
 
     public static void Buscar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "r")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "r")) {
 
             System.out.println("Escriba la posicion numerica numero del contacto q quiere encontrar");
 
@@ -144,20 +141,21 @@ public class Eje7 {
                 String dato2 = rs.readUTF();
                 String dato3 = rs.readUTF();
                 if (contador == registro) {
-                    System.out.println(contador + " - " + dato1 + dato2 + dato3);
+                   System.out.printf("%-3s %-30s %-15s %-35s%n", contador, dato1, dato2, dato3);
                 }
 
                 contador++;
             }
 
         } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
 
     }
 
     public static void Borrar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.print("Posición a borrar: ");
             int registro = sc.nextInt();
@@ -186,13 +184,14 @@ public class Eje7 {
                 cont++;
             }
         } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
 
     }
 
     public static void Modificar(Scanner sc) {
 
-        try (RandomAccessFile rs = new RandomAccessFile("Fichero3/src/Datos.txt", "rw")) {
+        try (RandomAccessFile rs = new RandomAccessFile(ruta, "rw")) {
 
             System.out.print("Posición a modificar: ");
             int registro = sc.nextInt();
@@ -228,6 +227,7 @@ public class Eje7 {
             }
 
         } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
 
     }

@@ -21,6 +21,7 @@ public class Eje12 {
             lista = (List<Usuario>) ois.readObject();
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
 
         }
         int opcion = 0;
@@ -119,6 +120,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -146,6 +148,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -179,6 +182,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -221,6 +225,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -247,6 +252,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
 
     }
@@ -277,6 +283,7 @@ public class Eje12 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
         }
     }
 }

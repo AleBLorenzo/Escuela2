@@ -23,6 +23,7 @@ public class Eje10 {
                lista = (List<Vehiculo>) ois.readObject();
         
         } catch (Exception e) {
+             System.out.println("Error: "+ e );
            
         }
         int opcion = 0;
@@ -103,6 +104,7 @@ public class Eje10 {
             ob.writeObject(lista);
 
         } catch (Exception e) {
+            System.out.println("Error: "+ e );
         }
 
     }
