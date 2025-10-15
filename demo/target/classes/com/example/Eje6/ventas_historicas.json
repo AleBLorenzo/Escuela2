@@ -1,0 +1,37 @@
+{
+    "empresa": "VentasGlobal SA",
+    "periodo": "2024",
+    "regiones": [
+        {
+            "nombre": "Europa",
+            "pais": "España",
+            "moneda": "EUR",
+            "ventas": [
+                {
+                    "fecha": "2024-01-15T10:30:00",
+                    "vendedor": {
+                        "id": "V001",
+                        "nombre": "María García",
+                        "comision": 0.15
+                    },
+                    "cliente": {
+                        "tipo": "EMPRESA",
+                        "nombre": "Tech Solutions SL",
+                        "segmento": "PREMIUM"
+                    },
+                    "productos": [
+                        {
+                            "codigo": "SOFT-001",
+                            "nombre": "Licencia Software",
+                            "cantidad": 5,
+                            "precio_unitario": 299.99,
+                            "descuento": 0.1
+                        }
+                    ],
+                    "total": 1349.955,
+                    "metodo_pago": "TRANSFERENCIA"
+                }
+            ]
+        }
+    ]
+}
