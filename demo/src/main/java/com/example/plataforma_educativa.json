@@ -4,7 +4,7 @@
     {
       "id": 1,
       "nombre": "Desarrollo Web",
-      "descripcion": "descripcion",
+      "descripcion": "Curso de HTML, CSS y JS",
       "instructor": "Jose Andres",
       "fechaInicio": "2024-09-01",
       "fechaFin": "2025-01-19",
@@ -14,7 +14,7 @@
     {
       "id": 2,
       "nombre": "Programacion",
-      "descripcion": "descripcion",
+      "descripcion": "Curso de Java",
       "instructor": "Pedro Alcala",
       "fechaInicio": "2025-01-21",
       "fechaFin": "2025-07-01",
@@ -33,13 +33,13 @@
       "id": 2,
       "nombre": "Pedro",
       "fechaNacimiento": "2005-07-05",
-      "pais": "España"
+      "pais": "EspaÃ±a"
     },
     {
       "id": 3,
       "nombre": "Juan",
       "fechaNacimiento": "2006-09-02",
-      "pais": "España"
+      "pais": "EspaÃ±a"
     }
   ],
   "calificaciones": [

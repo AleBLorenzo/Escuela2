@@ -4,12 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Eje2 {
@@ -22,7 +18,7 @@ public class Eje2 {
 
         File ruta = new File("src/main/java/com/example/datos.json");
 
-            JSONObject objetos = new JSONObject(new HashMap<>());
+            JSONObject objetos = new JSONObject();
 
             objetos.put("coleccion", "Mis Peliculas Favoritas");
             objetos.put("fecha_creacion", LocalDate.now());
@@ -30,7 +26,7 @@ public class Eje2 {
 
             JSONArray lista = new JSONArray();
 
-            JSONObject objetosl = new JSONObject(new HashMap<>());
+            JSONObject objetosl = new JSONObject();
 
             objetosl.put("id", 1);
             objetosl.put("titulo", "quijote");
@@ -39,7 +35,7 @@ public class Eje2 {
             objetosl.put("genero", generos);
             objetosl.put("clasificacion", 8.2);
 
-            JSONObject premios = new JSONObject(new HashMap<>());
+            JSONObject premios = new JSONObject();
 
             premios.put("oscar", true);
             premios.put("glovo:oro", false);
@@ -49,7 +45,7 @@ public class Eje2 {
 
             lista.put(objetosl);
 
-            JSONObject objetos2 = new JSONObject(new HashMap<>());
+            JSONObject objetos2 = new JSONObject();
 
             objetos2.put("id", 2);
             objetos2.put("titulo", "sssss");
@@ -58,7 +54,7 @@ public class Eje2 {
             objetos2.put("genero", generos2);
             objetos2.put("clasificacion", 7.5);
 
-            JSONObject premios1 = new JSONObject(new HashMap<>());
+            JSONObject premios1 = new JSONObject();
 
             premios1.put("oscar", true);
             premios1.put("glovo:oro", false);
@@ -68,7 +64,7 @@ public class Eje2 {
 
             lista.put(objetos2);
 
-            JSONObject objetos3 = new JSONObject(new HashMap<>());
+            JSONObject objetos3 = new JSONObject();
 
             objetos3.put("id", 2);
             objetos3.put("titulo", "sssss");
@@ -77,7 +73,7 @@ public class Eje2 {
             objetos3.put("genero", generos3);
             objetos3.put("clasificacion", 7.5);
 
-            JSONObject premios2 = new JSONObject(new HashMap<>());
+            JSONObject premios2 = new JSONObject();
 
             premios2.put("oscar", true);
             premios2.put("glovo:oro", false);
@@ -95,7 +91,7 @@ public class Eje2 {
                 System.out.println("Se creo 'Datos.json' correctamente");
 
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("Error: "+e);
             }
 
         System.out.println("Contenido");

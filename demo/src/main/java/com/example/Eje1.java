@@ -1,12 +1,12 @@
 package com.example;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Eje1 {
@@ -28,9 +28,11 @@ public class Eje1 {
             JSONObject json = new JSONObject(contenido.toString());
 
             String tienda = json.getString("tienda");
+
             System.out.println("Tienda: " + tienda);
 
             JSONArray array = json.getJSONArray("productos");
+            
             System.out.println("Total de productos: " + array.length());
 
             for (int i = 0; i < array.length(); i++) {
@@ -56,7 +58,7 @@ public class Eje1 {
             System.out.println("Archivo no encontrado: " + ex.getMessage());
         } catch (IOException ex) {
             System.out.println("Error al leer el archivo: " + ex.getMessage());
-        } catch (org.json.JSONException ex) {
+        } catch (JSONException ex) {
             System.out.println("Error al parsear JSON: " + ex.getMessage());
         }
 
