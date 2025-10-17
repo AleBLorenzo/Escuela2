@@ -1,0 +1,79 @@
+{
+  "nombre": "Academia Online Pro",
+  "cursos": [
+    {
+      "id": 101,
+      "nombre": "Programación Java Avanzada",
+      "descripcion": "Curso completo de Java desde básico hasta Spring Boot",
+      "instructor": "Dr. Carlos Martínez",
+      "fecha_inicio": "2024-01-15",
+      "fecha_fin": "2024-04-15",
+      "precio": 299.99,
+      "activo": true,
+      "calificaciones": [
+        {
+          "estudiante_id": 1,
+          "nota": 9.5,
+          "fecha": "2024-04-10",
+          "comentarios": "Excelente dominio de conceptos"
+        },
+        {
+          "estudiante_id": 2,
+          "nota": 8.7,
+          "fecha": "2024-04-12",
+          "comentarios": "Buen desempeño general"
+        },
+        {
+          "estudiante_id": 3,
+          "nota": 9.2,
+          "fecha": "2024-04-11",
+          "comentarios": "Muy buen trabajo en proyectos"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "nombre": "Desarrollo Web Full Stack",
+      "descripcion": "Aprende HTML, CSS, JavaScript, React y Node.js",
+      "instructor": "Ing. Laura Fernández",
+      "fecha_inicio": "2024-02-01",
+      "fecha_fin": "2024-05-30",
+      "precio": 399.99,
+      "activo": true,
+      "calificaciones": [
+        {
+          "estudiante_id": 1,
+          "nota": 8.9,
+          "fecha": "2024-05-28",
+          "comentarios": "Proyecto final destacado"
+        },
+        {
+          "estudiante_id": 2,
+          "nota": 9.3,
+          "fecha": "2024-05-29",
+          "comentarios": "Excelente creatividad en diseño"
+        }
+      ]
+    }
+  ],
+  "estudiantes": [
+    {
+      "id": 1,
+      "nombre": "María González",
+      "fecha_nacimiento": "1995-03-15",
+      "pais": "España"
+    },
+    {
+      "id": 2,
+      "nombre": "Juan Pérez",
+      "fecha_nacimiento": "1998-07-22",
+      "pais": "México"
+    },
+    {
+      "id": 3,
+      "nombre": "Ana Rodríguez",
+      "fecha_nacimiento": "2000-11-08",
+      "pais": "Argentina"
+    }
+  ]
+}
