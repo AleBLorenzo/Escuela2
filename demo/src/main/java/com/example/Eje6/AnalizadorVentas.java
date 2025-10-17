@@ -16,7 +16,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public class AnalizadorVentas {
 
@@ -24,57 +24,110 @@ public class AnalizadorVentas {
 
     public static void main(String[] args) throws IOException {
 
-         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
       
           String json = "";
+
         try(BufferedReader br = new BufferedReader(new FileReader(ruta))) {
           
-            
             String linea = "";
 
             while ((linea = br.readLine())!=null) {
-
                 json+= linea;
-
             }
        
-        } catch (FileNotFoundException ex) {
-
+        } catch (Exception ex) {
+            System.out.println("Error: "+ ex);
         }
 
-        JsonSerializer<OffsetDateTime> serializer = (src, typeOfSrc, context) ->
-        new JsonPrimitive(src.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
 
-        JsonDeserializer<OffsetDateTime> deserializer = (jsonElement, typeOfT, context) ->
-        OffsetDateTime.parse(jsonElement.getAsString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        JsonSerializer<LocalDateTime> serializer = (src, typeOfSrc, context) ->
+        new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+
+        JsonDeserializer<LocalDateTime> deserializer = (jsonElement, typeOfT, context) ->
+        LocalDateTime.parse(jsonElement.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
     Gson gson = new GsonBuilder()
-        .registerTypeAdapter(OffsetDateTime.class, serializer)
-        .registerTypeAdapter(OffsetDateTime.class, deserializer)
+        .registerTypeAdapter(LocalDateTime.class, serializer)
+        .registerTypeAdapter(LocalDateTime.class, deserializer)
         .setPrettyPrinting()
         .create();
 
     SistemaVentas sv = gson.fromJson(json, SistemaVentas.class);
 
-    for (Region region :sv.getRegion()) {
-        double total = 0.0;
+    double totalEuropa = 0.0;
+   
+    for (Region regions :sv.getRegion()) {
+        if (regions.getNombre().equals("Europa")) {
+             for (Venta venta : regions.getVentas()) {
+            totalEuropa+= venta.getTotal();               
+        }      
+        }
+       
+    }
 
-        for (Venta venta : region.getVentas()) {
-            total+= venta.getTotal();
+    double totalAmerica = 0.0;
+    for (Region regions : sv.getRegion()) {
+        if (regions.getNombre().equals("America del Norte")) {
+            for (Venta venta : regions.getVentas()) {
+                totalAmerica+=venta.getTotal();
+                
+            }
+        }
+        
+    }
 
-            System.out.println(total);           
+        double totalAsia = 0.0;
+    for (Region regions : sv.getRegion()) {
+        if (regions.getNombre().equals("Asia")) {
+            for (Venta venta : regions.getVentas()) {
+                totalAsia+=venta.getTotal();
+                
+            }
+        }
+        
+    }
+
+          double totalSuda = 0.0;
+    for (Region regions : sv.getRegion()) {
+        if (regions.getNombre().equals("Sudamerica")) {
+            for (Venta venta : regions.getVentas()) {
+                totalSuda+=venta.getTotal();
+                
+            }
+        }
+        
+    }
+       System.out.println("Total en Europa: "+ totalEuropa);
+       System.out.println("Total en America del  Norte: "+ totalAmerica);
+       System.out.println("Total en Asia: "+ totalAsia);
+       System.out.println("Total en Sudamerica: "+ totalSuda);
+
+
+           for (Region regions : sv.getRegion()) {
+       
+            for (Venta venta : regions.getVentas()) {
+               
+            String nombreV = venta.getVendedor().getNombre();
+            double totalV = venta.getTotal();
+
+            System.out.println("\nVendedor: "+nombreV +" - "+totalV);
+                
         }
 
         
     }
 
+    
+        double dolarEuro = totalAmerica *0.86;
+        double dolarYan = totalAsia * 0.00570;
+        double dolarArg = totalSuda *0.00059;
 
-        System.out.println(sv);
-
-
+        System.out.println("\nConvertir moneda");
+        System.out.println("Ganancias de America(USD) a EUR: "+dolarEuro);
+        System.out.println("Ganancias de Asia(JPY) a EUR: "+dolarYan);
+        System.out.println("Ganancias de Sudamerica(ARG) a EUR: "+dolarArg);
 
 
     }
-
 
 }

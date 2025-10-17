@@ -1,20 +1,18 @@
 package com.example.Eje6;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Venta {
 
-    private OffsetDateTime fecha;
-    private List<Vendedor> vendedor;
-    private List<Cliente> cliente;
+    private LocalDateTime fecha;
+    private Vendedor vendedor;
+    private Cliente cliente;
     private List<Producto> producto;
     private double total;
     private MetodoPago metodo_pago;
 
-    public Venta(List<Cliente> cliente, OffsetDateTime fecha, MetodoPago metodo_pago, List<Producto> producto, double total, List<Vendedor> vendedor) {
+    public Venta(Cliente cliente, LocalDateTime fecha, MetodoPago metodo_pago, List<Producto> producto, double total,Vendedor vendedor) {
         this.cliente = cliente;
         this.fecha = fecha;
         this.metodo_pago = metodo_pago;
@@ -26,27 +24,27 @@ public class Venta {
     public Venta() {
     }
 
-    public OffsetDateTime getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(OffsetDateTime fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    public List<Vendedor> getVendedor() {
+    public Vendedor getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(List<Vendedor> vendedor) {
+    public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
-    public List<Cliente> getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(List<Cliente> cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
