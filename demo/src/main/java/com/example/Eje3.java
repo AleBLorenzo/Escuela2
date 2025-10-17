@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.security.Principal;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONParserConfiguration;
 
 
 
@@ -26,7 +24,7 @@ public class Eje3 {
             String linea;
 
             while ((linea = read.readLine()) != null) {
-                contenido.append(linea); 
+                contenido.append(linea);
                 
             }
 
@@ -34,7 +32,7 @@ public class Eje3 {
             JSONArray libros = principal.getJSONArray("libros");
 
 
-            JSONObject preestado = libros.getJSONObject(0);   
+            JSONObject preestado = libros.getJSONObject(0);
             preestado.put("prestado",true);
             System.out.println("campo prestado cambiado a 'true'");
 
@@ -77,7 +75,7 @@ public class Eje3 {
             double SumaValores = 0.0;
 
            for (int i = 0; i < totallibros; i++) {
-             JSONObject libro = libros.getJSONObject(i);    
+             JSONObject libro = libros.getJSONObject(i);
             if (libro.getBoolean("prestado")) {
                     librosPrestados++;
                 }

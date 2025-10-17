@@ -26,6 +26,7 @@ public class Eje4 {
 
         for (Departamento dep  : empresa.getDepartamentos()) {
                 for (Empleado empl : dep.getEmpleados()) {
+
                     System.out.println(empl);
                     
                 }
@@ -53,10 +54,11 @@ public class Eje4 {
             double suma = 0 ;
  
             for (Empleado emp : lista) {
- 
+
                 suma+= emp.getSalario();
+
                 }
-                double promedio = Math.round((suma/ lista.size()) *100.0)/100.0;
+                double promedio = (suma/ lista.size()) *100.0 / 100.0;
 
                 System.out.println(dep.getNombre()+ ": "+promedio);
                }
