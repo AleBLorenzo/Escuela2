@@ -8,15 +8,15 @@ public class Venta {
     private LocalDateTime fecha;
     private Vendedor vendedor;
     private Cliente cliente;
-    private List<Producto> producto;
+    private List<Producto> productos;
     private double total;
     private MetodoPago metodo_pago;
 
-    public Venta(Cliente cliente, LocalDateTime fecha, MetodoPago metodo_pago, List<Producto> producto, double total,Vendedor vendedor) {
+    public Venta(Cliente cliente, LocalDateTime fecha, MetodoPago metodo_pago, List<Producto> productos, double total,Vendedor vendedor) {
         this.cliente = cliente;
         this.fecha = fecha;
         this.metodo_pago = metodo_pago;
-        this.producto = producto;
+        this.productos = productos;
         this.total = total;
         this.vendedor = vendedor;
     }
@@ -48,12 +48,12 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public List<Producto> getProducto() {
-        return producto;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setProducto(List<Producto> producto) {
-        this.producto = producto;
+    public void setProducto(List<Producto> productos) {
+        this.productos = productos;
     }
 
     public double getTotal() {
@@ -79,7 +79,7 @@ public class Venta {
         sb.append("fecha=").append(fecha);
         sb.append(", vendedor=").append(vendedor);
         sb.append(", cliente=").append(cliente);
-        sb.append(", producto=").append(producto);
+        sb.append(", producto=").append(productos);
         sb.append(", total=").append(total);
         sb.append(", metodo_pago=").append(metodo_pago);
         sb.append('}');
