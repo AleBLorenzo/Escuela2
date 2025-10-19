@@ -1,8 +1,10 @@
 package com.example.Eje6;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import com.google.gson.Gson;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class AnalizadorVentas {
 
     private static final String ruta = "src/main/java/com/example/Eje6/ventas_historicas.json";
+    private static final String rutaReporte = "src/main/java/com/example/Eje6/ventas_historicas_reporte.json";
 
     public static void main(String[] args) throws IOException {
 
@@ -58,223 +61,276 @@ public class AnalizadorVentas {
 
         SistemaVentas sv = gson.fromJson(json, SistemaVentas.class);
 
-        double totalEuropa = 0.0;
+        Map<String, Double> totalesRegion = calcularTotalesPorRegion(sv);
+        List<Map.Entry<String, Double>> top5 = calcularTop5Vendedores(sv);
+        Producto productoTop = calcularProductoMasVendido(sv);
+        double[] ventasMes = calcularVentasPorMes(sv);
+        Map<String, Double> ventasTipoCliente = calcularVentasPorTipoCliente(sv);
 
-        for (Region regions : sv.getRegion()) {
-            if (regions.getNombre().equals("Europa")) {
-                for (Venta venta : regions.getVentas()) {
+        generarReporteJSON(sv, totalesRegion, top5, productoTop, ventasMes, ventasTipoCliente);
+
+    }
+
+    public static Map<String, Double> calcularTotalesPorRegion(SistemaVentas sv) {
+        Map<String, Double> totales = new HashMap<>();
+
+        double totalEuropa = 0.0;
+        double totalAmerica = 0.0;
+        double totalAsia = 0.0;
+        double totalSudamerica = 0.0;
+
+        for (Region region : sv.getRegion()) {
+            if (region.getNombre().equals("Europa")) {
+                for (Venta venta : region.getVentas()) {
                     totalEuropa += venta.getTotal();
                 }
-            }
-
-        }
-
-        double totalAmerica = 0.0;
-        for (Region regions : sv.getRegion()) {
-            if (regions.getNombre().equals("America del Norte")) {
-                for (Venta venta : regions.getVentas()) {
+            } else if (region.getNombre().equals("America del Norte")) {
+                for (Venta venta : region.getVentas()) {
                     totalAmerica += venta.getTotal();
-
                 }
-            }
-
-        }
-
-        double totalAsia = 0.0;
-        for (Region regions : sv.getRegion()) {
-            if (regions.getNombre().equals("Asia")) {
-                for (Venta venta : regions.getVentas()) {
+            } else if (region.getNombre().equals("Asia")) {
+                for (Venta venta : region.getVentas()) {
                     totalAsia += venta.getTotal();
-
+                }
+            } else if (region.getNombre().equals("Sudamerica")) {
+                for (Venta venta : region.getVentas()) {
+                    totalSudamerica += venta.getTotal();
                 }
             }
-
         }
 
-        double totalSuda = 0.0;
-        for (Region regions : sv.getRegion()) {
-            if (regions.getNombre().equals("Sudamerica")) {
-                for (Venta venta : regions.getVentas()) {
-                    totalSuda += venta.getTotal();
+        totales.put("Europa", totalEuropa);
+        totales.put("America del Norte", totalAmerica);
+        totales.put("Asia", totalAsia);
+        totales.put("Sudamerica", totalSudamerica);
 
-                }
-            }
-
-        }
         System.out.println("Total en Europa: " + totalEuropa);
         System.out.println("Total en America del  Norte: " + totalAmerica);
         System.out.println("Total en Asia: " + totalAsia);
-        System.out.println("Total en Sudamerica: " + totalSuda);
-
-        for (Region regions : sv.getRegion()) {
-
-            for (Venta venta : regions.getVentas()) {
-
-                String nombreV = venta.getVendedor().getNombre();
-                double totalV = venta.getTotal();
-
-                System.out.println("\nVendedor: " + nombreV + " - " + totalV);
-
-            }
-
-        }
-
-        double dolarEuro = totalAmerica * 0.86;
-        double dolarYan = totalAsia * 0.00570;
-        double dolarArg = totalSuda * 0.00059;
+        System.out.println("Total en Sudamerica: " + totalSudamerica);
 
         System.out.println("\nConvertir moneda");
-        System.out.println("Ganancias de America(USD) a EUR: " + dolarEuro);
-        System.out.println("Ganancias de Asia(JPY) a EUR: " + dolarYan);
-        System.out.println("Ganancias de Sudamerica(ARG) a EUR: " + dolarArg);
+        System.out.println("Ganancias de America(USD) a EUR: " + totalAmerica * 0.86);
+        System.out.println("Ganancias de Asia(JPY) a EUR: " + totalAsia * 0.0057);
+        System.out.println("Ganancias de Sudamerica(ARG) a EUR: " + totalSudamerica * 0.00059);
 
-        Map<String, Double> tipoCambio = new HashMap<>();
-        tipoCambio.put("EUR", 1.0);
-        tipoCambio.put("USD", 0.86);
-        tipoCambio.put("JPY", 0.0057);
-        tipoCambio.put("ARS", 0.00059);
+        return totales;
+    }
 
+    public static List<Map.Entry<String, Double>> calcularTop5Vendedores(SistemaVentas sv) {
         Map<String, Double> comisiones = new HashMap<>();
 
-        String nombreV = null;
-        double Comision = 0;
-
-        for (Region regions : sv.getRegion()) {
-
-            String moneda = regions.getMoneda();
-            double cambio = tipoCambio.getOrDefault(moneda, 1.0);
-
-            for (Venta venta : regions.getVentas()) {
-
-                nombreV = venta.getVendedor().getNombre();
-                Comision = venta.getTotal() * venta.getVendedor().getComision();
-
-                double comisionEUR = Comision * cambio;
-
-                comisiones.put(nombreV, comisiones.getOrDefault(nombreV, 0.0) + comisionEUR);
+        for (Region region : sv.getRegion()) {
+            double cambio = 1.0;
+            if (region.getMoneda().equals("USD")) {
+                cambio = 0.86;
+            } else if (region.getMoneda().equals("JPY")) {
+                cambio = 0.0057;
+            } else if (region.getMoneda().equals("ARS")) {
+                cambio = 0.00059;
             }
 
+            for (Venta venta : region.getVentas()) {
+                String nombre = venta.getVendedor().getNombre();
+                double comision = venta.getTotal() * venta.getVendedor().getComision();
+                double comisionEUR = comision * cambio;
+
+                if (comisiones.containsKey(nombre)) {
+                    comisiones.put(nombre, comisiones.get(nombre) + comisionEUR);
+                } else {
+                    comisiones.put(nombre, comisionEUR);
+                }
+            }
         }
+
         List<Map.Entry<String, Double>> lista = new ArrayList<>(comisiones.entrySet());
 
         Collections.sort(lista, new Comparator<Map.Entry<String, Double>>() {
+
             @Override
             public int compare(Map.Entry<String, Double> a, Map.Entry<String, Double> b) {
                 return Double.compare(b.getValue(), a.getValue());
             }
         });
 
-        System.out.println("\n=== Top 5 Vendedores ===");
+        System.out.println("\nTop 5 Vendedores");
         for (int i = 0; i < Math.min(5, lista.size()); i++) {
-            System.out.println((i + 1) + ". " + lista.get(i).getKey() + " - " + lista.get(i).getValue());
+
+             System.out.println((i + 1) + ". " + lista.get(i).getKey() + " - " + lista.get(i).getValue() + " EUR");
         }
 
-        int catidadMax = 0;
-        String productoTop = null;
+        return lista;
+    }
 
-        Map<String, Integer> map = new HashMap<>();
+    public static Producto calcularProductoMasVendido(SistemaVentas sv) {
 
-        for (Region regions : sv.getRegion()) {
+        Map<String, Integer> cantidades = new HashMap<>();
 
-            for (Venta venta : regions.getVentas()) {
+        Producto productoMasVendido = null;
+        int maxCantidad = 0;
 
+        for (Region region : sv.getRegion()) {
+            for (Venta venta : region.getVentas()) {
                 for (Producto producto : venta.getProductos()) {
-
-                    String id = producto.getCodigo();
+                    String codigo = producto.getCodigo();
                     int cantidad = producto.getCantidad();
-                    map.put(id, cantidad);
 
-                }
-            }
-        }
-
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > catidadMax) {
-                catidadMax = entry.getValue();
-                productoTop = entry.getKey();
-            }
-        }
-        for (Region regions : sv.getRegion()) {
-
-            for (Venta venta : regions.getVentas()) {
-
-                for (Producto producto : venta.getProductos()) {
-
-                    if (producto.getCodigo().equals(productoTop)) {
-                        System.out.println("\nProducto mas Vendido");
-                        System.out.println("Codigo: " + producto.getCodigo());
-                        System.out.println("Nombre: " + producto.getNombre());
-                        System.out.println("Cantidad: " + producto.getCantidad());
-                        System.out.println("Precio: " + producto.getPrecio_unitario());
-                        System.out.println("Descuento: " + producto.getDescuento());
+                    if (cantidades.containsKey(codigo)) {
+                        cantidades.put(codigo, cantidades.get(codigo) + cantidad);
+                    } else {
+                        cantidades.put(codigo, cantidad);
                     }
 
+                    if (cantidades.get(codigo) > maxCantidad) {
+                        maxCantidad = cantidades.get(codigo);
+                        productoMasVendido = producto;
+                    }
                 }
             }
         }
 
-        double[] ventaspormes = new double[12];
+        if (productoMasVendido != null) {
 
-        for (Region regions : sv.getRegion()) {
+            System.out.println("\nProducto más vendido:");
+            System.out.println("Código: " + productoMasVendido.getCodigo());
+            System.out.println("Nombre: " + productoMasVendido.getNombre());
+            System.out.println("Cantidad: " + productoMasVendido.getCantidad());
+            System.out.println("Precio: " + productoMasVendido.getPrecio_unitario());
+        }
 
-            String moneda = regions.getMoneda();
+        return productoMasVendido;
+    }
 
-            for (Venta venta : regions.getVentas()) {
+    public static double[] calcularVentasPorMes(SistemaVentas sv) {
 
+        double[] ventasMes = new double[12];
+
+        for (Region region : sv.getRegion()) {
+            double cambio = 1.0;
+            if (region.getMoneda().equals("USD")) {
+                cambio = 0.86;
+            } else if (region.getMoneda().equals("JPY")) {
+                cambio = 0.0057;
+            } else if (region.getMoneda().equals("ARS")) {
+                cambio = 0.00059;
+            }
+
+            for (Venta venta : region.getVentas()) {
                 int mes = venta.getFecha().getMonthValue();
-
-                double total = venta.getTotal();
-                if (moneda.equals("ARG")) {
-                    total = total * 0.00059;
-                } else if (moneda.equals("JPY")) {
-                    total = total * 0.00570;
-                } else if (moneda.equals("USD")) {
-                    total = total * 0.86;
-                }
-
-                ventaspormes[mes - 1] += total;
-
+                double total = venta.getTotal() * cambio;
+                ventasMes[mes - 1] += total;
             }
         }
-        System.out.println("\nVenta por Mes");
-        for (int i = 0; i < 12; i++) {
-            System.out.println("Mes " + (i + 1) + " - Total ventas: " + ventaspormes[i]);
+
+        System.out.println("\nVentas por Mes (EUR)");
+        for (int i = 0; i < 12; i++) { 
+            
+            System.out.println("Mes " + (i + 1) + ": " + ventasMes[i]);
+       
         }
 
+        return ventasMes;
+    }
+
+    public static Map<String, Double> calcularVentasPorTipoCliente(SistemaVentas sv) {
         double totalEmpresa = 0.0;
         double totalParticular = 0.0;
 
-        for (Region regions : sv.getRegion()) {
+        for (Region region : sv.getRegion()) {
+            double cambio = 1.0;
+            if (region.getMoneda().equals("USD")) {
+                cambio = 0.86;
+            } else if (region.getMoneda().equals("JPY")) {
+                cambio = 0.0057;
+            } else if (region.getMoneda().equals("ARS")) {
+                cambio = 0.00059;
+            }
 
-            String moneda = regions.getMoneda();
+            for (Venta venta : region.getVentas()) {
+                double total = venta.getTotal() * cambio;
 
-            for (Venta venta : regions.getVentas()) {
-
-                TipoCliente tipo = venta.getCliente().getTipo();
-                double total = venta.getTotal();
-
-                if (moneda.equals("USD")) {
-                    total *= 0.86;
-                }  else if (moneda.equals("JPY")) {
-                    total *= 0.0057;
-                }else if (moneda.equals("ARS")) {
-                    total *= 0.00059;
-                }
-
-                if (tipo == TipoCliente.EMPRESA) {
+                if (venta.getCliente().getTipo() == TipoCliente.EMPRESA) {
                     totalEmpresa += total;
-
-                } else if (tipo == TipoCliente.PARTICULAR) {
-                    totalParticular += total;
-                } else if (tipo == TipoCliente.NORMAL) {
+                } else {
                     totalParticular += total;
                 }
-
             }
         }
-        System.out.println("\nReporte por tipo de cliente");
-        System.out.println("Empresa: " + totalEmpresa);
-        System.out.println("Particular: " + totalParticular);
+
+        Map<String, Double> resultado = new HashMap<>();
+
+        resultado.put("EMPRESA", totalEmpresa);
+        resultado.put("PARTICULAR/NORMAL", totalParticular);
+
+        System.out.println("\nVentas por tipo de cliente (EUR)");
+
+        for (Map.Entry<String, Double> entry : resultado.entrySet()) {
+            String tipo = entry.getKey();
+            double total = entry.getValue();
+            System.out.println(tipo + ": " + total);
+        }
+        return resultado;
+    }
+
+    public static void generarReporteJSON(SistemaVentas sv, Map<String, Double> totalesRegion, List<Map.Entry<String, Double>> top5, Producto productoMasVendido, double[] ventasPorMes, Map<String, Double> tipoCliente) {
+
+        Map<String, Object> reporte = new HashMap<>();
+
+        reporte.put("empresa", sv.getEmpresa());
+        reporte.put("periodo", sv.getPeriodo());
+        reporte.put("fecha_generacion", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        reporte.put("version", "1.0");
+        reporte.put("totales_por_region", totalesRegion);
+
+        List<Map<String, Object>> listaTop = new ArrayList<>();
+
+        for (int i = 0; i < Math.min(5, top5.size()); i++) {
+
+            Map<String, Object> v = new HashMap<>();
+
+            v.put("nombre", top5.get(i).getKey());
+            v.put("comision_ganada_EUR", top5.get(i).getValue());
+            listaTop.add(v);
+        }
+        reporte.put("top_5_vendedores", listaTop);
+
+        Map<String, Object> prod = new HashMap<>();
+
+        if (productoMasVendido != null) {
+
+            prod.put("codigo", productoMasVendido.getCodigo());
+            prod.put("nombre", productoMasVendido.getNombre());
+            prod.put("cantidad_vendida", productoMasVendido.getCantidad());
+        }
+        reporte.put("producto_mas_vendido", prod);
+
+        List<Map<String, Object>> ventasMesList = new ArrayList<>();
+
+        for (int i = 0; i < 12; i++) {
+
+            Map<String, Object> mes = new HashMap<>();
+
+            mes.put("mes", i + 1);
+            mes.put("total_EUR", ventasPorMes[i]);
+            ventasMesList.add(mes);
+        }
+        reporte.put("ventas_por_mes", ventasMesList);
+
+        reporte.put("ventas_por_tipo_cliente", tipoCliente);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaReporte))) {
+
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create()
+                    .toJson(reporte, bw);
+
+            System.out.println("\nArchivo de reporte generado correctamente en: " + rutaReporte);
+
+        } catch (IOException e) {
+
+            System.out.println("Error al generar reporte: " + e.getMessage());
+        }
     }
 
 }
