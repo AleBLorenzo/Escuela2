@@ -1,6 +1,7 @@
 package com.example;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Curso {
 
@@ -12,18 +13,13 @@ public class Curso {
     private LocalDate fechaFin;
     private double precio;
     private Boolean activo;
+    private List<Calificacion> calificaciones;
 
-    @Override
-    public String toString() {
-        return "Curso [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", instructor=" + instructor
-                + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precio=" + precio + ", activo="
-                + activo + "]";
-    }
 
     public Curso() {
     }
 
-    public Curso(Boolean activo, String descripcion, LocalDate fechaFin, LocalDate fechaInicio, int id, String instructor, String nombre, double precio) {
+    public Curso(Boolean activo, String descripcion, LocalDate fechaFin, LocalDate fechaInicio, int id, String instructor, String nombre, double precio ,List<Calificacion> calificaciones) {
         this.activo = activo;
         this.descripcion = descripcion;
         this.fechaFin = fechaFin;
@@ -32,6 +28,7 @@ public class Curso {
         this.instructor = instructor;
         this.nombre = nombre;
         this.precio = precio;
+        this.calificaciones= calificaciones;
     }
 
     public int getId() {
@@ -96,6 +93,31 @@ public class Curso {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public List<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<Calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Curso{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", descripcion=").append(descripcion);
+        sb.append(", instructor=").append(instructor);
+        sb.append(", fechaInicio=").append(fechaInicio);
+        sb.append(", fechaFin=").append(fechaFin);
+        sb.append(", precio=").append(precio);
+        sb.append(", activo=").append(activo);
+        sb.append(", calificaciones=").append(calificaciones);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

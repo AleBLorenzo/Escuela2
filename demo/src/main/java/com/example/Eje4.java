@@ -64,6 +64,7 @@ public class Eje4 {
                }
 
         } catch (Exception e) {
+            System.out.println("Error: "+ e.getMessage());
             e.printStackTrace();
         }
 
