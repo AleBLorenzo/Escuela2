@@ -1,0 +1,93 @@
+{
+  "producto_mas_vendido": {
+    "codigo": "SW-050",
+    "cantidad_vendida": 12,
+    "nombre": "Suscripción Cloud Pro"
+  },
+  "periodo": "2024",
+  "fecha_generacion": "2025-10-19T11:56:05.4009288",
+  "top_5_vendedores": [
+    {
+      "comision_ganada_EUR": 833.9100000000001,
+      "nombre": "Yuki Tanaka"
+    },
+    {
+      "comision_ganada_EUR": 202.4925,
+      "nombre": "María García"
+    },
+    {
+      "comision_ganada_EUR": 60.887312,
+      "nombre": "Michael Brown"
+    },
+    {
+      "comision_ganada_EUR": 48.89625,
+      "nombre": "Sofía Pérez"
+    },
+    {
+      "comision_ganada_EUR": 41.2714,
+      "nombre": "Emily Johnson"
+    }
+  ],
+  "ventas_por_tipo_cliente": {
+    "PARTICULAR/NORMAL": 1505.2564,
+    "EMPRESA": 8095.289
+  },
+  "totales_por_region": {
+    "Sudamerica": 698000.0,
+    "Asia": 1120000.0,
+    "Europa": 1630.92,
+    "America del Norte": 1364.8899999999999
+  },
+  "empresa": "VentasGlobal SA",
+  "ventas_por_mes": [
+    {
+      "mes": 1,
+      "total_EUR": 1349.95
+    },
+    {
+      "mes": 2,
+      "total_EUR": 412.714
+    },
+    {
+      "mes": 3,
+      "total_EUR": 280.97
+    },
+    {
+      "mes": 4,
+      "total_EUR": 5956.5
+    },
+    {
+      "mes": 5,
+      "total_EUR": 376.125
+    },
+    {
+      "mes": 6,
+      "total_EUR": 761.0914
+    },
+    {
+      "mes": 7,
+      "total_EUR": 0.0
+    },
+    {
+      "mes": 8,
+      "total_EUR": 427.5
+    },
+    {
+      "mes": 9,
+      "total_EUR": 35.695
+    },
+    {
+      "mes": 10,
+      "total_EUR": 0.0
+    },
+    {
+      "mes": 11,
+      "total_EUR": 0.0
+    },
+    {
+      "mes": 12,
+      "total_EUR": 0.0
+    }
+  ],
+  "version": "1.0"
+}
