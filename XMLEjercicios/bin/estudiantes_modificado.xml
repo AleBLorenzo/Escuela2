@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><universidad>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<universidad>
     <estudiante id="001">
         <nombre>María Rodríguez</nombre>
         <edad>20</edad>
@@ -11,4 +12,10 @@
         <carrera>Matemáticas</carrera>
         <nota>7.2</nota>
     </estudiante>
-<estudiante id="003"><nombre>Laura González</nombre><edad>21</edad><carrera>Fisica</carrera><nota>8.8</nota></estudiante></universidad>
+    <estudiante id="003">
+        <nombre>Laura González</nombre>
+        <edad>21</edad>
+        <carrera>Fisica</carrera>
+        <nota>8.8</nota>
+    </estudiante>
+</universidad>
