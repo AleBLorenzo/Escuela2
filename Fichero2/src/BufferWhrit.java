@@ -1,6 +1,5 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.Writer;
 import java.util.Scanner;
 
 public class BufferWhrit {
@@ -13,22 +12,18 @@ public class BufferWhrit {
 
         try {
 
-            fw = new FileWriter("Fichero2/src/frases_usuario.txt", true);
+            fw = new FileWriter("src/frases_usuario.txt", true);
             bw = new BufferedWriter(fw);
             
 
-            System.out.println("Escribe una frase: "+"\n Para salir escriba exit");
+            System.out.println("Escribe una frase: ");
 
-            String user = null;
-            while (user != "exit") {
+           for (int i = 1; i <= 5; i++) {
 
-                user = sc.nextLine();
-
-                if (user.equals("exit")) {
-                    break;
-                }
-                bw.write(user);
-                bw.newLine();
+             System.out.print("Frase " + i + ": ");
+             String frase = sc.nextLine();
+             bw.write(frase);
+             bw.newLine();
                 bw.flush();
 
             }

@@ -18,7 +18,7 @@ public class ordenar {
 
         try {
 
-            s = new FileReader("Fichero2/src/desordenado.txt");
+            s = new FileReader("src/desordenado.txt");
             d = new BufferedReader(s);
 
             String r ;
@@ -30,7 +30,7 @@ public class ordenar {
 
             Collections.sort(datos);
 
-            a = new FileWriter("Fichero2/src/ordenados.txt");
+            a = new FileWriter("src/ordenados.txt");
             w = new BufferedWriter(a);
 
             for (String q : datos) {

@@ -2,12 +2,17 @@ package com.example;
 
 import java.time.LocalDate;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Estudiante {
 
     private  int id;
     private String nombre;
     private transient  String email;
+
+    @SerializedName ("fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    
     private String pais;
 
     @Override

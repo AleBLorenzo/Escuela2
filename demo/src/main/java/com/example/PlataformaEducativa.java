@@ -7,21 +7,20 @@ public class PlataformaEducativa {
     private String nombre ;
     private List<Curso> cursos;
     private List<Estudiante> estudiantes;
-    private List<Calificacion> calificaciones;
 
 
 
     @Override
     public String toString() {
         return "PlataformaEducativa [nombre=" + nombre + ", cursos=" + cursos + ", estudiantes=" + estudiantes
-                + ", calificaciones=" + calificaciones + "]";
+                +"]";
     }
 
     public PlataformaEducativa() {
     }
 
-    public PlataformaEducativa(List<Calificacion> calificaciones, List<Curso> cursos, List<Estudiante> estudiantes, String nombre) {
-        this.calificaciones = calificaciones;
+    public PlataformaEducativa(List<Curso> cursos, List<Estudiante> estudiantes, String nombre) {
+     
         this.cursos = cursos;
         this.estudiantes = estudiantes;
         this.nombre = nombre;
@@ -53,15 +52,7 @@ public class PlataformaEducativa {
         this.estudiantes = estudiantes;
     }
 
-    public List<Calificacion> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(List<Calificacion> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
-
+  
 
 
 }

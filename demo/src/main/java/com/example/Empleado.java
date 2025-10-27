@@ -1,8 +1,8 @@
 package com.example;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Empleado {
 
@@ -10,7 +10,10 @@ public class Empleado {
    private String nombre;
    private String email;
    private double salario;
+
+    @SerializedName ("fecha_contratacion")
    private String fechaContratacion;
+   
    private Boolean activo;
    private List<String> habilidades;
 

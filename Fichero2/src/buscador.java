@@ -20,7 +20,7 @@ public class buscador {
 
         try {
 
-            s = new FileReader("Fichero2/src/libro.txt");
+            s = new FileReader("src/libro.txt");
             leer = new BufferedReader(s);
 
             String a;

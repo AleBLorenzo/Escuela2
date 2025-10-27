@@ -91,7 +91,7 @@ public class Eje2 {
                 System.out.println("Se creo 'Datos.json' correctamente");
 
             } catch (Exception e) {
-                System.out.println("Error: "+e);
+                System.out.println("Error: "+ e.getMessage());
             }
 
         System.out.println("Contenido");

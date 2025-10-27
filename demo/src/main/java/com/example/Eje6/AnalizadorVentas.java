@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -156,7 +158,7 @@ public class AnalizadorVentas {
         System.out.println("\nTop 5 Vendedores");
         for (int i = 0; i < Math.min(5, lista.size()); i++) {
 
-             System.out.println((i + 1) + ". " + lista.get(i).getKey() + " - " + lista.get(i).getValue() + " EUR");
+            System.out.println((i + 1) + ". " + lista.get(i).getKey() + " - " + lista.get(i).getValue() + " EUR");
         }
 
         return lista;
@@ -223,10 +225,10 @@ public class AnalizadorVentas {
         }
 
         System.out.println("\nVentas por Mes (EUR)");
-        for (int i = 0; i < 12; i++) { 
-            
+        for (int i = 0; i < 12; i++) {
+
             System.out.println("Mes " + (i + 1) + ": " + ventasMes[i]);
-       
+
         }
 
         return ventasMes;
@@ -272,7 +274,9 @@ public class AnalizadorVentas {
         return resultado;
     }
 
-    public static void generarReporteJSON(SistemaVentas sv, Map<String, Double> totalesRegion, List<Map.Entry<String, Double>> top5, Producto productoMasVendido, double[] ventasPorMes, Map<String, Double> tipoCliente) {
+    public static void generarReporteJSON(SistemaVentas sv, Map<String, Double> totalesRegion,
+            List<Map.Entry<String, Double>> top5, Producto productoMasVendido, double[] ventasPorMes,
+            Map<String, Double> tipoCliente) {
 
         Map<String, Object> reporte = new HashMap<>();
 

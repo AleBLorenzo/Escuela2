@@ -1,7 +1,5 @@
 package com.example;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,6 +7,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class App {
 

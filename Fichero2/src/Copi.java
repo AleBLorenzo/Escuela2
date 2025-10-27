@@ -10,8 +10,8 @@ public class Copi {
 
         try {
 
-            fr = new FileReader("Fichero2/src/frases.txt");
-            fw = new FileWriter("Fichero2/src/destino.txt");
+            fr = new FileReader("src/frases.txt");
+            fw = new FileWriter("src/destino.txt");
 
             int valor = fr.read();
 

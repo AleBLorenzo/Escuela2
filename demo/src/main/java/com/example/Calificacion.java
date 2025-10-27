@@ -2,8 +2,11 @@ package com.example;
 
 import java.time.LocalDate;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Calificacion {
 
+    @SerializedName("estudiante_id")
     private  int estudianteid ;
     private double nota;
     private LocalDate fecha;

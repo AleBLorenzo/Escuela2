@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><biblioteca>
+    <libro id="1">
+        <titulo>El Quijote</titulo>
+        <autor>Miguel de Cervantes</autor>
+        <anio>1605</anio>
+    </libro>
+
+    <libro id="5">
+        <titulo>Cien años de soledad</titulo>
+        <autor>Gabriel García Márquez</autor>
+        <anio>588</anio>
+    </libro>
+
+    <libro id="3">
+        <titulo>La sombra del viento</titulo>
+        <autor>Carlos Ruiz Zafón</autor>
+        <anio>2001</anio>
+    </libro>
+    <libro id="4">
+        <titulo>Algo Nuevo</titulo>
+        <autor>Franco</autor>
+        <anio>2004</anio>
+    </libro>
+</biblioteca>

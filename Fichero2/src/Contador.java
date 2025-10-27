@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.Reader;
 
 public class Contador {
 
@@ -11,7 +10,7 @@ public class Contador {
 
         try {
 
-            si = new FileReader("Fichero2/src/fichero.txt");
+            si = new FileReader("src/fichero.txt");
             lee = new BufferedReader(si);
 
             int contador = 0;

@@ -9,7 +9,21 @@
       "fechaInicio": "2024-09-01",
       "fechaFin": "2025-01-19",
       "precio": 219.99,
-      "activo": true
+      "activo": true,
+      "calificaciones": [
+        {
+          "estudiante_id": 2,
+          "nota": 7.9,
+          "fecha": "2025-01-31",
+          "comentarios": "Bien"
+        },
+        {
+          "estudiante_id": 3,
+          "nota": 6.0,
+          "fecha": "2025-02-25",
+          "comentarios": "Se puede Mejorar"
+        }
+      ]
     },
     {
       "id": 2,
@@ -19,53 +33,41 @@
       "fechaInicio": "2025-01-21",
       "fechaFin": "2025-07-01",
       "precio": 259.99,
-      "activo": false
+      "activo": false,
+      "calificaciones": [
+        {
+          "estudiante_id": 1,
+          "nota": 9.6,
+          "fecha": "2025-01-30",
+          "comentarios": "Muy bien"
+        },
+        {
+          "estudiante_id": 3,
+          "nota": 5.1,
+          "fecha": "2025-01-30",
+          "comentarios": "Mal planteado"
+        }
+      ]
     }
   ],
   "estudiantes": [
     {
       "id": 1,
       "nombre": "Alejandro",
-      "fechaNacimiento": "2005-05-25",
+      "fecha_nacimiento": "2005-05-25",
       "pais": "Cuba"
     },
     {
       "id": 2,
       "nombre": "Pedro",
-      "fechaNacimiento": "2005-07-05",
+      "fecha_nacimiento": "2005-07-05",
       "pais": "España"
     },
     {
       "id": 3,
       "nombre": "Juan",
-      "fechaNacimiento": "2006-09-02",
+      "fecha_nacimiento": "2006-09-02",
       "pais": "España"
-    }
-  ],
-  "calificaciones": [
-    {
-      "estudianteid": 1,
-      "nota": 9.6,
-      "fecha": "2025-01-30",
-      "comentarios": "Muy bien"
-    },
-    {
-      "estudianteid": 3,
-      "nota": 5.1,
-      "fecha": "2025-01-30",
-      "comentarios": "Mal planteado"
-    },
-    {
-      "estudianteid": 2,
-      "nota": 7.9,
-      "fecha": "2025-01-31",
-      "comentarios": "Bien"
-    },
-    {
-      "estudianteid": 3,
-      "nota": 6.0,
-      "fecha": "2025-02-25",
-      "comentarios": "Se puede Mejorar"
     }
   ]
 }
