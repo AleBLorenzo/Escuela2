@@ -1,10 +1,7 @@
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.lang.StringBuffer;
-import java.util.ArrayList;
-import java.lang.Comparable;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 // Falta lo de la inversa
 public class creainversa {
@@ -18,10 +15,10 @@ public class creainversa {
 
         try {
 
-            lee = new FileReader("Fichero2/src/entrada.txt");
+            lee = new FileReader("src/entrada.txt");
             listo = new BufferedReader(lee);
 
-            doc = new FileWriter("Fichero2/src/invertido.txt");
+            doc = new FileWriter("src/invertido.txt");
             escrito = new BufferedWriter(doc);
 
             String a;

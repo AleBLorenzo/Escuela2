@@ -12,7 +12,7 @@ public class BufferReade {
 
         try {
 
-            fr = new FileReader("Fichero2/src/frases.txt");
+            fr = new FileReader("src/textos.txt");
             br = new BufferedReader(fr);
             
 
