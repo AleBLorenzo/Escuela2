@@ -134,7 +134,7 @@ public class App5 {
                     
                     doa.writeLong(nuemrocuenta);
                     doa.writeUTF(nombre);
-                    doa.writeDouble(saldo); 
+                    doa.writeDouble(saldo);
                     doa.writeBoolean(actividad);
                 }
    
