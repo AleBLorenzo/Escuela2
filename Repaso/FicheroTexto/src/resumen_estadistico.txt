@@ -1,0 +1,21 @@
+Palabras 12 Lectura con Buffer: Lee el contenido de "datos_originales.txt" línea a línea utilizando BufferedReader.
+Palabras 0 
+Palabras 4 Procesamiento: Por cada línea leída:
+Palabras 0 
+Palabras 8 Cuenta el número de palabras que contiene esa línea.
+Palabras 0 
+Palabras 15  Identifica si la línea contiene la letra 'a' (minúscula o mayúscula) al menos una vez.
+Palabras 12 Lectura con Buffer: Lee el contenido de "datos_originales.txt" línea a línea utilizando BufferedReader.
+Palabras 0 
+Palabras 4 Procesamiento: Por cada línea leída:
+Palabras 0 
+Palabras 8 Cuenta el número de palabras que contiene esa línea.
+Palabras 0 
+Palabras 15  Identifica si la línea contiene la letra 'a' (minúscula o mayúscula) al menos una vez.
+Palabras 12 Lectura con Buffer: Lee el contenido de "datos_originales.txt" línea a línea utilizando BufferedReader.
+Palabras 0 
+Palabras 4 Procesamiento: Por cada línea leída:
+Palabras 0 
+Palabras 8 Cuenta el número de palabras que contiene esa línea.
+Palabras 0 
+Palabras 15  Identifica si la línea contiene la letra 'a' (minúscula o mayúscula) al menos una vez.

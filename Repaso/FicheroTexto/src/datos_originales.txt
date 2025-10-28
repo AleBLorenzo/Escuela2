@@ -1,0 +1,7 @@
+Lectura con Buffer: Lee el contenido de "datos_originales.txt" línea a línea utilizando BufferedReader.
+
+Procesamiento: Por cada línea leída:
+
+Cuenta el número de palabras que contiene esa línea.
+
+ Identifica si la línea contiene la letra 'a' (minúscula o mayúscula) al menos una vez.
