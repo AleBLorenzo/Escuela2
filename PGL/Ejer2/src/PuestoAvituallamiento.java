@@ -1,8 +1,22 @@
+
+import java.util.concurrent.Semaphore;
+
 /**
  * Representa el puesto de agua. Es un recurso compartido.
  */
 public class PuestoAvituallamiento {
 
+    static int CapacidadP;
+
+   private static Semaphore semafaro = new Semaphore(CapacidadP);
+
+    public static int getCapacidadP() {
+        return CapacidadP;
+    }
+
+    public static void setCapacidadP(int CapacidadP) {
+        PuestoAvituallamiento.CapacidadP = CapacidadP;
+    }
     
     /**
      * TAREA 3.1: Identifica este método como la sección crítica.
@@ -10,14 +24,26 @@ public class PuestoAvituallamiento {
      */
 
 
-     public synchronized void  usarPuesto(String nombreCorredor){
+     public void  usarPuesto(String nombreCorredor){  
+            
+            
+            try {
 
-        System.out.println("Ha llegado al puesto");
-        try {
-           Thread.currentThread().sleep(1000);
-        } catch (Exception e) {
-        }
+                System.out.println("Ha llegado al puesto");
+             
+                semafaro.acquire();
+                Thread.sleep(1000);
+               
+                   System.out.println("<< " + nombreCorredor + " ha salido del puesto.");
 
-        System.out.println("<< " + nombreCorredor + " ha salido del puesto.");
+
+            } catch (InterruptedException  e) {
+                 Thread.currentThread().interrupt();
+            } 
+                 semafaro.release();
+            
+            
+         
+       
     }
 }
