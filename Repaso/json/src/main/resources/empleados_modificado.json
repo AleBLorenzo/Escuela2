@@ -1,0 +1,57 @@
+{
+  "empresa": "TechCorp",
+  "ubicacion": "Madrid",
+  "departamentos": [
+    {
+      "nombre": "Desarrollo",
+      "proyectos": [
+        {
+          "codigo": "PRJ001",
+          "nombre": "Sistema de Ventas",
+          "fechaInicio": "2022-01-10",
+          "fechaFin": "2022-12-20"
+        }
+      ],
+      "empleados": [
+        {
+          "id": 101,
+          "nombre": "Ana Martínez",
+          "email": "ana.martinez@techcorp.com",
+          "salario": 45000.0,
+          "fechaContratacion": "2020-03-15",
+          "activo": true,
+          "habilidades": [
+            "Java",
+            "Spring",
+            "MySQL"
+          ]
+        },
+        {
+          "id": 102,
+          "nombre": "Carlos López",
+          "email": "carlos.lopez@techcorp.com",
+          "salario": 52000.0,
+          "fechaContratacion": "2019-07-22",
+          "activo": true,
+          "habilidades": [
+            "Python",
+            "Django",
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 1,
+          "nombre": "nombre",
+          "email": "email",
+          "salario": 200.5,
+          "fechaContratacion": "2020-03-15",
+          "activo": true,
+          "habilidades": [
+            "Hola",
+            "q tal"
+          ]
+        }
+      ]
+    }
+  ]
+}
