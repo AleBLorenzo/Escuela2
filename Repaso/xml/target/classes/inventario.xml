@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><inventario>
+    <producto id="P001">
+        <nombre>Teclado Mecánico</nombre>
+        <categoria>Periférico</categoria>
+        <precio>59.99</precio>
+        <stock>10</stock>
+    </producto>
+    <producto id="P002">
+        <nombre>Monitor 24"</nombre>
+        <categoria>Pantalla</categoria>
+        <precio>129.99</precio>
+        <stock>5</stock>
+    </producto>
+    <proveedores>
+        <provedor id="PR01">
+            <nombre>Informatica globo</nombre>
+            <ciudad>asdasd</ciudad>
+            <telefono>fsdgfgdf</telefono>
+        </provedor>
+    </proveedores>
+<proveedores><provedor id="PR01"><nombre>Informatica globo</nombre><ciudad>asdasd</ciudad><telefono>fsdgfgdf</telefono></provedor></proveedores></inventario>

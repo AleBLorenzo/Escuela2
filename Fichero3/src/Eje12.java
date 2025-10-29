@@ -248,13 +248,7 @@ public class Eje12 {
 
         }
 
-        try (ObjectOutputStream ob = new ObjectOutputStream(new FileOutputStream("Fichero3/src/Users.dat"))) {
-            ob.writeObject(lista);
-
-        } catch (Exception e) {
-             System.out.println("Error: "+ e );
-        }
-
+    
     }
 
     public static void Estadisticas(List<Usuario> lista) {
@@ -279,11 +273,6 @@ public class Eje12 {
 
         System.out.println(" inactivos: " + contadorP + " activos: " + contadorD);
 
-        try (ObjectOutputStream ob = new ObjectOutputStream(new FileOutputStream("Fichero3/src/Users.dat"))) {
-            ob.writeObject(lista);
-
-        } catch (Exception e) {
-             System.out.println("Error: "+ e );
-        }
+    
     }
 }
