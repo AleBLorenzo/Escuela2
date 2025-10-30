@@ -1,0 +1,236 @@
+  Gsno 
+   
+     DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try (BufferedReader rd = new BufferedReader(
+                new FileReader("json/src/main/resources/empleados_proyectos.json"))) {
+
+            Gson builder = new GsonBuilder()
+                    .registerTypeAdapter(LocalDate.class,
+                            (JsonDeserializer<LocalDate>) (json, typeOfT, context) -> LocalDate
+                                    .parse(json.getAsString(), formato))
+                    .registerTypeAdapter(LocalDate.class,
+                            (JsonSerializer<LocalDate>) (date, typeOfSrc,
+                                    context) -> new JsonPrimitive(date.format(formato)))
+                    .setPrettyPrinting().create();
+
+            Empresa empresa = builder.fromJson(rd, Empresa.class);
+  
+  
+   try (FileWriter fw = new FileWriter("json/src/main/resources/empleados_modificado.json")) {
+                builder.toJson(empresa, fw);
+                System.out.println("JSON modificado guardado correctamente.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+
+ JSOn
+ try (BufferedReader rd = new BufferedReader(new FileReader(RUTA))) {
+
+            String dato = "";
+
+            while ((dato = rd.readLine()) != null) {
+
+                linea += dato;
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JSONObject objetos = new JSONObject(linea);
+
+ String nombre = objetos.getString("inventario");
+
+        JSONArray array = objetos.getJSONArray("productos");
+        contador = array.length();
+
+        System.out.println("Nombre : " + nombre);
+        System.out.println("Cantidad Total de Libros : " + contador);
+
+        boolean existe = false;
+
+        for (int i = 0; i < array.length(); i++) {
+
+            JSONObject productos = array.getJSONObject(i);
+           
+                 int id = productos.getInt("id");
+            String nombreP = productos.getString("nombre");
+            int stock = productos.getInt("stock");
+            float precio = productos.getFloat("precio");
+            boolean disponible = productos.getBoolean("disponible");
+           
+                   
+        objetos.put("estadisticas",datos);
+
+        try (BufferedWriter re = new BufferedWriter(new FileWriter(RUTA))) {
+            re.write(objetos.toString(4));
+            
+        } catch (Exception e) {
+        }
+
+    }
+}
+
+
+XML
+
+   private static void crearxml0()
+            throws TransformerException, TransformerConfigurationException, ParserConfigurationException, DOMException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        DOMImplementation implement = builder.getDOMImplementation();
+
+        Document documento = implement.createDocument(null, "cartelera", null);
+        documento.setXmlVersion("1.0");
+
+        Element lista = documento.createElement("cartelera");
+
+
+  DOMSource sou = new DOMSource(lista);
+        StreamResult resol = new StreamResult(RUTA);
+
+        TransformerFactory transfactory = TransformerFactory.newDefaultInstance();
+        Transformer former = transfactory.newTransformer();
+
+        former.transform(sou, resol);
+
+
+          private static void leerXML() throws IOException, ParserConfigurationException, SAXException, DOMException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        
+        Document documento = builder.parse(RUTA);
+        
+        NodeList lista = documento.getElementsByTagName("pelicula");
+        int total = lista.getLength();
+        
+        String nombreraiz = lista.item(0).getParentNode().getNodeName();
+        int contador = 0;
+        
+        System.out.println("Elemento raíz: " + nombreraiz);
+        System.out.println("Total de películas: " + total);
+        
+        for (int i = 0; i < lista.getLength(); i++) 
+            
+            Element e = (Element) lista.item(i);
+
+Texto   
+numerodepalabras = linea.split("\\s+").length -1;
+
+FicheroBinario
+
+rivate static void añadirdatos(Scanner sc) {
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("FicheroBinario/src/datos.dat",true))) {
+
+            System.out.println("introduce el nuemro de cuenta");
+            long NumeroCuenta = sc.nextLong();
+            sc.nextLine();
+
+            System.out.println("introduce el nombre");
+            String NombreTitular = sc.nextLine();
+
+            System.out.println("introduce el saldo");
+            double SaldoActual = sc.nextDouble();
+            sc.nextLine();
+
+            System.out.println("introduce si eesta activo o no");
+            boolean Activo = sc.nextBoolean();
+            sc.nextLine();
+
+            dos.writeLong(NumeroCuenta);
+            dos.writeUTF(NombreTitular);
+            dos.writeDouble(SaldoActual);
+            dos.writeBoolean(Activo);
+            dos.flush();
+
+
+  try (DataInputStream dos = new DataInputStream(new FileInputStream("FicheroBinario/src/datos.dat"))) {
+
+            while (true) {
+
+                long num = dos.readLong();
+                String nombre = dos.readUTF();
+                double saldo = dos.readDouble();
+                boolean activo = dos.readBoolean();
+                
+                Cuenta c = new Cuenta(activo ,nombre ,num, saldo);
+                System.out.println(c.toString());
+            }
+
+        } catch (EOFException e) {
+            System.out.println("Fin de la lista");
+        }
+    }
+
+      File ficehro = new File ("FicheroBinario/src/datos.dat");
+            File nuevofichero = new File ("FicheroBinario/src/datos_temp.dat");
+            boolean encotrar = false;
+
+                try (DataInputStream dos = new DataInputStream(new FileInputStream("FicheroBinario/src/datos.dat"));
+        DataOutputStream doa = new DataOutputStream(new FileOutputStream("FicheroBinario/src/datos_temp.dat"))) {
+
+
+            System.out.println("Introdece el nuemro de cuanta a modificar");
+            long nuemroamodificar = sc.nextLong();
+            sc.nextLine();
+
+            System.out.println("Introdece el saldo a editar");
+            double nuevosaldo = sc.nextDouble();
+            sc.nextLine();
+
+            while (true) {
+
+                long nuemrocuenta;
+                System.out.println(nuemrocuenta = dos.readLong());
+                String nombre;
+                System.out.println(nombre = dos.readUTF());
+                double saldo ;
+                System.out.println(saldo =dos.readDouble());
+                boolean actividad ;
+                System.out.println(actividad =dos.readBoolean());
+
+
+                if (nuemroamodificar == nuemrocuenta ) {
+
+                    double saldoFinal = nuevosaldo;
+                    
+                    doa.writeLong(nuemrocuenta);
+                    doa.writeUTF(nombre);
+                    doa.writeDouble(saldoFinal);
+                    doa.writeBoolean(actividad);
+
+                   encotrar = true;
+                    
+                }else {
+                    
+                    doa.writeLong(nuemrocuenta);
+                    doa.writeUTF(nombre);
+                    doa.writeDouble(saldo);
+                    doa.writeBoolean(actividad);
+                }
+   
+ }
+                 } catch (EOFException e) {
+           
+            }
+                  
+       
+        if (encotrar) {
+            File archivoDestino = new File("FicheroBinario/src/datos.dat");
+
+            if (ficehro.delete()) {
+                if ( nuevofichero.renameTo(archivoDestino)) {
+                    System.out.println("Archivo actualizado correctamente.");
+                } else {
+                    System.err.println("Error: No se pudo renombrar el archivo temporal.");
+                }
+            } else {
+                System.err.println("Error: No se pudo eliminar el archivo original.");
+            }
+        } else {
+          
+            nuevofichero.delete();
+        }

@@ -1,5 +1,10 @@
 package com.example;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,16 +13,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializer;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 public class Eje2 {
 
@@ -83,7 +78,7 @@ public class Eje2 {
             }
 
             try (FileWriter fw = new FileWriter("json/src/main/resources/empleados_modificado.json")) {
-                builder.toJson(empresa, fw); // GSON ya fue creado con setPrettyPrinting()
+                builder.toJson(empresa, fw);
                 System.out.println("JSON modificado guardado correctamente.");
             } catch (IOException e) {
                 e.printStackTrace();
