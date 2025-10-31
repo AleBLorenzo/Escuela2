@@ -1,137 +1,101 @@
 [
-    {
-        "isbn": "9780134685991",
-        "titulo": "Effective Java",
-        "autor": "Joshua Bloch",
-        "anoPublicacion": 2018,
-        "numeroPaginas": 416,
-        "precio": 45.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9781617291999",
-        "titulo": "Java Persistence with Hibernate",
-        "autor": "Christian Bauer",
-        "anoPublicacion": 2015,
-        "numeroPaginas": 624,
-        "precio": 52.5,
-        "disponible": true
-    },
-    {
-        "isbn": "9780596007126",
-        "titulo": "Head First Design Patterns",
-        "autor": "Eric Freeman",
-        "anoPublicacion": 2004,
-        "numeroPaginas": 694,
-        "precio": 39.95,
-        "disponible": false
-    },
-    {
-        "isbn": "9781449373320",
-        "titulo": "Designing Data-Intensive Applications",
-        "autor": "Martin Kleppmann",
-        "anoPublicacion": 2017,
-        "numeroPaginas": 616,
-        "precio": 49.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9780135166307",
-        "titulo": "Clean Architecture",
-        "autor": "Robert C. Martin",
-        "anoPublicacion": 2017,
-        "numeroPaginas": 432,
-        "precio": 38.75,
-        "disponible": true
-    },
-    {
-        "isbn": "9780061120084",
-        "titulo": "To Kill a Mockingbird",
-        "autor": "Harper Lee",
-        "anoPublicacion": 1960,
-        "numeroPaginas": 336,
-        "precio": 12.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9780547928227",
-        "titulo": "The Hobbit",
-        "autor": "J.R.R. Tolkien",
-        "anoPublicacion": 1937,
-        "numeroPaginas": 310,
-        "precio": 14.5,
-        "disponible": false
-    },
-    {
-        "isbn": "9780316769174",
-        "titulo": "The Catcher in the Rye",
-        "autor": "J.D. Salinger",
-        "anoPublicacion": 1951,
-        "numeroPaginas": 277,
-        "precio": 11.25,
-        "disponible": true
-    },
-    {
-        "isbn": "9781503280786",
-        "titulo": "Moby Dick",
-        "autor": "Herman Melville",
-        "anoPublicacion": 1851,
-        "numeroPaginas": 585,
-        "precio": 9.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9780743273565",
-        "titulo": "The Great Gatsby",
-        "autor": "F. Scott Fitzgerald",
-        "anoPublicacion": 1925,
-        "numeroPaginas": 180,
-        "precio": 10.5,
-        "disponible": false
-    },
-    {
-        "isbn": "9788420412146",
-        "titulo": "Cien Años de Soledad",
-        "autor": "Gabriel García Márquez",
-        "anoPublicacion": 1967,
-        "numeroPaginas": 471,
-        "precio": 18.9,
-        "disponible": true
-    },
-    {
-        "isbn": "9780141439518",
-        "titulo": "Pride and Prejudice",
-        "autor": "Jane Austen",
-        "anoPublicacion": 1813,
-        "numeroPaginas": 432,
-        "precio": 8.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9780679783268",
-        "titulo": "Crime and Punishment",
-        "autor": "Fyodor Dostoevsky",
-        "anoPublicacion": 1866,
-        "numeroPaginas": 671,
-        "precio": 13.75,
-        "disponible": false
-    },
-    {
-        "isbn": "9780140449136",
-        "titulo": "The Odyssey",
-        "autor": "Homer",
-        "anoPublicacion": -800,
-        "numeroPaginas": 541,
-        "precio": 11.99,
-        "disponible": true
-    },
-    {
-        "isbn": "9780451524935",
-        "titulo": "1984",
-        "autor": "George Orwell",
-        "anoPublicacion": 1949,
-        "numeroPaginas": 328,
-        "precio": 12.5,
-        "disponible": true
-    }
+  {
+    "isbn": "9780134685991",
+    "titulo": "Effective Java",
+    "autor": "Joshua Bloch",
+    "anoPublicacion": 2018,
+    "numeroPaginas": 416,
+    "precio": 45.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9781617291999",
+    "titulo": "Java Persistence with Hibernate",
+    "autor": "Christian Bauer",
+    "anoPublicacion": 2015,
+    "numeroPaginas": 624,
+    "precio": 52.5,
+    "disponible": true
+  },
+  {
+    "isbn": "9781449373320",
+    "titulo": "Designing Data-Intensive Applications",
+    "autor": "Martin Kleppmann",
+    "anoPublicacion": 2017,
+    "numeroPaginas": 616,
+    "precio": 49.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9780135166307",
+    "titulo": "Clean Architecture",
+    "autor": "Robert C. Martin",
+    "anoPublicacion": 2017,
+    "numeroPaginas": 432,
+    "precio": 38.75,
+    "disponible": true
+  },
+  {
+    "isbn": "9780061120084",
+    "titulo": "To Kill a Mockingbird",
+    "autor": "Harper Lee",
+    "anoPublicacion": 1960,
+    "numeroPaginas": 336,
+    "precio": 12.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9780316769174",
+    "titulo": "The Catcher in the Rye",
+    "autor": "J.D. Salinger",
+    "anoPublicacion": 1951,
+    "numeroPaginas": 277,
+    "precio": 11.25,
+    "disponible": true
+  },
+  {
+    "isbn": "9781503280786",
+    "titulo": "Moby Dick",
+    "autor": "Herman Melville",
+    "anoPublicacion": 1851,
+    "numeroPaginas": 585,
+    "precio": 9.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9788420412146",
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez",
+    "anoPublicacion": 1967,
+    "numeroPaginas": 471,
+    "precio": 18.9,
+    "disponible": true
+  },
+  {
+    "isbn": "9780141439518",
+    "titulo": "Pride and Prejudice",
+    "autor": "Jane Austen",
+    "anoPublicacion": 1813,
+    "numeroPaginas": 432,
+    "precio": 8.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9780140449136",
+    "titulo": "The Odyssey",
+    "autor": "Homer",
+    "anoPublicacion": -800,
+    "numeroPaginas": 541,
+    "precio": 11.99,
+    "disponible": true
+  },
+  {
+    "isbn": "9780451524935",
+    "titulo": "1984",
+    "autor": "George Orwell",
+    "anoPublicacion": 1949,
+    "numeroPaginas": 328,
+    "precio": 12.5,
+    "disponible": true
+  }
 ]
