@@ -1,7 +1,13 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class Carrera {
@@ -9,16 +15,17 @@ public class Carrera {
     static Scanner sc = new Scanner(System.in);
 
     static int numeroC;
-    static PuestoAvituallamiento puesto ;
+    static PuestoAvituallamiento puesto;
+    static List<Corredor> listaCoredores;
     static ExecutorService corredores;
+    static int capacidad;
     static String nombreC;
     public static int metros;
+    static List<Future<Long>> resultados;
+    public BlockingQueue<String> compartida = new LinkedBlockingQueue<>();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         // --- Preparación de objetos compartidos ---
-       
-        
-        Podio podio = new Podio(); // TAREA 4.4: Crea la instancia del Podio.
 
         JuezSalida Juez = new JuezSalida();
 
@@ -46,7 +53,7 @@ public class Carrera {
                     ConfigurarCoredores();
                     DistanciaCarrera();
                     Capacidad();
-                    NombreCorredores(puesto, podio, Juez);
+                    NombreCorredores(puesto, Juez);
 
                     break;
 
@@ -58,7 +65,7 @@ public class Carrera {
 
                 case 3:
 
-                    InicioCarrera(Juez, podio);
+                    InicioCarrera(Juez);
 
                     break;
                 case 4:
@@ -84,16 +91,21 @@ public class Carrera {
 
     }
 
-    private  static void NombreCorredores(PuestoAvituallamiento puesto, Podio podio, JuezSalida Juez) {
+    private static void NombreCorredores(PuestoAvituallamiento puesto, JuezSalida Juez) {
+
+        int distanciaTotal = Corredor.distanciaTotal;
+        resultados = new ArrayList<>();
+        listaCoredores = new ArrayList<>();
 
         for (int i = 0; i < numeroC; i++) {
             System.out.println("Introduzca el nombre del Corredor (Tiene" + numeroC + "Vacantes)");
 
             nombreC = sc.nextLine();
 
-            Corredor Corredor = new Corredor(nombreC, metros ,puesto, podio, Juez);
+            Corredor Corredor = new Corredor(nombreC, distanciaTotal, puesto, Juez);
+            listaCoredores.add(Corredor);
 
-            corredores.submit(Corredor);
+            resultados.add(corredores.submit(Corredor));
         }
 
     }
@@ -101,9 +113,9 @@ public class Carrera {
     private static void DistanciaCarrera() {
         System.out.println("Que distancia tendra la Carrera?");
 
-        metros = sc.nextInt();
+        Corredor.distanciaTotal = sc.nextInt();
         sc.nextLine();
-        
+
     }
 
     private static void Estadisticas() {
@@ -117,21 +129,22 @@ public class Carrera {
     private static void Capacidad() {
         System.out.println("Que Capacidad quieres q tenga el Puesto de Avituallamiento");
 
-         int CapacidadP = sc.nextInt();
+        int CapacidadP = sc.nextInt();
         sc.nextLine();
+        capacidad = CapacidadP;
         puesto = new PuestoAvituallamiento();
-        puesto.setCapacidadP(CapacidadP);
+        puesto.setCapacidadP(capacidad);
     }
 
-    private static void InicioCarrera(JuezSalida Juez, Podio podio) throws InterruptedException {
+    private static void InicioCarrera(JuezSalida Juez) throws InterruptedException, ExecutionException {
         System.out.println("¡Suena el pistoletazo de salida!");
 
+        Corredor ganador = null;
+        Long tiempo = null;
         // TAREA 1.3: Inicia todos los hilos.
         // --- INICIA TU CÓDIGO AQUÍ ---
 
         System.out.println("¡PREPARADOS, LISTOS, YA!");
-
-          
 
         Thread.sleep(2000);
         Juez.darSalida();
@@ -139,25 +152,34 @@ public class Carrera {
         // TAREA 2.1: Espera a que todos los hilos terminen usando join().
         // --- INICIA TU CÓDIGO AQUÍ ---
 
-     
-          
-            try {
-                   corredores.shutdown();
-            } catch (Exception e) {
-                corredores.awaitTermination(500, TimeUnit.MILLISECONDS);
+        try {
+            corredores.shutdown();
+        } catch (Exception e) {
+            corredores.awaitTermination(500, TimeUnit.MILLISECONDS);
+
+        }
+
+        long mejorTiempo = Long.MAX_VALUE;
+
+        for (int i = 0; i < resultados.size(); i++) {
+
+            tiempo = resultados.get(i).get();
+            Corredor corredorActual = listaCoredores.get(i);
+
+            if (tiempo < mejorTiempo) {
+                mejorTiempo = tiempo;
+                ganador = corredorActual;
             }
 
-          
-        
+        }
 
         System.out.println("\n¡¡¡LA CARRERA HA TERMINADO!!!");
 
         // TAREA 4.5: Obtén el ganador del podio e imprímelo por pantalla.
         // --- INICIA TU CÓDIGO AQUÍ ---
 
-        String ganador = podio.getGanador();
         System.out.println("=============================================");
-        System.out.println("El ganador de la carrera es: " + ganador);
+        System.out.println("El ganador de la carrera es: " + ganador.getNombre() + " terminó en " + tiempo + " ms");
         System.out.println("=============================================");
 
         // --- TERMINA TU CÓDIGO AQUÍ ---

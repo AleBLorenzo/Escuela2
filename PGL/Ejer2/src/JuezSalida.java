@@ -1,24 +1,22 @@
 public class JuezSalida {
 
     boolean listosParaEmpezar = false;
- 
-    
-    public synchronized void esperarSalida(){
+
+    public synchronized void esperarSalida() {
 
         while (!listosParaEmpezar) {
             try {
-               wait();
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public synchronized void darSalida(){
+    public synchronized void darSalida() {
 
         listosParaEmpezar = true;
-           notifyAll();
+        notifyAll();
 
-      
     }
 }

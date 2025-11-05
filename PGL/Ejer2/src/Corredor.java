@@ -5,30 +5,33 @@ import java.util.concurrent.Callable;
 /**
  * Representa la tarea que realizará cada corredor.
  */
-public abstract class Corredor implements Callable<Long>, Serializable {
+public class Corredor implements Callable<Long>, Serializable {
 
     private final String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
 
     @Override
     public String toString() {
         return "Corredor [nombre=" + nombre + "]";
     }
 
-    public static int distanciaTotal = Carrera.metros;
-    private final PuestoAvituallamiento puesto;
-    private final Podio podio;
+    public static int distanciaTotal;
+    public final PuestoAvituallamiento puesto;
     private final JuezSalida juez;
 
-    public Corredor(String nombre, int distanciaTotal, PuestoAvituallamiento puesto, Podio podio, JuezSalida juez) {
+    public Corredor(String nombre, int distanciaTotal, PuestoAvituallamiento puesto, JuezSalida juez) {
         this.nombre = nombre;
         this.distanciaTotal = distanciaTotal;
         this.puesto = puesto;
-        this.podio = podio;
+
         this.juez = juez;
     }
 
     @Override
-    public Long call() {
+    public Long call() throws InterruptedException {
         // TAREA 1.1: Completa el bucle de la carrera.
         long startTime = System.currentTimeMillis();
 
@@ -39,7 +42,7 @@ public abstract class Corredor implements Callable<Long>, Serializable {
         for (int i = 1; i <= distanciaTotal; i++) {
             System.out.println("   " + nombre + " va por el metro " + i);
 
-            if (i == 5) {
+            if (i == (distanciaTotal / 2)) {
                 puesto.usarPuesto(this.nombre);
             }
             try {
@@ -48,7 +51,6 @@ public abstract class Corredor implements Callable<Long>, Serializable {
                 Thread.currentThread().interrupt();
 
             }
-            podio.registrarLlegada(nombre);
 
         }
 
@@ -58,9 +60,10 @@ public abstract class Corredor implements Callable<Long>, Serializable {
         // llegada en el podio. Llama al método correspondiente de la clase Podio.
         // --- INICIA TU CÓDIGO AQUÍ ---
 
-        podio.registrarLlegada(this.nombre);
         long endTime = System.currentTimeMillis();
-        return endTime - startTime;
+
+        long finals = endTime - startTime;
+        return finals;
         // --- TERMINA TU CÓDIGO AQUÍ ---
     }
 }

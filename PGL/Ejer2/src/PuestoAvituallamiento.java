@@ -7,8 +7,7 @@ import java.util.concurrent.Semaphore;
 public class PuestoAvituallamiento {
 
     static int CapacidadP;
-
-   private static Semaphore semafaro = new Semaphore(CapacidadP);
+    private Semaphore semafaro = new Semaphore(Carrera.capacidad);
 
     public static int getCapacidadP() {
         return CapacidadP;
@@ -17,33 +16,32 @@ public class PuestoAvituallamiento {
     public static void setCapacidadP(int CapacidadP) {
         PuestoAvituallamiento.CapacidadP = CapacidadP;
     }
-    
+
     /**
      * TAREA 3.1: Identifica este método como la sección crítica.
      * TAREA 3.2: Añade 'synchronized' para evitar que los hilos se pisen.
+     * 
+     * @throws InterruptedException
      */
 
+    public void usarPuesto(String nombreCorredor) throws InterruptedException {
 
-     public void  usarPuesto(String nombreCorredor){  
-            
-            
-            try {
+        
+        semafaro.acquire();
 
-                System.out.println("Ha llegado al puesto");
-             
-                semafaro.acquire();
-                Thread.sleep(1000);
-               
-                   System.out.println("<< " + nombreCorredor + " ha salido del puesto.");
+        try {
 
+            System.out.println("Ha llegado al puesto");
 
-            } catch (InterruptedException  e) {
-                 Thread.currentThread().interrupt();
-            } 
-                 semafaro.release();
-            
-            
-         
-       
+            Thread.sleep(1000);
+
+            System.out.println("<< " + nombreCorredor + " ha salido del puesto.");
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+                semafaro.release();
+        }
+
     }
 }
