@@ -58,6 +58,7 @@ public class Ejer2 {
             System.out.println("- Modo Infantil\n");
             System.out.println("NOTA: Algunos contenidos pueden requerir supervisión parental.");
             System.out.println("¡Disfruta del juego!");
+            
         } else   if (nuevo.getEdad()>= 16 && nuevo.getEdad() <= 17) {
             System.out.println("Categoría: "+ Categoria.JOVEN);
             System.out.println("Edad: "+ nuevo.getEdad());
