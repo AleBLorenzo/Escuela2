@@ -5,56 +5,60 @@ public class Ejer3 {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-
-        String nombre;
-        int xpBase = 0;
+        int xpBase;
         int nivel;
         int numeroEliminados;
-        int saludRestante = 0;
+        int saludRestante;
         int numeroMuertes;
         int tiempoEmpleado;
 
-        System.out.println("Nombre del jugador: ");
-        nombre = sc.nextLine();
+        try (Scanner sc = new Scanner(System.in)) {
 
-        System.out.println("XP base de la misión (número entero, mínimo 100): ");
+            String nombre;
+            xpBase = 0;
+            saludRestante = 0;
 
-        int xpBaseF = sc.nextInt();
-        sc.nextLine();
+            System.out.println("Nombre del jugador: ");
+            nombre = sc.nextLine();
 
-        if (xpBaseF >= 100) {
-            xpBase = xpBaseF;
+            System.out.println("XP base de la misión (número entero, mínimo 100): ");
+            int xpBaseF = sc.nextInt();
+            sc.nextLine();
+            
+            if (xpBaseF >= 100) {
+                xpBase = xpBaseF;
 
-        } else {
-            System.out.println("numero menor de 100");
+            } else {
+                System.out.println("numero menor de 100");
+            }
+            System.out.println("Nivel del jugador (número entero): ");
+            nivel = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Número de enemigos derrotados (número entero): ");
+            numeroEliminados = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Porcentaje de salud restante al finalizar (número entero entre 0 y 100): ");
+            int saludRestanteF = sc.nextInt();
+            sc.nextLine();
+
+            if (saludRestanteF >= 0 && saludRestanteF <= 100) {
+
+                saludRestante = saludRestanteF;
+            } else {
+                System.out.println("introduce un número entero entre 0 y 100");
+            }
+
+            System.out.println("Número de muertes durante la misión (número entero): ");
+            numeroMuertes = sc.nextInt();
+            sc.nextLine();
+            
+            System.out.println("Tiempo empleado en minutos (número entero): ");
+            tiempoEmpleado = sc.nextInt();
+
+            sc.nextLine();
         }
-
-        System.out.println("Nivel del jugador (número entero): ");
-        nivel = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Número de enemigos derrotados (número entero): ");
-        numeroEliminados = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Porcentaje de salud restante al finalizar (número entero entre 0 y 100): ");
-        int saludRestanteF = sc.nextInt();
-        sc.nextLine();
-
-        if (saludRestanteF >= 0 && saludRestanteF <= 100) {
-            saludRestante = saludRestanteF;
-        } else {
-            System.out.println("introduce un número entero entre 0 y 100");
-        }
-
-        System.out.println("Número de muertes durante la misión (número entero): ");
-        numeroMuertes = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Tiempo empleado en minutos (número entero): ");
-        tiempoEmpleado = sc.nextInt();
-        sc.nextLine();
 
         System.out.println("\nCalcular experiencia Total\n");
         System.out.println("Xp base: " + xpBase);
