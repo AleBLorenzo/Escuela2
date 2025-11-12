@@ -1,9 +1,10 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Cliente {
@@ -18,32 +19,54 @@ public class Cliente {
         // Creamos un socket con los datos del HOST y el PUERTO.@interface
         // try-catch para si el servidor esta en escucha si no lanza exepcion
 
-        try (Socket emisor = new Socket(HOST, PUERTO)) {
+        Socket emisor = new Socket(HOST, PUERTO);
 
-            try ( // Con esto sacamos la info hacia el servidor
-                    OutputStream salida = emisor.getOutputStream();
+            while (true) {
 
-                    // Creamos el PrintWriter para facilitar el envio
-                    // Con el autoflush en true apra q se haga de inmediato
-                    PrintWriter escritor = new PrintWriter(salida, true)) {
+                try ( // Con esto sacamos la info hacia el servidor
+                        OutputStream salida = emisor.getOutputStream();
 
-                System.out.println("Escribe el mensaje a enviar: ");
-                String mensaje = sc.nextLine();
+                        // Creamos el PrintWriter para facilitar el envio
+                        // Con el autoflush en true apra q se haga de inmediato
+                        PrintWriter escritor = new PrintWriter(salida, true)) {
 
-                escritor.println(mensaje);
+                    System.out.println("Escribe el mensaje a enviar: ");
+                    String mensaje = sc.nextLine();
 
-            } catch (IOException e) {
-            System.out.println("Error" + e.getMessage());
+                    if (mensaje.toLowerCase().equals("adios")) {
 
-        }
-            sc.close();
+                       
+                        System.out.println("Connexion apagada");
+                        break;
 
-        } catch (UnknownHostException e) {
-            System.out.println("Error" + e.getMessage());
+                    } else {
+                        escritor.println(mensaje);
 
-        } catch (IOException e) {
-            System.out.println("Error" + e.getMessage());
-        }
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("Error" + e.getMessage());
+
+                }
+                try (BufferedReader buffer = new BufferedReader(new InputStreamReader(emisor.getInputStream()))) {
+
+                    String datos = buffer.readLine();
+
+                    if (datos.toLowerCase().equals("adios")) {
+
+                        System.out.println("Connexion apagada");
+                        break;
+                    } else {
+
+                        System.out.println("Mensaje recibido: " + datos);
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("Error" + e.getMessage());
+
+                }
+                sc.close();
+            }
 
     }
 }
