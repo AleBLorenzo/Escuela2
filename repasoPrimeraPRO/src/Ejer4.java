@@ -9,12 +9,16 @@ public class Ejer4 {
         String Contraseña = null;
         String ConfirmarContraseña;
 
-        Boolean tamanoMinimo = null;
-        Boolean ContieneMayuscula = null;
-        Boolean ContieneMiniscula = null;
-        Boolean ContieneNumeros = null;
-        Boolean Coinciden = null;
-        Boolean UsuarioEnContraseña = null;
+        Boolean tamanoMinimo = false;
+        Boolean ContieneMayuscula = false;
+        Boolean ContieneMiniscula = false;
+        Boolean ContieneNumeros = false;
+        Boolean Coinciden = false;
+        Boolean UsuarioEnContraseña = false;
+        Boolean ContieneEspecial = false;
+
+        
+        String especiales = "!@#$%&*";
 
         Scanner sc = new Scanner(System.in);
 
@@ -40,29 +44,38 @@ public class Ejer4 {
 
         for (int i = 0; i < Contraseña.length(); i++) {
 
-            if (Character.isUpperCase(Contraseña.charAt(i))) {
-                System.out.println("Contiene mayúsculas: SÍ [" + Contraseña.charAt(i) + "]");
+            char c = Contraseña.charAt(i);
+
+                 if (Character.isUpperCase(c)) {
                 ContieneMayuscula = true;
-            } else {
-                System.out.println("\"Contiene mayúsculas: NO");
-                ContieneMayuscula = false;
             }
-
-            if (Character.isLowerCase(Contraseña.charAt(i))) {
+            if (Character.isLowerCase(c)) {
                 ContieneMiniscula = true;
-                System.out.println("Contiene minúsculas: SÍ [" + Contraseña.charAt(i) + "]");
-            } else {
-                System.out.println("\"Contiene minúsculas: NO");
-                ContieneMiniscula = false;
             }
-
-            if (Character.isDigit(Contraseña.charAt(i))) {
+            if (Character.isDigit(c)) {
                 ContieneNumeros = true;
-                System.out.println("Contiene números: SÍ [" + Contraseña.charAt(i) + "]");
-            } else {
-                System.out.println("\"Contiene números: NO");
-                ContieneNumeros = false;
             }
+            if (especiales.indexOf(c) != -1) {
+                ContieneEspecial = true;
+            }
+        }
+
+           if (ContieneMayuscula) {
+            System.out.println("Contiene mayúsculas: SÍ");
+        } else {
+            System.out.println("Contiene mayúsculas: NO");
+        }
+
+        if (ContieneMiniscula) {
+            System.out.println("Contiene minúsculas: SÍ");
+        } else {
+            System.out.println("Contiene minúsculas: NO");
+        }
+
+        if (ContieneNumeros) {
+            System.out.println("Contiene números: SÍ");
+        } else {
+            System.out.println("Contiene números: NO");
         }
 
         if (Contraseña.equals(ConfirmarContraseña)) {
@@ -74,7 +87,7 @@ public class Ejer4 {
             System.out.println("Contraseñas coinciden: NO");
         }
 
-        if (Contraseña.contains(NombreUser)) {
+        if (Contraseña.contains(NombreUser.toLowerCase())) {
             UsuarioEnContraseña = false;
             System.out.println(" Contiene nombre de usuario: SÍ [Contiene '" + NombreUser + "']");
         } else {
@@ -89,13 +102,13 @@ public class Ejer4 {
                 System.out.println("Estado: ✓ CONTRASEÑA ACEPTADA\n");
 
                 System.out.println("Nota: Considera usar más de 10 caracteres para mayor seguridad.");
-            } else if (Contraseña.length() > 10 ) {
+            } else if (Contraseña.length() >= 10 ) {
                 
                   System.out.println("\nNivel de seguridad: MEDIA");
                 System.out.println("Estado: ✓ CONTRASEÑA ACEPTADA\n");
 
                 System.out.println("Sugerencia: Añade caracteres especiales (!@#$%&*) para hacerla más fuerte.");
-            } else if (Contraseña.contains("!@#$%&*")) {
+            } else if (Contraseña.length() >= 12 && ContieneEspecial) {
 
                  System.out.println("\nNivel de seguridad: FUERTE");
                 System.out.println("Estado: ✓ CONTRASEÑA ACEPTADA\n");
