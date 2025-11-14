@@ -87,7 +87,7 @@ public class Ejer4 {
             System.out.println("Contraseñas coinciden: NO");
         }
 
-        if (Contraseña.contains(NombreUser.toLowerCase())) {
+        if (Contraseña.toLowerCase().contains(NombreUser.toLowerCase())) {
             UsuarioEnContraseña = false;
             System.out.println(" Contiene nombre de usuario: SÍ [Contiene '" + NombreUser + "']");
         } else {
