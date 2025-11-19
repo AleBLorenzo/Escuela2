@@ -33,6 +33,14 @@ public class Cliente {
                 ReceptorMensajes receptorMensajes = new ReceptorMensajes(buffer);
                 Thread hiloreceptor = new Thread(receptorMensajes);
 
+
+                    try {
+                        hiloreceptor.start();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
                 while (true) {
 
                     System.out.println("Escribe el mensaje a enviar: ");
@@ -49,12 +57,6 @@ public class Cliente {
 
                     }
 
-                    try {
-                        hiloreceptor.start();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
                 }
 
             } catch (IOException e) {
@@ -86,9 +88,10 @@ class ReceptorMensajes implements Runnable {
 
     public void run() {
 
+         String datos;
         while (true) {
 
-            String datos;
+           
             try {
                 datos = buffer.readLine();
 
