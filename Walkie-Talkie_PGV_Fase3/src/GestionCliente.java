@@ -8,21 +8,21 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 
-
 //Creamos la clase GestionCliente con la interfaz runable q implementa run 
 // Aca ponemos la logica de ejecion para q cada ves q se llame a un cliente haga esta logica y poder hacerlo con varios 
 // ya q cone sta clase puedo poner de entrada varios de ellos.
 
-public  class GestionCliente implements Runnable {
-    
+public class GestionCliente implements Runnable {
+
     Scanner sc = new Scanner(System.in);
 
-    List<PrintWriter> listaclientes;
-    Socket cliente;
+    private List<PrintWriter> listaclientes;
+    private Socket cliente;
 
-    public GestionCliente(Socket cliente, List<PrintWriter> listaclientes) {
+    public GestionCliente(Socket cliente, List<PrintWriter> listaclientes ){
         this.cliente = cliente;
         this.listaclientes = listaclientes;
+       
     }
 
     public Socket getCliente() {
@@ -33,23 +33,19 @@ public  class GestionCliente implements Runnable {
         this.cliente = cliente;
     }
 
-    
-
     @Override
     public void run() {
 
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
                 OutputStream salida = cliente.getOutputStream();
                 PrintWriter escritor = new PrintWriter(salida, true)) {
-                
-                    listaclientes.add(escritor);
 
-                    for (int i = 0; i < listaclientes.size(); i++) {
+            listaclientes.add(escritor);
 
-                          System.out.println("Se a unido " + escritor);
-                    }
-                  
-                
+            for (int i = 0; i < listaclientes.size(); i++) {
+
+                System.out.println("Se a unido " + escritor);
+            }
 
             while (true) {
 
@@ -61,15 +57,15 @@ public  class GestionCliente implements Runnable {
                     System.out.println("Mensaje recibido: " + datos);
 
                     listaclientes.remove(escritor);
-                    
+                    break;
+
                 } else {
 
-                    for (int i = 0; i < listaclientes.size(); i++) {
-                        
-                        escritor.print(datos);
+                    for (PrintWriter pw : listaclientes) {
+
+                        pw.println(escritor);
                     }
                 }
-
 
             }
 

@@ -29,69 +29,26 @@ public class Servidor {
 
             // El metodo accept boquea hazta q se connecete un cliente
             // declaramos una variable tipo socket pq esto es lo q devuelve el accept
-            // Con el getInputStream obtenemos los datos q manda el cliente
-            // para facilitar la lectura lo envovlemos en un InputStreamReader
-            // Creamos un BufferedReader para poder leerlo masc comodo
-            // Con esto sacamos la info hacia el servidor
-            // Creamos el PrintWriter para facilitar el envio
-            // Con el autoflush en true apra q se haga de inmediato
 
             while (true) {
 
-                try (Socket cliente = server.accept()) {
+                Socket cliente = server.accept();
 
-                    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-                            OutputStream salida = cliente.getOutputStream();
-                            PrintWriter escritor = new PrintWriter(salida, true)) {
+                //Creamos en gestor del cliente
+                GestionCliente clienteN = new GestionCliente(cliente, listaclientes);
+                //El hilo con la opercaionq queremos q haga cada cliente
+                //Liengo lo inicamos con el start
+                Thread NuevoCliente = new Thread(clienteN);
 
-                        listaclientes.add(escritor);
-
-                        GestionCliente clienteN = new GestionCliente(cliente, listaclientes);
-                        Thread NuevoCliente = new Thread(clienteN);
-
-                        while (true) {
-
-                            String datos = buffer.readLine();
-
-                            if (datos.toLowerCase().equals("adios")) {
-
-                                System.out.println("Connexion apagada");
-                                System.out.println("Mensaje recibido: " + datos);
-
-                                listaclientes.remove(escritor);
-
-                            } else {
-
-                                for (int i = 0; i < listaclientes.size(); i++) {
-
-                                    escritor.print(datos);
-                                }
-                            }
-
-                            System.out.println("Se a connectado el cliente");
-
-                            try {
-                                NuevoCliente.start();
-                            } catch (Exception e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
-                        }
-
-                    } catch (IOException e) {
-                        System.out.println("Error" + e.getMessage());
-
-                    }
-
-                    System.out.println("Conversacion terminada");
-
-                } catch (IOException e) {
-                    System.out.println("Error" + e.getMessage());
-
+                try {
+                    NuevoCliente.start();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                sc.close();
             }
-        }
+
+        }  
 
     }
 }
