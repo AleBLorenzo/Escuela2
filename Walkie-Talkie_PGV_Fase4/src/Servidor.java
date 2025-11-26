@@ -6,16 +6,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.crypto.SecretKey;
+
 public class Servidor {
 
     public static List<ObjectOutputStream> listaclientes = Collections.synchronizedList(new ArrayList<ObjectOutputStream>());
 
     public static void main(String[] args) throws Exception {
 
-        // Creamos un puerto con un numero recomendable mayor de 1024
+        // Creamos un puerto conun numero recomendable mayor de 1024
         final int PUERTO = 1025;
-        
-        Scanner sc = new Scanner(System.in);
+         final String Contraseña = "1234567891234567";
+        SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
         String nombre = "Cliente";
         int contador= 1;
        

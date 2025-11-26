@@ -16,7 +16,7 @@ import javax.crypto.SecretKey;
 public class GestionCliente implements Runnable {
 
     Scanner sc = new Scanner(System.in);
-              final String Contraseña = "1234";
+              final String Contraseña = "1234567891234567";
       SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
 
     private static List<ObjectOutputStream> listaclientes;
@@ -52,18 +52,21 @@ public class GestionCliente implements Runnable {
               
               while ((datos = buffer.readObject())!= null) { 
                   
+                byte[] mensaje = (byte[]) datos;
+
+            String mensajedescifrado = Cifrador.descifrar(mensaje, contraseñaCifrada);
              
 
-                if (datos.toString().toLowerCase().equals("adios")) {
+                if (mensajedescifrado.toLowerCase().equals("adios")) {
 
                     System.out.println("Connexion apagada");
-                    System.out.println("Mensaje recibido: " + datos.toString());
+                    System.out.println("Mensaje recibido: " + mensajedescifrado);
 
                     listaclientes.remove(escritor);
                     break;
 
                 } else {
-                    Broadcast(datos, Nombre);
+                    Broadcast(mensaje, Nombre);
 
                 }
 
@@ -93,12 +96,13 @@ public class GestionCliente implements Runnable {
         this.Nombre = Nombre;
     }
 
-    public static void Broadcast(Object datos,String Nombre) {
+    public static void Broadcast(byte[] mensaje,String Nombre) {
 
         for (ObjectOutputStream pw : listaclientes) {
 
             try {
-                pw.writeObject(Nombre +" : "+datos);
+                pw.writeObject (mensaje);
+                pw.flush();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

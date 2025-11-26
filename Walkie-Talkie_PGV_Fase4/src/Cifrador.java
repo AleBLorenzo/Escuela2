@@ -66,7 +66,7 @@ public class Cifrador {
   
       byte[] mensaje = cipher.doFinal(mensajeCifrado);
 
-     mensajeoriginal = mensaje.toString();
+     mensajeoriginal = new String(mensaje);
 
 
 
