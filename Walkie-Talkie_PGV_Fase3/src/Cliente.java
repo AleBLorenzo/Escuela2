@@ -89,11 +89,12 @@ class ReceptorMensajes implements Runnable {
         try {
             while ((datos = buffer.readLine()) != null) {
 
-                if (datos.toLowerCase().equals("adios")) {
+                if (datos == null) {
 
                     System.out.println("Connexion apagada");
                     System.out.println("Mensaje recibido: " + datos);
 
+                    
                 } else {
 
                     System.out.println("Mensaje recibido: " + datos);
