@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -12,12 +8,13 @@ import java.util.Scanner;
 
 public class Servidor {
 
-    public static List<PrintWriter> listaclientes = Collections.synchronizedList(new ArrayList<PrintWriter>());
+    public static List<ObjectOutputStream> listaclientes = Collections.synchronizedList(new ArrayList<ObjectOutputStream>());
 
     public static void main(String[] args) throws Exception {
 
         // Creamos un puerto con un numero recomendable mayor de 1024
         final int PUERTO = 1025;
+        
         Scanner sc = new Scanner(System.in);
         String nombre = "Cliente";
         int contador= 1;
@@ -39,7 +36,7 @@ public class Servidor {
                 contador++;
                  String nombreCompleto= nombre+contador;
 
-                    GestionCliente clienteN = new GestionCliente(cliente, listaclientes,nombreCompleto);
+                    GestionCliente clienteN = new GestionCliente(cliente, listaclientes ,nombreCompleto);
                     Thread NuevoCliente = new Thread(clienteN);
 
                     System.out.println("Se a connectado el cliente");

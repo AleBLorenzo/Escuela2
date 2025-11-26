@@ -1,11 +1,12 @@
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.crypto.SecretKey;
 
 public class Cliente {
 
@@ -14,7 +15,10 @@ public class Cliente {
         // Declaramos el puerto del cliente y la dirrecion y el Scanner.
         final String HOST = "localhost";
         final int PUERTO = 1025;
+      
         Scanner sc = new Scanner(System.in);
+          final String Contraseña = "1234";
+        SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
 
         // Creamos un socket con los datos del HOST y el PUERTO.
         // try-catch para si el servidor esta en escucha si no lanza exepcion
@@ -25,8 +29,9 @@ public class Cliente {
             // Creamos el PrintWriter para facilitar el envio
             // Con el autoflush en true apra q se haga de inmediato
             try (OutputStream salida = emisor.getOutputStream();
-                    PrintWriter escritor = new PrintWriter(salida, true);
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(emisor.getInputStream()))) {
+                    ObjectOutputStream escritor = new ObjectOutputStream(salida);
+                    InputStream entrada = emisor.getInputStream();
+                    ObjectInputStream buffer = new ObjectInputStream(entrada)) {
 
                 ReceptorMensajes receptorMensajes = new ReceptorMensajes(buffer);
                 Thread hiloreceptor = new Thread(receptorMensajes);
@@ -46,11 +51,13 @@ public class Cliente {
                     if (mensaje.toLowerCase().equals("adios")) {
 
                         System.out.println("Connexion apagada");
-                        escritor.println(mensaje);
+                       byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
+                        escritor.writeObject(cifrado);
                         break;
 
                     } else {
-                        escritor.println(mensaje);
+                       byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
+                        escritor.writeObject(cifrado);
 
                     }
 
@@ -75,9 +82,10 @@ public class Cliente {
 
 class ReceptorMensajes implements Runnable {
 
-    BufferedReader buffer;
+    public static final String Contraseña = "1234";
+    ObjectInputStream buffer;
 
-    public ReceptorMensajes(BufferedReader buffer) {
+    public ReceptorMensajes(ObjectInputStream buffer) {
         this.buffer = buffer;
     }
 
@@ -85,23 +93,29 @@ class ReceptorMensajes implements Runnable {
 
     public void run() {
 
-        String datos;
+        Object datos;
         try {
-            while ((datos = buffer.readLine()) != null) {
+            while ((datos = buffer.readObject()) != null) {
 
-                System.out.println("Mensaje recibido: " + datos);
+                byte[] mensaje = (byte[]) datos;
+
+                SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");;
+                String mensajedescifrado = Cifrador.descifrar(mensaje, contraseñaCifrada);
+
+                System.out.println("Mensaje recibido: " + mensajedescifrado);
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
         }
 
     }
 
-    public BufferedReader getbuffer() {
+    public ObjectInputStream getBuffer() {
         return buffer;
     }
 
-    public void setbuffer(BufferedReader buffer) {
+    public void setBuffer(ObjectInputStream buffer) {
         this.buffer = buffer;
     }
+
 }

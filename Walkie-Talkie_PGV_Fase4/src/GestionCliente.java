@@ -1,12 +1,13 @@
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
+import javax.crypto.SecretKey;
 
 //Creamos la clase GestionCliente con la interfaz runable q implementa run 
 // Aca ponemos la logica de ejecion para q cada ves q se llame a un cliente haga esta logica y poder hacerlo con varios 
@@ -15,12 +16,14 @@ import java.util.Scanner;
 public class GestionCliente implements Runnable {
 
     Scanner sc = new Scanner(System.in);
+              final String Contraseña = "1234";
+      SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
 
-    private static List<PrintWriter> listaclientes;
+    private static List<ObjectOutputStream> listaclientes;
     private Socket cliente;
     private String Nombre;
 
-    public GestionCliente(Socket cliente, List<PrintWriter> listaclientes, String Nombre) {
+    public GestionCliente(Socket cliente, List<ObjectOutputStream> listaclientes, String Nombre) {
         this.cliente = cliente;
         this.listaclientes = listaclientes;
         this.Nombre = Nombre;
@@ -38,19 +41,20 @@ public class GestionCliente implements Runnable {
     @Override
     public void run() {
 
-        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-                OutputStream salida = cliente.getOutputStream();
-                PrintWriter escritor = new PrintWriter(salida, true)) {
+        try (OutputStream salida = cliente.getOutputStream();
+                    ObjectOutputStream escritor = new ObjectOutputStream(salida);
+                    InputStream entrada = cliente.getInputStream();
+                    ObjectInputStream buffer = new ObjectInputStream(entrada)) {
 
             listaclientes.add(escritor);
 
-                 String datos;
+                 Object datos;
               
-              while ((datos = buffer.readLine())!= null) { 
+              while ((datos = buffer.readObject())!= null) { 
                   
              
 
-                if (datos.toLowerCase().equals("adios")) {
+                if (datos.toString().toLowerCase().equals("adios")) {
 
                     System.out.println("Connexion apagada");
                     System.out.println("Mensaje recibido: " + datos.toString());
@@ -68,15 +72,16 @@ public class GestionCliente implements Runnable {
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
 
+        } catch (ClassNotFoundException ex) {
         }
 
     }
 
-    public List<PrintWriter> getListaclientes() {
+    public List<ObjectOutputStream> getListaclientes() {
         return listaclientes;
     }
 
-    public void setListaclientes(List<PrintWriter> listaclientes) {
+    public void setListaclientes(List<ObjectOutputStream> listaclientes) {
         this.listaclientes = listaclientes;
     }
 
@@ -88,11 +93,16 @@ public class GestionCliente implements Runnable {
         this.Nombre = Nombre;
     }
 
-    public static void Broadcast(String mensaje,String Nombre) {
+    public static void Broadcast(Object datos,String Nombre) {
 
-        for (PrintWriter pw : listaclientes) {
+        for (ObjectOutputStream pw : listaclientes) {
 
-            pw.println(Nombre +" : "+mensaje);
+            try {
+                pw.writeObject(Nombre +" : "+datos);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 }
