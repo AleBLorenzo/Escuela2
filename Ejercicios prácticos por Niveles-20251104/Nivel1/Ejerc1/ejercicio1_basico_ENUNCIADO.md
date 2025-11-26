@@ -141,7 +141,7 @@ Análisis completado.
 
 3. **Para mostrar los primeros bytes en hex:**
    - Guarda los primeros 64 bytes en un array
-   - Usa `String.format("%02X", valor)` para formato hexadecimal
+   - Usa `String.format( , valor)` para formato hexadecimal
 
 4. **Try-with-resources:**
    - No olvides usar `try (FileInputStream fis = ...)` para cerrar automáticamente

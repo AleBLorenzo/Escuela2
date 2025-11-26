@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-
-
 public class Cliente {
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +16,7 @@ public class Cliente {
         final int PUERTO = 1025;
         Scanner sc = new Scanner(System.in);
 
-        // Creamos un socket con los datos del HOST y el PUERTO.@interface
+        // Creamos un socket con los datos del HOST y el PUERTO.
         // try-catch para si el servidor esta en escucha si no lanza exepcion
 
         try (Socket emisor = new Socket(HOST, PUERTO)) {
@@ -33,13 +31,12 @@ public class Cliente {
                 ReceptorMensajes receptorMensajes = new ReceptorMensajes(buffer);
                 Thread hiloreceptor = new Thread(receptorMensajes);
 
-
-                    try {
-                        hiloreceptor.start();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                try {
+                    hiloreceptor.start();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
                 while (true) {
 
@@ -88,28 +85,24 @@ class ReceptorMensajes implements Runnable {
 
     public void run() {
 
-         String datos;
-        while (true) {
-
-           
-            try {
-                datos = buffer.readLine();
+        String datos;
+        try {
+            while ((datos = buffer.readLine()) != null) {
 
                 if (datos.toLowerCase().equals("adios")) {
 
                     System.out.println("Connexion apagada");
                     System.out.println("Mensaje recibido: " + datos);
 
-                    
                 } else {
 
                     System.out.println("Mensaje recibido: " + datos);
                 }
-            } catch (IOException e) {
-              
-                e.printStackTrace();
-            }
 
+            }
+        } catch (IOException e) {
+
+            e.printStackTrace();
         }
 
     }

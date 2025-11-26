@@ -38,7 +38,7 @@ public class Servidor {
 
             while (true) {
 
-                try (Socket cliente = server.accept()) {
+               Socket cliente = server.accept();
 
                     try (BufferedReader buffer = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
                             OutputStream salida = cliente.getOutputStream();
@@ -49,34 +49,10 @@ public class Servidor {
                         GestionCliente clienteN = new GestionCliente(cliente, listaclientes);
                         Thread NuevoCliente = new Thread(clienteN);
 
-                        while (true) {
-
-                            String datos = buffer.readLine();
-
-                            if (datos.toLowerCase().equals("adios")) {
-
-                                System.out.println("Connexion apagada");
-                                System.out.println("Mensaje recibido: " + datos);
-
-                                listaclientes.remove(escritor);
-
-                            } else {
-
-                                for (int i = 0; i < listaclientes.size(); i++) {
-
-                                    escritor.print(datos);
-                                }
-                            }
-
-                            System.out.println("Se a connectado el cliente");
-
-                            try {
+                      
                                 NuevoCliente.start();
-                            } catch (Exception e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
-                        }
+                          
+                    
 
                     } catch (IOException e) {
                         System.out.println("Error" + e.getMessage());
