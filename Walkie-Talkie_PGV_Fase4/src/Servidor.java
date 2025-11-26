@@ -16,8 +16,6 @@ public class Servidor {
 
         // Creamos un puerto conun numero recomendable mayor de 1024
         final int PUERTO = 1025;
-         final String Contraseña = "1234567891234567";
-        SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
         String nombre = "Cliente";
         int contador= 1;
        

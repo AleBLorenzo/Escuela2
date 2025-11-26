@@ -101,7 +101,7 @@ public class GestionCliente implements Runnable {
         for (ObjectOutputStream pw : listaclientes) {
 
             try {
-                pw.writeObject (mensaje);
+                pw.writeObject(mensaje);
                 pw.flush();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
