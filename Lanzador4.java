@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class Lanzador4 {
     public static void main(String[] args) {
@@ -24,7 +23,7 @@ public class Lanzador4 {
 
             System.out.println("PID: "+p.pid());
             System.out.println("Comando: "+info.command().orElse("-"));
-            System.out.println("Línea de comando: "+info.commandLine().orElse("-"));           
+            System.out.println("Línea de comando: "+info.commandLine().orElse("-"));
             System.out.println("Hora de inicio: "+info.startInstant().toString());
             System.out.println("Usuario:"+info.user().orElse("-"));
 
