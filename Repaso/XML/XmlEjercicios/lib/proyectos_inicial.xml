@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<proyectos>
+    <proyecto id="P001">
+        <nombre>Migración a la Nube</nombre>
+        <estado>En Progreso</estado>
+        <fecha_inicio>2024-03-01</fecha_inicio>
+        <presupuesto>150000</presupuesto>
+    </proyecto>
+    <proyecto id="P002">
+        <nombre>Rediseño Web UX</nombre>
+        <estado>Inicial</estado>
+        <fecha_inicio>2024-05-15</fecha_inicio>
+        <presupuesto>45000</presupuesto>
+    </proyecto>
+    <proyecto id="P003">
+        <nombre>Lanzamiento Producto X</nombre>
+        <estado>Finalizado</estado>
+        <fecha_inicio>2023-11-20</fecha_inicio>
+        <presupuesto>280000</presupuesto>
+    </proyecto>
+</proyectos>

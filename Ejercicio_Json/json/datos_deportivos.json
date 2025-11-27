@@ -1,0 +1,46 @@
+{
+"evento": "Liga Nacional de Programación",
+"temporada": 2024,
+"jornadas": [
+{
+"jornada_id": 1,
+"fecha": "2024-05-01",
+"partidos": [
+{
+"local": "Algoritmos FC",
+"visitante": "Debuggers Unidos",
+"marcador_local": 3,
+"marcador_visitante": 1,
+"es_empate": false
+},
+{
+"local": "Java Masters",
+"visitante": "Python Coders",
+"marcador_local": 2,
+"marcador_visitante": 2,
+"es_empate": true
+}
+]
+},
+{
+"jornada_id": 2,
+"fecha": "2024-05-08",
+"partidos": [
+{
+"local": "Debuggers Unidos",
+"visitante": "Java Masters",
+"marcador_local": 0,
+"marcador_visitante": 4,
+"es_empate": false
+},
+{
+"local": "Python Coders",
+"visitante": "Algoritmos FC",
+"marcador_local": 1,
+"marcador_visitante": 0,
+"es_empate": false
+}
+]
+}
+]
+}
