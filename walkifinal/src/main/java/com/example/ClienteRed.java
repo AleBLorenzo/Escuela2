@@ -1,4 +1,4 @@
-package com.example.walkie;
+package com.example;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,42 +19,35 @@ public class ClienteRed {
     private InputStream entrada;
     private SecretKey contraseñaCifrada;
     private ObservadorMensajes observador;
+    private Scanner sc = new Scanner(System.in);
 
-    public ClienteRed(ObjectInputStream buffer, SecretKey contraseñaCifrada, Socket emisor, InputStream entrada,
-            ObjectOutputStream escritor, OutputStream salida) {
-        this.buffer = buffer;
-        this.contraseñaCifrada = contraseñaCifrada;
-        this.emisor = emisor;
-        this.entrada = entrada;
-        this.escritor = escritor;
-        this.salida = salida;
+    final String HOST = "localhost";
+    final int PUERTO = 1025;
+
+    public ClienteRed() {
+            final String Contraseña = "1234567891234567";
+        this.contraseñaCifrada = Cifrador.generarClave(Contraseña);
     }
 
-    private static void iniciarConexion() {
+    public  void iniciarConexion(String HOST ,int PUERTO) {
 
-        // Declaramos el puerto del cliente y la dirrecion y el Scanner.
-        final String HOST = "localhost";
-        final int PUERTO = 1025;
+        try  {
 
-        Scanner sc = new Scanner(System.in);
-        final String Contraseña = "1234567891234567";
-        SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
+            this.emisor = new Socket(HOST, PUERTO);
 
-        // Creamos un socket con los datos del HOST y el PUERTO.
-        // try-catch para si el servidor esta en escucha si no lanza exepcion
+            this.salida = emisor.getOutputStream();
+            this.escritor = new ObjectOutputStream(salida);
 
-        try (Socket emisor = new Socket(HOST, PUERTO);
-                OutputStream salida = emisor.getOutputStream();
-                ObjectOutputStream escritor = new ObjectOutputStream(salida);
-
-                InputStream entrada = emisor.getInputStream();
-                ObjectInputStream buffer = new ObjectInputStream(entrada);) {
+            this.entrada = emisor.getInputStream();
+            this.buffer = new ObjectInputStream(entrada);
 
             // Con esto sacamos la info hacia el servidor
             // Creamos el PrintWriter para facilitar el envio
             // Con el autoflush en true apra q se haga de inmediato
 
             ReceptorMensajes receptorMensajes = new ReceptorMensajes(buffer);
+            receptorMensajes.setObservador(observador);
+            receptorMensajes.setContraseñaCifrada(this.contraseñaCifrada);
             Thread hiloreceptor = new Thread(receptorMensajes);
 
             try {
@@ -64,7 +57,6 @@ public class ClienteRed {
                 e.printStackTrace();
             }
 
-            Escribir(escritor, sc, contraseñaCifrada);
 
         } catch (IOException e) {
 
@@ -76,13 +68,10 @@ public class ClienteRed {
 
     }
 
-    private static void Escribir(ObjectOutputStream escritor, Scanner sc, SecretKey contraseñaCifrada) {
+    public void Escribir(String mensaje) {
 
         try {
-            while (true) {
-
-                System.out.println("Escribe el mensaje a enviar: ");
-                String mensaje = sc.nextLine();
+  
 
                 if (mensaje.toLowerCase().equals("adios")) {
 
@@ -90,7 +79,6 @@ public class ClienteRed {
                     byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
                     escritor.writeObject(cifrado);
                     escritor.flush();
-                    break;
 
                 } else {
                     byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
@@ -99,7 +87,7 @@ public class ClienteRed {
 
                 }
 
-            }
+            
         } catch (Exception e) {
         }
 
@@ -169,13 +157,19 @@ public class ClienteRed {
 
 class ReceptorMensajes implements Runnable {
 
-    public static final String Contraseña = "1234567891234567";
+
     private ObservadorMensajes observador;
     ObjectInputStream buffer;
-    SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
+   private SecretKey contraseñaCifrada;
 
+
+  
     public ReceptorMensajes(ObjectInputStream buffer) {
         this.buffer = buffer;
+    }
+
+    public void setContraseñaCifrada(SecretKey contraseñaCifrada) {
+        this.contraseñaCifrada = contraseñaCifrada;
     }
 
     @Override

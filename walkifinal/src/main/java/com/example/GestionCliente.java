@@ -1,5 +1,4 @@
-
-package com.example.walkie;
+package com.example;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +19,7 @@ public class GestionCliente implements Runnable {
 
     Scanner sc = new Scanner(System.in);
     final String Contraseña = "1234567891234567";
-    SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
+    SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña);
 
     private static List<ObjectOutputStream> listaclientes;
     private Socket cliente;

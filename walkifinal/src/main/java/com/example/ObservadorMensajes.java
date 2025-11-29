@@ -1,4 +1,4 @@
-package com.example.walkie;
+package com.example;
 
 public interface ObservadorMensajes {
 

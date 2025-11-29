@@ -1,4 +1,4 @@
-package com.example.walkie;
+package com.example;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +14,7 @@ public class Cifrador {
 
     private static final String ALGORITMO = "AES";
 
-    public static SecretKey generarClave(String contraseña, String ALGORITMO) {
+    public static SecretKey generarClave(String contraseña) {
 
         byte[] contraseñabyte = contraseña.getBytes();
 

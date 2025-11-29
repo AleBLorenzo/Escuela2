@@ -1,4 +1,4 @@
-package com.example.walkie;
+package com.example;
 
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
