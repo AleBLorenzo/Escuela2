@@ -27,11 +27,11 @@ public class VistaChat extends JFrame implements ObservadorMensajes {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-       conversacion = new JTextArea();
+        conversacion = new JTextArea();
         conversacion.setEditable(false);
-        JScrollPane scroll = new JScrollPane(conversacion);
+        panel = new JScrollPane(conversacion);
 
-        // --- Panel inferior con campo + botón ---
+        //Panel inferior con campo y el boton
         JPanel panelInferior = new JPanel();
         panelInferior.setLayout(new BorderLayout());
 
@@ -41,14 +41,14 @@ public class VistaChat extends JFrame implements ObservadorMensajes {
         panelInferior.add(escritura, BorderLayout.CENTER);
         panelInferior.add(boton, BorderLayout.EAST);
 
-        // Añadir componentes al JFrame
-        add(scroll, BorderLayout.CENTER);
+        //Anadir componentes al JFrame
+        add(panel, BorderLayout.CENTER);
         add(panelInferior, BorderLayout.SOUTH);
 
-        // --- Acción para el botón ---
+        //Accion para el boton
         boton.addActionListener(e -> enviarMensaje());
 
-        // --- Acción al pulsar ENTER en el campo de texto ---
+        //Acción al pulsar enter en el campo de texto
         escritura.addActionListener(e -> enviarMensaje());
 
         setVisible(true);
@@ -58,12 +58,12 @@ public class VistaChat extends JFrame implements ObservadorMensajes {
         String mensaje = escritura.getText().trim();
         if (mensaje.isEmpty()) return;
 
-        cliente.Escribir(mensaje);  // <-- Llama al motor
+        cliente.Escribir(mensaje);  
 
         escritura.setText("");
     }
 
-    // Método del observador (llega desde ClienteRed en otro hilo)
+    //Meodo del observador llega desde ClienteRed en otro hilo
     @Override
     public void onMensajeRecibido(String mensaje) {
         SwingUtilities.invokeLater(() -> {
