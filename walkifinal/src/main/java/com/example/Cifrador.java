@@ -24,7 +24,7 @@ public class Cifrador {
 
     }
 
-    public static byte[] cifrar(String mensaje, SecretKey clave, String ALGORITMO) {
+    public static byte[] cifrar(String mensaje, SecretKey clave) {
 
         byte[] mensajecifrado = null;
         try {

@@ -23,7 +23,7 @@ public class GestionCliente implements Runnable {
 
     private static List<ObjectOutputStream> listaclientes;
     private Socket cliente;
-    private String Nombre;
+    private static String Nombre;
 
     public GestionCliente(Socket cliente, List<ObjectOutputStream> listaclientes, String Nombre) {
         this.cliente = cliente;
@@ -67,7 +67,10 @@ public class GestionCliente implements Runnable {
                     break;
 
                 } else {
-                    Broadcast(mensaje, Nombre);
+
+                    String mensajeCompleto = Nombre+ ": "+ mensajedescifrado;
+                    byte[] mensajeCifradoParaBroadcast = Cifrador.cifrar(mensajeCompleto, contraseñaCifrada);
+                    Broadcast(mensajeCifradoParaBroadcast);
 
                 }
 
@@ -97,7 +100,7 @@ public class GestionCliente implements Runnable {
         this.Nombre = Nombre;
     }
 
-    public static void Broadcast(byte[] mensaje, String Nombre) {
+    public static void Broadcast(byte[] mensaje) {
 
         for (ObjectOutputStream pw : listaclientes) {
 

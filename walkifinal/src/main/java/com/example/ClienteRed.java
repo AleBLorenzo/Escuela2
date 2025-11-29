@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 import javax.crypto.SecretKey;
 
@@ -19,27 +18,24 @@ public class ClienteRed {
     private InputStream entrada;
     private SecretKey contraseñaCifrada;
     private ObservadorMensajes observador;
-    private Scanner sc = new Scanner(System.in);
 
     final String HOST = "localhost";
     final int PUERTO = 1025;
 
     public ClienteRed() {
-            final String Contraseña = "1234567891234567";
+        final String Contraseña = "1234567891234567";
         this.contraseñaCifrada = Cifrador.generarClave(Contraseña);
     }
 
-    public  void iniciarConexion(String HOST ,int PUERTO) {
+    public void iniciarConexion(String HOST, int PUERTO) {
 
-        try  {
+        try {
 
-            this.emisor = new Socket(HOST, PUERTO);
-
-            this.salida = emisor.getOutputStream();
-            this.escritor = new ObjectOutputStream(salida);
-
-            this.entrada = emisor.getInputStream();
-            this.buffer = new ObjectInputStream(entrada);
+            emisor = new Socket(HOST, PUERTO);
+            salida = emisor.getOutputStream();
+            escritor = new ObjectOutputStream(salida);
+            entrada = emisor.getInputStream();
+            buffer = new ObjectInputStream(entrada);
 
             // Con esto sacamos la info hacia el servidor
             // Creamos el PrintWriter para facilitar el envio
@@ -47,7 +43,7 @@ public class ClienteRed {
 
             ReceptorMensajes receptorMensajes = new ReceptorMensajes(buffer);
             receptorMensajes.setObservador(observador);
-            receptorMensajes.setContraseñaCifrada(this.contraseñaCifrada);
+            receptorMensajes.setContraseñaCifrada(contraseñaCifrada);
             Thread hiloreceptor = new Thread(receptorMensajes);
 
             try {
@@ -57,37 +53,22 @@ public class ClienteRed {
                 e.printStackTrace();
             }
 
-
         } catch (IOException e) {
 
             System.out.println("Error" + e.getMessage());
 
         }
 
-        sc.close();
-
     }
 
     public void Escribir(String mensaje) {
 
         try {
-  
 
-                if (mensaje.toLowerCase().equals("adios")) {
+            byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada);
+            escritor.writeObject(cifrado);
+            escritor.flush();
 
-                    System.out.println("Connexion apagada");
-                    byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
-                    escritor.writeObject(cifrado);
-                    escritor.flush();
-
-                } else {
-                    byte[] cifrado = Cifrador.cifrar(mensaje, contraseñaCifrada, "AES");
-                    escritor.writeObject(cifrado);
-                    escritor.flush();
-
-                }
-
-            
         } catch (Exception e) {
         }
 
@@ -157,13 +138,10 @@ public class ClienteRed {
 
 class ReceptorMensajes implements Runnable {
 
-
     private ObservadorMensajes observador;
-    ObjectInputStream buffer;
-   private SecretKey contraseñaCifrada;
+    private ObjectInputStream buffer;
+    private SecretKey contraseñaCifrada;
 
-
-  
     public ReceptorMensajes(ObjectInputStream buffer) {
         this.buffer = buffer;
     }
@@ -178,7 +156,7 @@ class ReceptorMensajes implements Runnable {
 
         Object datos;
         try {
-            while ((datos = buffer.readObject()) != null) {
+            while ( (datos = buffer.readObject())!= null) {
 
                 byte[] mensaje = (byte[]) datos;
 
