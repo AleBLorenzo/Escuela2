@@ -1,4 +1,4 @@
-package com.example.walkie;
+package com.example.walkie
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
