@@ -1,5 +1,0 @@
-Este es el archivo de texto de ejemplo.
-Contiene varias líneas.
-La aplicación debe leerlas.
-Luego procesarlas.
-Y generar el informe final.

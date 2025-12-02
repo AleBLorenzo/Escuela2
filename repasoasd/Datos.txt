@@ -1,0 +1,6 @@
+=== INFORME DE ACTIVIDAD DEL SERVIDOR ===
+Configuración:
+- Nombre: 2024-11-01
+- IP: WebServer-01
+- Puerto: 8080
+

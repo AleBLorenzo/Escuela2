@@ -1,0 +1,4 @@
+Servidor: WebServer-01
+IP: 192.168.1.100
+Puerto: 8080
+Inicio: 2024-11-01

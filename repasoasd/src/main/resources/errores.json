@@ -1,0 +1,22 @@
+{
+  "errores": [
+    {
+      "timestamp": "2024-11-01T08:20:45",
+      "tipo": "FileNotFound",
+      "mensaje": "Archivo no encontrado: /images/logo.png",
+      "gravedad": "WARNING"
+    },
+    {
+      "timestamp": "2024-11-01T09:15:34",
+      "tipo": "AccessDenied",
+      "mensaje": "Acceso denegado al recurso /admin",
+      "gravedad": "ERROR"
+    },
+    {
+      "timestamp": "2024-11-01T10:22:18",
+      "tipo": "InternalError",
+      "mensaje": "Error interno del servidor en /api/datos",
+      "gravedad": "CRITICAL"
+    }
+  ]
+}

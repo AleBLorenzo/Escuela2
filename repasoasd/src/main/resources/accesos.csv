@@ -1,0 +1,7 @@
+fecha,hora,ip_cliente,metodo,recurso,codigo_estado
+2024-11-01,08:15:23,203.0.113.45,GET,/index.html,200
+2024-11-01,08:17:11,203.0.113.67,POST,/api/login,200
+2024-11-01,08:20:45,198.51.100.23,GET,/images/logo.png,404
+2024-11-01,09:05:12,203.0.113.45,GET,/dashboard,200
+2024-11-01,09:15:34,198.51.100.89,GET,/admin,403
+2024-11-01,10:22:18,203.0.113.67,POST,/api/datos,50
