@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
        
-        String URL = "jdbc:mysql://localhost:3306";
+        String URL = "jdbc:mysql://localhost:3306/db-1";
 
         Connection con = DriverManager.getConnection(URL);
 
