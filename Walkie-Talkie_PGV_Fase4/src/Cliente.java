@@ -26,7 +26,6 @@ public class Cliente {
         try (Socket emisor = new Socket(HOST, PUERTO);
                 OutputStream salida = emisor.getOutputStream();
                 ObjectOutputStream escritor = new ObjectOutputStream(salida);
-
                 InputStream entrada = emisor.getInputStream();
                 ObjectInputStream buffer = new ObjectInputStream(entrada);) {
 
