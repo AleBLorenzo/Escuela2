@@ -6,13 +6,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
+    public static void main(String[] args) throws SQLException {
        
-        String URL = "jdbc:mysql://localhost:3306/db-1";
 
-        Connection con = DriverManager.getConnection(URL);
+        String URL = "jdbc:mysql://74.208.70.10:3306/AccesoDatos";
+            String user = "root";
+    String password = "1234";
+
+        Connection con = DriverManager.getConnection(URL ,user,password);
 
         DatabaseMetaData MeTa = con.getMetaData();
 

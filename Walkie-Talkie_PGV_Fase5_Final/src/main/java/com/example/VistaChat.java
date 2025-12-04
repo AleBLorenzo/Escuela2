@@ -56,7 +56,6 @@ public class VistaChat extends JFrame implements ObservadorMensajes {
 
     private void enviarMensaje() {
         String mensaje = escritura.getText().trim();
-        if (mensaje.isEmpty()) return;
 
         cliente.Escribir(mensaje);  
 
