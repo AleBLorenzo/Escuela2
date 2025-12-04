@@ -33,104 +33,98 @@ public class Servidor {
         try (ServerSocket server = new ServerSocket(PUERTO)) {
             System.out.println("Servidor listo para recibir");
 
-            // El metodo accept boquea hazta q se connecete un cliente
-            // declaramos una variable tipo socket pq esto es lo q devuelve el accept
-
             while (true) {
 
                 Socket cliente = server.accept();
                 contador++;
 
-                try (OutputStream salida = cliente.getOutputStream();
-                    ObjectOutputStream escritor = new ObjectOutputStream(salida);) {
+                String nombreCompleto = nombre + contador;
 
-                    String nombreCompleto = nombre + contador;
+                GestionCliente clienteN = new GestionCliente(cliente, listaclientes, nombreCompleto);
+                Thread NuevoCliente = new Thread(clienteN);
 
-                    GestionCliente clienteN = new GestionCliente(cliente, listaclientes, nombreCompleto);
-                    Thread NuevoCliente = new Thread(clienteN);
+                System.out.println("Se a connectado el cliente");
+                System.out.println(nombreCompleto);
 
-                    System.out.println("Se a connectado el cliente");
-                    System.out.println(nombreCompleto);
+                try {
+                    NuevoCliente.start();
 
-                    try {
-                        NuevoCliente.start();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
-                    EnvioMensajes envio = new EnvioMensajes(escritor);
+                EnvioMensajes envio = new EnvioMensajes(listaclientes);
+                Thread hiloreceptor = new Thread(envio);
 
-                    Thread hiloreceptor = new Thread(envio);
-
-                    try {
-                        hiloreceptor.start();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                try {
+                    hiloreceptor.start();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
 
             }
 
+            // El metodo accept boquea hazta q se connecete un cliente
+            // declaramos una variable tipo socket pq esto es lo q devuelve el accept
+
         }
     }
 
-  
 }
- class EnvioMensajes implements Runnable {
-                
-        final String HOST = "localhost";
-        final int PUERTO = 1025;
-        Scanner sc = new Scanner(System.in);
 
-        String Contraseña = "1234567891234567";
-        ObjectOutputStream buffer;
-        SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
-        String nombre = "[ANUNCIO DEL SERVIDOR]: ";
+class EnvioMensajes implements Runnable {
 
-        public EnvioMensajes(ObjectOutputStream buffer) {
-            this.buffer = buffer;
+    static List<ObjectOutputStream> listaclientes;
+
+    Scanner sc = new Scanner(System.in);
+    String Contraseña = "1234567891234567";
+
+    SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
+    String nombre = "[ANUNCIO DEL SERVIDOR]: ";
+
+    public EnvioMensajes(List<ObjectOutputStream> listaclientes) {
+
+        this.listaclientes = listaclientes;
+    }
+
+    @Override
+
+    public void run() {
+
+        while (true) {
+
+            System.out.println("Escriba un comando: ");
+            String mensaje = sc.nextLine();
+
+            if (mensaje.toLowerCase().equals("/broadcast")) {
+
+                System.out.println("Escribe el mensaje a mandar :");
+                String mensajecliente = sc.nextLine();
+                String mensajeCompleto = nombre + mensajecliente;
+                byte[] cifrado = Cifrador.cifrar(mensajeCompleto, contraseñaCifrada, "AES");
+                GestionCliente.Broadcast(cifrado, nombre);
+
+            } else {
+                System.out.println("Comando desconocido");
+            }
         }
 
-        @Override
+    }
 
-        public void run() {
+    public static void Broadcast(byte[] mensaje, String Nombre) {
 
-            try (Socket emisor = new Socket(HOST, PUERTO);
-                OutputStream salida = emisor.getOutputStream();
-                ObjectOutputStream escritor = new ObjectOutputStream(salida);
-               ) {
-                while (true) {
+        for (ObjectOutputStream pw : listaclientes) {
 
-                    String mensaje = sc.nextLine();
-
-                    if (mensaje.toLowerCase().equals("/broadcast")) {
-
-                        System.out.print("Escribe el mensaje a mandar :");
-                        String mensajecliente = sc.nextLine();
-                        System.out.println("Connexion apagada");
-                        String mensajeCompleto = nombre + mensajecliente;
-                        byte[] cifrado = Cifrador.cifrar(mensajeCompleto, contraseñaCifrada, "AES");
-                        escritor.write(cifrado);
-                        escritor.flush();
-                    } else {
-
-                    }
-
-                }
+            try {
+                pw.writeObject(mensaje);
+                pw.flush();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-        }
-
-        public ObjectOutputStream getBuffer() {
-            return buffer;
-        }
-
-        public void setBuffer(ObjectOutputStream buffer) {
-            this.buffer = buffer;
         }
     }
+
+}

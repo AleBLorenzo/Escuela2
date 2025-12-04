@@ -20,6 +20,7 @@ public class GestionCliente implements Runnable {
       SecretKey contraseñaCifrada = Cifrador.generarClave(Contraseña, "AES");
 
     private static List<ObjectOutputStream> listaclientes;
+    public static ObjectOutputStream getOutputStream;
     private Socket cliente;
     private String Nombre;
 
@@ -110,3 +111,4 @@ public class GestionCliente implements Runnable {
         }
     }
 }
+
